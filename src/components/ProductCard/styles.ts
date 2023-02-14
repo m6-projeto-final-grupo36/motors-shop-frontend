@@ -1,67 +1,64 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
-const Div = styled.div`
+export const Li = styled.li`
+  width: 312px;
+  height: 354px;
+  display: flex;
+  flex-direction: column;
+
+  .productImg {
     width: 312px;
-    height: 354px;
-    display: flex;
-    flex-direction: column;
+    height: 152px;
+    object-fit: cover;
+  }
 
-    .productImg {
-        width: 312px;
-        height: 152px;
-    }
+  h2 {
+    margin: 5px;
+    font-weight: 600;
+    font-size: 16px;
+  }
 
-    h2 {
-        margin: 5px;
-
-        font-size: 16px;
-    }
-
-    .description {
-        margin: 5px;
-
-        font-size: 14px;
-        line-height: 24px;
-    }
-`
-
-const DivProfile = styled.div`
-    display: flex;
-    align-items: center;
+  .description {
     margin: 5px;
 
-    .profileImg {
-        width: 32px;
-        height: 32px;
-        margin-right: 10px;
+    font-size: 14px;
+    line-height: 24px;
+  }
+`;
 
-        border-radius: 150px;
-    }
-`
+export const DivProfile = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 5px;
 
-const DivInfo = styled.div`
+  .profileImg {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+
+    border-radius: 150px;
+  }
+`;
+
+export const DivInfo = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 5px;
+
+  span {
+    width: 51px;
+    height: 32px;
     display: flex;
     align-items: center;
-    margin: 5px;
+    justify-content: center;
+    margin-right: 10px;
+    background-color: var(--color-brand-4);
+    font-size: 14px;
+    color: var(--color-brand-1);
+  }
 
-    span {
-        width: 51px;
-        height: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 10px;
-        
-        background-color: #EDEAFD; //trocar cor por variável
-
-        font-size: 14px;
-        color: #4529E6; //trocar cor por variável
-    }
-
-    p {
-        margin: auto 5px auto auto;
-        font-weight: 600;
-    }
-`
-
-export { Div, DivProfile, DivInfo }
+  p {
+    margin: auto 5px auto auto;
+    font-weight: 600;
+  }
+`;

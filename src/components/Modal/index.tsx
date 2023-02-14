@@ -37,18 +37,23 @@ export const Modal = ({
     <ChakraModal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader color="#212529" as="h2" display="flex" alignItems="center">
+        <ModalHeader
+          color="var(--color-grey-1)"
+          as="h2"
+          display="flex"
+          alignItems="center"
+        >
           {titleModal}
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <VStack alignItems="start" spacing="18px">
             {subtitleModal && (
-              <Text as="h3" fontWeight="500" color="#212529">
+              <Text as="h3" fontWeight="500" color="var(--color-grey-1)">
                 {subtitleModal}
               </Text>
             )}
-            {infoModal && <Text color="#495057">{infoModal}</Text>}
+            {infoModal && <Text color="var(--color-grey-2)">{infoModal}</Text>}
             {children && children}
           </VStack>
         </ModalBody>
@@ -76,7 +81,7 @@ export const Modal = ({
 //   titleModal="Sucesso!"
 //   subtitleModal="Sua conta foi criada com Sucesso!"
 //   infoModal="Agora você poderá ver seus negócios crescendo em grande escala"
-//   link_text="Ie para o login"
+//   link_text="Ir para o login"
 //   link_url="/login"
 //   isOpen={isOpenModal2}
 //   onClose={onCloseModal2}
