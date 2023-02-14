@@ -5,6 +5,7 @@ export const App = () => {
     <>
       <Global />
       <h1>Iniciando projeto</h1>
+      <h1>Incio</h1>
     </>
   );
 };
