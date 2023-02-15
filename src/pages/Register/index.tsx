@@ -4,6 +4,7 @@ import { RegisterForm } from "./RegisterForm";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "../../schemas";
 import { Box, Flex, Heading } from "@chakra-ui/react";
+import { Footer } from "../../components/Footer";
 
 export interface IRegister {
   name: string;
@@ -18,7 +19,7 @@ export interface IRegister {
   street: string;
   number: string;
   complement: string;
-  account_type: "buyer" | "seller";
+  account_type: string;
   password: string;
   confirm_password: string;
 }
@@ -66,6 +67,7 @@ export const Register = () => {
           />
         </Box>
       </Flex>
+      <Footer />
     </>
   );
 };

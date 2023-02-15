@@ -18,10 +18,7 @@ export const registerSchema = yup.object().shape({
   street: yup.string().required("Rua obrigatória"),
   number: yup.string().required("Número obrigatório"),
   complement: yup.string().notRequired(),
-  account_type: yup
-    .mixed()
-    .required("Tipo de conta obrigatório")
-    .oneOf(["buyer", "seller"], "Anunciante ou comprador"),
+  account_type: yup.string().required("Tipo de conta obrigatório"),
   password: yup.string().required("Senha obrigatória"),
   confirm_password: yup
     .string()
