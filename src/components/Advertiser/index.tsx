@@ -1,42 +1,33 @@
 import { Container } from "./style";
 
 interface IAdvertiserProfile {
-  profileImg: string;
   name: string;
   typeAccount: string;
   description: string;
 }
 
-export const Advertiser: React.FunctionComponent<any> = ({
-  profileImg,
+export const Advertiser = ({
   name,
   typeAccount,
   description,
-}) => {
+}: IAdvertiserProfile) => {
   return (
     <Container>
       <div className="containerTwo">
         <div className="divImg">
-          {/* <img src={profileImg} alt="Profile Logo" /> */}
-          {/* <p>{name}</p> */}
-          <p className="pImg">RZ</p>
-        </div>
-        <div className="divName">
-          {/* <p>{name}</p>
-        <span>{typeAccount}</span> */}
-          <p className="pName">Richard Zago</p>
-          <span className="spanTypeAccount">Anunciante</span>
-        </div>
-        <div className="divDescription">
-          {/* <p>{description}</p> */}
-          <p className="pDescription">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
-            provident repellat asperiores sequi, maiores alias sapiente dicta
-            vitae molestiae vero error cumque eveniet veniam animi ipsum tempore
-            ad veritatis assumenda.
+          <p className="pImg">
+            {name.split(" ")[0][0]}
+            {name.split(" ")[1] && name.split(" ")[1][0]}
           </p>
         </div>
-        <button className="btn">Criar anuncio</button>
+        <div className="divName">
+          <p className="pName">{name}</p>
+          <span className="spanTypeAccount">{typeAccount}</span>
+        </div>
+        <div className="divDescription">
+          <p className="pDescription">{description}</p>
+        </div>
+        <button className="btn">Criar anúncio</button>
       </div>
     </Container>
   );
