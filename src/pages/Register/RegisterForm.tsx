@@ -2,7 +2,10 @@ import { Button, Grid, HStack, Text, VStack } from "@chakra-ui/react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { Input } from "../../components/Form/Input";
 import { FaUser, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
-import { IRegister } from ".";
+import { useContext } from "react";
+import { InputRadio } from "../../components/Form/Radio";
+import { TextArea } from "../../components/Form/TextArea";
+import { IRegister, UserContext } from "../../Providers/UserProvider";
 
 interface IRegisterForm {
   handleRegister: () => void;
@@ -17,6 +20,8 @@ export const RegisterForm = ({
   register,
   loadingRegister,
 }: IRegisterForm) => {
+  const { setAccount_type } = useContext(UserContext);
+
   return (
     <>
       <Grid as="form" onSubmit={handleRegister} w="100%">
@@ -57,6 +62,14 @@ export const RegisterForm = ({
             label="Data de nascimento"
             error={errors.birthdate}
             {...register("birthdate")}
+          />
+
+          <TextArea
+            placeholder="Digitar descrição"
+            label="Descrição"
+            error={errors.description}
+            {...register("description")}
+            maxH="200px"
           />
 
           <Text fontWeight="500" as="h4">
@@ -106,9 +119,43 @@ export const RegisterForm = ({
               {...register("complement")}
             />
           </HStack>
+
+          <Text fontWeight="500" as="h4">
+            Tipo de conta
+          </Text>
+
+          <InputRadio
+            defaultValue="buyer"
+            name="account_type"
+            options={[
+              { text: "Comprador", value: "buyer" },
+              { text: "Anunciante", value: "seller" },
+            ]}
+            handleChange={setAccount_type}
+          />
+
+          <Input
+            placeholder="Digitar senha"
+            label="Senha"
+            error={errors.password}
+            {...register("password")}
+          />
+          <Input
+            placeholder="Repetir senha"
+            label="Confirmar senha"
+            error={errors.confirm_password}
+            {...register("confirm_password")}
+          />
         </VStack>
 
-        <Button mt="6" isLoading={loadingRegister} type="submit">
+        <Button
+          bgColor="var(--color-brand-1)"
+          color="var(--color-white-fixed)"
+          mt="6"
+          size="lg"
+          isLoading={loadingRegister}
+          type="submit"
+        >
           Finalizar cadastro
         </Button>
       </Grid>
