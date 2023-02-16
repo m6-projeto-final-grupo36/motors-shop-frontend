@@ -39,7 +39,7 @@ export const FooterContainer = styled.footer`
     color: var(--color-white-fixed);
   }
 
-  @media (max-width: 376px) {
+  @media (max-width: 480px) {
     height: 200px;
     flex-direction: column;
     align-items: center;

@@ -66,25 +66,3 @@ export const Modal = ({
     </ChakraModal>
   );
 };
-
-// Como utilizar o componente
-
-// const {
-//   isOpen: isOpenModal2,
-//   onOpen: onOpenMOdal2,
-//   onClose: onCloseModal2,
-// } = useDisclosure();
-
-// <button onClick={() => onOpenMOdal2()}>Abrir modal2</button>
-
-// <Modal
-//   titleModal="Sucesso!"
-//   subtitleModal="Sua conta foi criada com Sucesso!"
-//   infoModal="Agora você poderá ver seus negócios crescendo em grande escala"
-//   link_text="Ir para o login"
-//   link_url="/login"
-//   isOpen={isOpenModal2}
-//   onClose={onCloseModal2}
-// >
-//   {/* Pode enviar children */}
-// </Modal>
