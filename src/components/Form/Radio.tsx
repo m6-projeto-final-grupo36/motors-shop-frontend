@@ -2,22 +2,18 @@ import {
   RadioProps as ChakraRadioProps,
   Box,
   useRadio,
-  HStack,
   useRadioGroup,
+  HStack,
 } from "@chakra-ui/react";
 
-interface IOptionsRadio {
-  options: string[];
-}
-
-function RadioCard(props: ChakraRadioProps) {
+const RadioCard = (props: ChakraRadioProps) => {
   const { getInputProps, getCheckboxProps } = useRadio(props);
 
   const input = getInputProps();
   const checkbox = getCheckboxProps();
 
   return (
-    <Box as="label">
+    <Box as="label" w="100%" textAlign="center">
       <input {...input} />
       <Box
         {...checkbox}
@@ -26,13 +22,10 @@ function RadioCard(props: ChakraRadioProps) {
         borderRadius="md"
         boxShadow="md"
         _checked={{
-          bg: "teal.600",
+          bg: "var(--color-brand-1)",
           color: "white",
-          borderColor: "teal.600",
+          borderColor: "var(--color-brand-1)",
         }}
-        // _focus={{
-        //   boxShadow: "outline",
-        // }}
         px={5}
         py={3}
       >
@@ -40,27 +33,44 @@ function RadioCard(props: ChakraRadioProps) {
       </Box>
     </Box>
   );
+};
+
+interface IOptions {
+  value: string;
+  text: string;
 }
 
-export function Example({ options }: IOptionsRadio) {
+interface IInputRadio {
+  name: string;
+  defaultValue: string;
+  handleChange: (str: string) => void;
+  options: IOptions[];
+}
+
+export const InputRadio = ({
+  name,
+  defaultValue,
+  handleChange,
+  options,
+}: IInputRadio) => {
   const { getRootProps, getRadioProps } = useRadioGroup({
-    name: "framework",
-    defaultValue: "react",
-    onChange: console.log,
+    name,
+    defaultValue,
+    onChange: handleChange,
   });
 
   const group = getRootProps();
 
   return (
-    <HStack {...group}>
-      {options.map((value) => {
+    <HStack w="100%" {...group}>
+      {options.map(({ text, value }) => {
         const radio = getRadioProps({ value });
         return (
           <RadioCard key={value} {...radio}>
-            {value}
+            {text}
           </RadioCard>
         );
       })}
     </HStack>
   );
-}
+};
