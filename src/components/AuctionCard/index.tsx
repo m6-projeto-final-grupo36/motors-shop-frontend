@@ -1,4 +1,6 @@
-import { AuctionLi, UserContainer, ProductInfoContainer } from "./styles";
+import { AuctionLi, 
+  // UserContainer, 
+  ProductInfoContainer, } from "./styles";
 import { useState } from "react";
 
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
@@ -25,10 +27,11 @@ export const AuctionCard = ({
   productValue,
   expiryTime
 }: IAuctionCard) => {
+
   const useCount = (date: string) => {
-    const [hour, setHour] = useState<number>();
-    const [minute, setMinute] = useState<number>();
-    const [second, setSecond] = useState<number>();
+    const [hour, setHour] = useState<string>();
+    const [minute, setMinute] = useState<string>();
+    const [second, setSecond] = useState<string>();
 
     const countdown = () => {
       const countTime = new Date(date).getTime();
@@ -40,9 +43,9 @@ export const AuctionCard = ({
       const minute = second * 60;
       const hour = minute * 60;
 
-      const hourNumber = Math.floor(interval / hour);
-      const minuteNumber = Math.floor((interval % hour) / minute);
-      const secondNumber = Math.floor((interval % minute) / second);
+      const hourNumber = Math.floor(interval / hour).toString();
+      const minuteNumber = Math.floor((interval % hour) / minute).toString();
+      const secondNumber = Math.floor((interval % minute) / second).toString();
 
       setHour(hourNumber)
       setMinute(minuteNumber)
@@ -54,21 +57,38 @@ export const AuctionCard = ({
     return [hour, minute, second]
   };
 
-  const [hour, minute, second] = useCount(`Feb 15, 2023 ${expiryTime}:00:00`);
+  let [hour, minute, second] = useCount(`Feb 17, 2023 ${expiryTime}:00:00`);
+
+  if(+hour! < 0 ){
+    hour = '00'
+  }
+  if(+minute! < 0){
+    minute = '00'
+  }
+  if(+second! < 0){
+    second = '00'
+  }
 
   return (
     <AuctionLi>
-      <img src={productImg} alt="Imagem do produto" className="productImg" />
-      <span className="timer"><BiTime color="var(--color-brand-1)" fontSize={20}/>{`${hour}:${minute}:${second}`}</span>
+      <div className="productImg" >
+        <img src={productImg} alt="Imagem do produto" />
+      </div>
+      <span className="timer"><BiTime color="var(--color-brand-1)" fontSize={20}/>{`${hour ? hour : '00'}:${minute ? (minute.length === 2 ? minute : '0' + minute) : '00'}:${second ? (second.length === 2 ? second : '0' + second) : '00'}`}</span>
       <h2 className="productName">{productName}</h2>
       <p className="productDescription">{productDescription}</p>
-      <UserContainer>
-        <p className="profileIcon">{userName[0]}</p>
+      {/* <UserContainer>
+        <p className="profileIcon">
+          {userName.split(' ')[0][0]}
+          {userName.split(" ")[1] && userName.split(" ")[1][0]}  
+        </p>
         <p className="userName">{userName}</p>
-      </UserContainer>
+      </UserContainer> */}
       <ProductInfoContainer>
-        <span>{productYear}</span>
-        <span>{productKm} KM</span>
+        <div>
+          <span>{productYear}</span>
+          <span>{productKm} KM</span>
+        </div>
         <p>
         {productValue.toLocaleString("pt-br", {
             style: "currency",
@@ -76,12 +96,12 @@ export const AuctionCard = ({
           })}
         </p>
       </ProductInfoContainer>
-      <button className="auctionButton">
-        <p>Acessar página do leilão</p>
-        <p className="arrow">
-          <HiOutlineArrowNarrowRight fontSize={35} />
-        </p>
-      </button>
+      {/* <button className="auctionButton"> */}
+      <div className="auctionButton">
+        <button className="btn-edit-auction">Editar</button>
+        <button className="btn-list-auction">Ver como</button>
+      </div>
+      {/* </button> */}
     </AuctionLi>
   );
 };

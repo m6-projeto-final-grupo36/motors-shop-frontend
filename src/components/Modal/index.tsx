@@ -10,7 +10,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
-import { ModalLink } from "./style";
+import { ModalLink } from "./styles";
 
 interface IModalProps {
   titleModal: string;
