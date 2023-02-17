@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "../../components/Footer";
+import { Header } from "../../components/Header";
 import { Modal } from "../../components/Modal";
 import { ILogin, UserContext } from "../../Providers/UserProvider";
 import { loginSchema } from "../../schemas";
@@ -44,7 +45,7 @@ export const Login = () => {
 
   return (
     <VStack
-      h={["100%", "100vh"]}
+      minH="100vh"
       justifyContent="space-between"
       backgroundColor="var(--color-grey-8)"
     >
@@ -55,6 +56,7 @@ export const Login = () => {
         isOpen={isModalErrorOpen}
         onClose={onCloseModalError}
       />
+      <Header />
       <Flex justifyContent="center" w="100%" p="15px">
         <Box
           padding={["44px 20px", "44px 48px"]}

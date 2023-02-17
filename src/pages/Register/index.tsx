@@ -3,11 +3,12 @@ import { useForm } from "react-hook-form";
 import { RegisterForm } from "./RegisterForm";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "../../schemas";
-import { Box, Flex, Heading, useDisclosure } from "@chakra-ui/react";
+import { Box, Flex, Heading, useDisclosure, VStack } from "@chakra-ui/react";
 import { Footer } from "../../components/Footer";
 import { IRegister, UserContext } from "../../Providers/UserProvider";
 import { api } from "../../services/api";
 import { Modal } from "../../components/Modal";
+import { Header } from "../../components/Header";
 
 export const Register = () => {
   const { account_type } = useContext(UserContext);
@@ -51,7 +52,11 @@ export const Register = () => {
   };
 
   return (
-    <>
+    <VStack
+      // h={["100%", "100vh"]}
+      justifyContent="space-between"
+      backgroundColor="var(--color-grey-8)"
+    >
       <Modal
         titleModal="Sucesso!"
         subtitleModal="Sua conta foi criada com Sucesso!"
@@ -68,6 +73,7 @@ export const Register = () => {
         isOpen={isModalErrorOpen}
         onClose={onCloseModalError}
       />
+      <Header />
       <Flex
         justifyContent="center"
         w="100%"
@@ -90,6 +96,6 @@ export const Register = () => {
         </Box>
       </Flex>
       <Footer />
-    </>
+    </VStack>
   );
 };

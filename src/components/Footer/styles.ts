@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const FooterContainer = styled.footer`
   width: 100%;
-  height: 70px;
+  padding: 10px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -20,6 +20,7 @@ export const FooterContainer = styled.footer`
   }
 
   .copyright {
+    text-align: center;
     font-size: 12px;
     color: var(--color-grey-4);
   }
@@ -40,9 +41,10 @@ export const FooterContainer = styled.footer`
   }
 
   @media (max-width: 480px) {
-    height: 200px;
+    height: unset;
     flex-direction: column;
     align-items: center;
+    gap: 15px;
 
     .title {
       margin: 15px auto 0px auto;

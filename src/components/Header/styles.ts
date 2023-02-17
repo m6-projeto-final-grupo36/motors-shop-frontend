@@ -76,14 +76,14 @@ export const HeaderStyled = styled.header`
       display: flex;
       align-items: center;
 
-      .divider-bar{
+      .divider-bar {
         height: 80px;
         width: 2px;
         background-color: var(--color-grey-6);
         margin-right: 44px;
       }
 
-      .navbar nav a{
+      .navbar nav a {
         margin-right: 2.75rem;
         font-weight: 600;
         font-size: 16px;
@@ -94,16 +94,16 @@ export const HeaderStyled = styled.header`
         align-items: center;
         color: var(--color-grey-2);
 
-        .btn-login{
+        .btn-login {
           font-weight: 600;
           font-size: 16px;
           margin-right: 44px;
         }
 
-        .btn-register{
-          display:flex; 
-          align-items: center; 
-          justify-content: center; 
+        .btn-register {
+          display: flex;
+          align-items: center;
+          justify-content: center;
 
           width: 90%;
           padding: 24px 28px;
@@ -117,33 +117,32 @@ export const HeaderStyled = styled.header`
         }
       }
 
-      .user button{
-
+      .user button {
         width: 100%;
         background-color: transparent;
         align-items: center;
         justify-content: center;
 
         span:first-child {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        width: 100%;
-
-        .initial-caracters {
           display: flex;
           align-items: center;
           justify-content: center;
-          color: var(--color-white-fixed);
-          height: 32px;
-          width: 32px;
-          border-radius: 100%;
-          background-color: var(--color-brand-2);
-          padding: 16px 7px;
-          margin-right: 8px;
+
+          width: 100%;
+
+          .initial-caracters {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white-fixed);
+            height: 32px;
+            width: 32px;
+            border-radius: 100%;
+            background-color: var(--color-brand-2);
+            padding: 16px 7px;
+            margin-right: 8px;
+          }
         }
-      }
       }
     }
   }
