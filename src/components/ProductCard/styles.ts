@@ -5,11 +5,16 @@ export const Li = styled.li`
   height: 354px;
   display: flex;
   flex-direction: column;
+  margin-left: 30px;
 
   .productImg {
     width: 312px;
     height: 152px;
     object-fit: cover;
+
+    :hover {
+      border: 1px solid var(--color-brand-1);
+    }
   }
 
   h2 {
@@ -31,12 +36,18 @@ export const DivProfile = styled.div`
   align-items: center;
   margin: 5px;
 
-  .profileImg {
-    width: 32px;
-    height: 32px;
+  .profileIcon {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-right: 10px;
 
     border-radius: 150px;
+    background-color: var(--color-brand-1);
+    color: var(--color-white-fixed);
   }
 `;
 

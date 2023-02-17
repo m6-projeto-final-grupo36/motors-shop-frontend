@@ -1,10 +1,9 @@
 import { Li, DivProfile, DivInfo } from "./styles";
 
-interface IProductCard {
+export interface IProductCard {
   title: string;
   productImg: string;
   description: string;
-  profileImg: string;
   name: string;
   km: number;
   year: number;
@@ -15,7 +14,6 @@ export const ProductCard = ({
   title,
   productImg,
   description,
-  profileImg,
   name,
   km,
   year,
@@ -27,7 +25,10 @@ export const ProductCard = ({
       <h2>{title}</h2>
       <p className="description">{description}</p>
       <DivProfile>
-        <img src={profileImg} alt="Imagem do usuário" className="profileImg" />
+        <p className="profileIcon">
+          {name.split(" ")[0][0]}
+          {name.split(" ")[1] && name.split(" ")[1][0]}
+        </p>
         <p>{name}</p>
       </DivProfile>
       <DivInfo>
