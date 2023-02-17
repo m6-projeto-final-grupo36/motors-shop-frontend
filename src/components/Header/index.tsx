@@ -116,7 +116,6 @@ export const Header = () => {
           )}
         </div>
       </div>
-
       <div className="mobile">
         <Menu>
           <MenuButton
@@ -130,7 +129,8 @@ export const Header = () => {
           <MenuList
             borderRadius="0"
             borderLeft="none"
-            minW="97vw"
+            minW="95vw"
+            w="100vmin"
             ref={dropRef}
           >
             <MenuGroup>
