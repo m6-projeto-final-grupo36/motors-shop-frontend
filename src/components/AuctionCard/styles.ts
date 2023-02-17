@@ -12,6 +12,14 @@ export const AuctionLi = styled.li`
   list-style: none;
   color: var(--color-white-fixed);
 
+  &:hover{
+    .productImg{
+      img{
+        filter: brightness(30%);
+      }
+    }
+  }
+
   .productImg {
     width: 100%;
     height: 100%;
@@ -20,9 +28,9 @@ export const AuctionLi = styled.li`
     position: absolute;
     z-index: -1;
 
-    filter: brightness(30%);
-
+    
     img{
+      filter: brightness(70%);
       width: 100%;
       height: 100%;
     }
