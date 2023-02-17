@@ -98,13 +98,12 @@ export const Header = () => {
                 </div>
             </div>
 
-            <div className="mobile">
-                        
+            <div className="mobile">          
                 <Menu>
                     <MenuButton className='btn-open-drop' bg='transparent' as={Button} onClick={() => setIsClick(!isClick)}>
                         {isClick ? <IoCloseOutline/> : <BiMenu/>}
                     </MenuButton>
-                    <MenuList borderRadius='0' borderLeft='none' minW='100vw' ref={dropRef}>
+                    <MenuList borderRadius='0' borderLeft='none' minW='95vw' w='100vmin' ref={dropRef}>
                         <MenuGroup>
                             <MenuItem fontWeight='600' pl='16px' color='var(--color-grey-2)' mt='32px' mb='44px' fontSize='16px'>Carros</MenuItem>
                             <MenuItem fontWeight='600' pl='16px' color='var(--color-grey-2)' mb='44px' fontSize='16px'>Motos</MenuItem>
