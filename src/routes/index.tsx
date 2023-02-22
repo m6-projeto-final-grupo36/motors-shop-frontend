@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import { RetrieveAnnouncement } from "../components/RetrieveAnnouncement";
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
 import { Product } from "../pages/Product";
@@ -14,6 +15,8 @@ export const ContainerRoutes = () => (
     <Route path="/profileb" element={<ProfileBuyer />} />
     <Route path="/profiles" element={<ProfileSeller />} />
     <Route path="/home" element={<Home />} />
+    <Route path="/tester" element={<RetrieveAnnouncement />} />
+
 
     <Route path="*" element={<Navigate replace to={"/login"} />} />
   </Routes>
