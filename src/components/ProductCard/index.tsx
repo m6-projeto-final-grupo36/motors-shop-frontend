@@ -1,33 +1,40 @@
-import { Li, DivProfile, DivInfo } from "./styles";
+import { Li, DivProfile, DivInfo, DivButtons } from "./styles";
 
-interface IProductCard {
+export interface IProductCard {
   title: string;
   productImg: string;
   description: string;
-  profileImg: string;
   name: string;
   km: number;
   year: number;
   value: number;
+  is_active?: boolean;
+  page?: string;
 }
 
 export const ProductCard = ({
   title,
   productImg,
   description,
-  profileImg,
   name,
   km,
   year,
   value,
+  is_active,
+  page
 }: IProductCard) => {
+
   return (
     <Li>
       <img src={productImg} alt={title} className="productImg" />
+      {is_active ? <span className="active">Ativo</span> : <span className="inactive">Inativo</span>}
       <h2>{title}</h2>
       <p className="description">{description}</p>
       <DivProfile>
-        <img src={profileImg} alt="Imagem do usuário" className="profileImg" />
+        <p className="profileIcon">
+          {name.split(" ")[0][0]}
+          {name.split(" ")[1] && name.split(" ")[1][0]}
+        </p>
         <p>{name}</p>
       </DivProfile>
       <DivInfo>
@@ -40,6 +47,12 @@ export const ProductCard = ({
           })}
         </p>
       </DivInfo>
-    </Li>
+      {page && 
+      <DivButtons>
+        <button>Editar</button>
+        <button>Ver como</button>
+      </DivButtons>
+      }
+ </Li>
   );
 };
