@@ -16,6 +16,7 @@ export const Li = styled.li`
     :hover {
       border: 1px solid var(--color-brand-1);
     }
+
   }
 
   .active {
@@ -42,6 +43,7 @@ export const Li = styled.li`
     text-align: center;
     font-size: 13px;
     color: var(--color-white-fixed);
+
   }
 
   h2 {
