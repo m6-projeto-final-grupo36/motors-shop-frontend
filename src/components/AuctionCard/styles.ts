@@ -8,6 +8,7 @@ export const AuctionLi = styled.li`
   flex-direction: column;
   position: relative;
   justify-content: space-between;
+  margin: 0px 20px 20px 0px;
 
   list-style: none;
   color: var(--color-white-fixed);

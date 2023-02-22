@@ -6,6 +6,7 @@ import { ProfileBuyer } from "../pages/ProfileBuyer";
 import { ProfileSeller } from "../pages/ProfileSeller";
 import { Register } from "../pages/Register";
 import { ProfileViewUser } from "../pages/ProfileViewUser";
+import { ProfileViewAdmin } from "../pages/ProfileViewAdmin";
 
 export const ContainerRoutes = () => (
   <Routes>
@@ -15,6 +16,7 @@ export const ContainerRoutes = () => (
     <Route path="/profileb" element={<ProfileBuyer />} />
     <Route path="/profiles" element={<ProfileSeller />} />
     <Route path="/profileViewUser" element={<ProfileViewUser />} />
+    <Route path="/profileViewAdmin" element={<ProfileViewAdmin />} />
     <Route path="/home" element={<Home />} />
 
     <Route path="*" element={<Navigate replace to={"/login"} />} />
