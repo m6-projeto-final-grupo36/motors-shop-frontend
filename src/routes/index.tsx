@@ -6,6 +6,7 @@ import { Product } from "../pages/Product";
 import { ProfileBuyer } from "../pages/ProfileBuyer";
 import { ProfileSeller } from "../pages/ProfileSeller";
 import { Register } from "../pages/Register";
+import { ProfileViewUser } from "../pages/ProfileViewUser";
 
 export const ContainerRoutes = () => (
   <Routes>
@@ -14,6 +15,7 @@ export const ContainerRoutes = () => (
     <Route path="/product" element={<Product />} />
     <Route path="/profileb" element={<ProfileBuyer />} />
     <Route path="/profiles" element={<ProfileSeller />} />
+    <Route path="/profileViewUser" element={<ProfileViewUser />} />
     <Route path="/home" element={<Home />} />
     <Route path="/tester" element={<RetrieveAnnouncement />} />
 

@@ -4,9 +4,10 @@ import { SectionProduct } from "./styles";
 interface IListProduct {
     productType: string;
     productList: IProductCard[]
+    productPage?: string;
 }
 
-export const ListProduct = ({productType, productList}: IListProduct) => {
+export const ListProduct = ({productType, productList, productPage}: IListProduct) => {
 
   return (
     <SectionProduct>
@@ -21,6 +22,8 @@ export const ListProduct = ({productType, productList}: IListProduct) => {
             productImg={elem.productImg}
             value={elem.value}
             year={elem.year}
+            is_active={elem.is_active}
+            page={productPage}
           />
         ))}
       </ul>
