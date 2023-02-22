@@ -3,6 +3,7 @@ import { Advertiser } from "../../components/Advertiser";
 import { ListProduct } from "../../components/ListProduct";
 import { Footer } from "../../components/Footer";
 import { MainContainer, ContainerAdvertiser } from "./styles";
+import { ListAuction } from "../../components/ListAuction";
 
 export const ProfileViewAdmin = () => {
   const array = [
@@ -141,6 +142,7 @@ export const ProfileViewAdmin = () => {
           typeAccount="Anunciante"
         />
       </ContainerAdvertiser>
+      <ListAuction />
       <ListProduct productType="Carros" productList={array} />
       <ListProduct productType="Motos" productList={array2} />
       <Footer />
