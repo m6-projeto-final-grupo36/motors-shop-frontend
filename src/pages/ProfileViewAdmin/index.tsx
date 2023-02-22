@@ -143,8 +143,8 @@ export const ProfileViewAdmin = () => {
         />
       </ContainerAdvertiser>
       <ListAuction />
-      <ListProduct productType="Carros" productList={array} />
-      <ListProduct productType="Motos" productList={array2} />
+      <ListProduct productType="Carros" productList={array} productPage="my_ads" />
+      <ListProduct productType="Motos" productList={array2} productPage="my_ads" />
       <Footer />
     </MainContainer>
   );
