@@ -51,7 +51,7 @@ export const AuctionCard = ({
     return [hour, minute, second]
   };
 
-  let [hour, minute, second] = useCount(`Feb 17, 2023 ${expiryTime}:00:00`);
+  let [hour, minute, second] = useCount(`Feb 25, 2023 ${expiryTime}:00:00`);
 
   if(+hour! < 0 ){
     hour = '00'

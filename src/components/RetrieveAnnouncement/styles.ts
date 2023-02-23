@@ -75,10 +75,9 @@ export const Container = styled.div`
 
             .car-info{
                 display: flex;
-                width: 114px;
                 margin-bottom: 32px;
                 span{
-                    width: 51px;
+                    min-width: 6.25rem;
                     height: 40px;
                     display: flex;
                     align-items: center;
