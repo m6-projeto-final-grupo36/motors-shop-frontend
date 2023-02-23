@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AnnouncementContext } from "../../Providers/AnnouncementProvider";
+import { Commentary } from "../Comments";
 import { Footer } from "../Footer";
 import { Header } from "../Header"
 import { Container } from "./styles"
@@ -73,6 +74,7 @@ export const RetrieveAnnouncement = () => {
                     </section>
                 <div className="fixed"></div>
             </Container>
+            <Commentary/>
             <Footer />
         </>
     )

@@ -8,6 +8,8 @@ export const SectionProduct = styled.section`
   justify-content: center;
   position: relative;
 
+  margin-bottom: 50px;
+
   h1 {
     width: 80px;
     height: 30px;

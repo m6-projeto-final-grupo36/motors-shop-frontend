@@ -1,7 +1,8 @@
-import { Container, Input } from "./style";
+import { Container, ContainerInput, Input } from "./styles";
 
 export const Commentary = () => {
   return (
+    <>
     <Container>
       <h3 className="title">Comentários</h3>
 
@@ -80,11 +81,12 @@ export const Commentary = () => {
           </p>
         </div>
       </div>
-
+      </Container>
+      <ContainerInput>
       <div className="containerInput">
         <div className="cardHeader">
           <div className="cardImg5">
-            <p className="cardNameImg">MS</p>
+            <p className="cardNameImg">PM</p>
           </div>
           <div className="cardTitle">Paulo Mello</div>
         </div>
@@ -96,15 +98,18 @@ export const Commentary = () => {
           <button className="btn">Comentar</button>
         </div>
 
-        <div className="divFeedback">
-          <p className="pFeedback">Gostei muito!</p>
-          <p className="pFeedback2">Incrível</p>
-        </div>
+        <div className="feedbacks">
+          <div className="divFeedback">
+            <p className="pFeedback">Gostei muito!</p>
+            <p className="pFeedback2">Incrível</p>
+          </div>
 
-        <div className="divFeedback2">
-          <p className="pFeedback3">Recomendarei para os meus amigos!</p>
+          <div className="divFeedback2">
+            <p className="pFeedback3">Recomendarei para os meus amigos!</p>
+          </div>
         </div>
       </div>
-    </Container>
+      </ContainerInput>
+      </>
   );
 };
