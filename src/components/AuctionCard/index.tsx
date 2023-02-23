@@ -1,16 +1,11 @@
-import { AuctionLi, 
-  // UserContainer, 
-  ProductInfoContainer, } from "./styles";
+import { AuctionLi, ProductInfoContainer, } from "./styles";
 import { useState } from "react";
-
-import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { BiTime } from "react-icons/bi";
 
 interface IAuctionCard {
   productImg: string;
   productName: string;
   productDescription: string;
-  userName: string;
   productYear: number;
   productKm: number;
   productValue: number;
@@ -21,7 +16,6 @@ export const AuctionCard = ({
   productImg,
   productName,
   productDescription,
-  userName,
   productYear,
   productKm,
   productValue,
@@ -96,12 +90,10 @@ export const AuctionCard = ({
           })}
         </p>
       </ProductInfoContainer>
-      {/* <button className="auctionButton"> */}
       <div className="auctionButton">
         <button className="btn-edit-auction">Editar</button>
         <button className="btn-list-auction">Ver como</button>
       </div>
-      {/* </button> */}
     </AuctionLi>
   );
 };

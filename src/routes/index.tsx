@@ -2,24 +2,30 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { RetrieveAnnouncement } from "../components/RetrieveAnnouncement";
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
-import { Product } from "../pages/Product";
-import { ProfileBuyer } from "../pages/ProfileBuyer";
-import { ProfileSeller } from "../pages/ProfileSeller";
 import { Register } from "../pages/Register";
 import { ProfileViewUser } from "../pages/ProfileViewUser";
+import { useContext } from "react";
+import { AnnouncementContext } from "../Providers/AnnouncementProvider";
 
-export const ContainerRoutes = () => (
-  <Routes>
-    <Route path="/login" element={<Login />} />
-    <Route path="/register" element={<Register />} />
-    <Route path="/product" element={<Product />} />
-    <Route path="/profileb" element={<ProfileBuyer />} />
-    <Route path="/profiles" element={<ProfileSeller />} />
-    <Route path="/profileViewUser" element={<ProfileViewUser />} />
-    <Route path="/home" element={<Home />} />
-    <Route path="/tester" element={<RetrieveAnnouncement />} />
+export const ContainerRoutes = () => {
+
+  const {announcementFound} = useContext(AnnouncementContext)
+
+  return(
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/advertiser_announcement" element={<ProfileViewUser />} />
+      <Route path="/my_announcements" element={<ProfileViewUser page='my_announcements' />} />
+      {
+        Object.keys(announcementFound).length &&
+        <Route path="/detail" element={<RetrieveAnnouncement />} />
+      }
+      <Route path="*" element={<Navigate replace to={"/"} />} />
+    </Routes>
+  )
+}
 
 
-    <Route path="*" element={<Navigate replace to={"/login"} />} />
-  </Routes>
-);
+

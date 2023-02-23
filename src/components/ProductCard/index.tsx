@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AnnouncementContext } from "../../Providers/AnnouncementProvider";
 import { Li, DivProfile, DivInfo, DivButtons } from "./styles";
 
 export interface IProductCard {
@@ -5,11 +8,12 @@ export interface IProductCard {
   productImg: string;
   description: string;
   name: string;
-  km: number;
-  year: number;
+  km: string;
+  year: string;
   value: number;
   is_active?: boolean;
   page?: string;
+  id: string
 }
 
 export const ProductCard = ({
@@ -21,11 +25,21 @@ export const ProductCard = ({
   year,
   value,
   is_active,
+  id,
   page
 }: IProductCard) => {
 
+  const navigate = useNavigate()
+
+  const {listAnnouncement} = useContext(AnnouncementContext)
+
   return (
-    <Li>
+    <Li onClick={() => {
+        listAnnouncement(id)
+        setTimeout(() => {
+          navigate('/detail', {replace: true})
+        }, 2000);
+      }}>
       <img src={productImg} alt={title} className="productImg" />
       {is_active ? <span className="active">Ativo</span> : <span className="inactive">Inativo</span>}
       <h2>{title}</h2>

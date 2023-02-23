@@ -1,24 +1,15 @@
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AnnouncementContext } from "../../Providers/AnnouncementProvider";
 import { Footer } from "../Footer";
 import { Header } from "../Header"
 import { Container } from "./styles"
 
-interface IRetrieveAnnouncement{
-    img_cape: string;
-    title: string;
-    year: number;
-    productKm: number;
-    productValue: number;
-    productDescription: string;
-    images: string[]; // como foi mudado no db podemos fazer de outra forma também
-    advertiser_name: string;
-    advertiser_description: string;
-
-
-}
-
 export const RetrieveAnnouncement = () => {
 
-    const productValue = 240000
+    const {announcementFound} = useContext(AnnouncementContext)
+
+    const navigate = useNavigate()
 
     return(
         <>
@@ -26,17 +17,17 @@ export const RetrieveAnnouncement = () => {
             <Container>
                 <section>
                     <div className="img-announcement">
-                        <img src="https://www.chevrolet.com.br/content/dam/chevrolet/mercosur/brazil/portuguese/index/cars/cars-subcontent/04-images/novo-onix-branco-summit.png?imwidth=960" alt="Logo" />
+                        <img src={announcementFound.img_cape} alt="Imagem do produto" />
                     </div>
                     <div className="purchase-info">
-                        <h3>Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200 </h3>
+                        <h3>{announcementFound.title}</h3>
                         <div className="other-infos">
                             <div className="car-info">
-                                <span>2013</span>
-                                <span>0 KM</span>
+                                <span>{announcementFound.year}</span>
+                                <span>{announcementFound.mileage} KM</span>
                             </div>
                             <span>
-                            {productValue.toLocaleString("pt-br", {
+                            {announcementFound.price.toLocaleString("pt-br", {
                                 style: "currency",
                                 currency: "BRL",
                             })}
@@ -48,7 +39,7 @@ export const RetrieveAnnouncement = () => {
                     </div>
                     <div className="description-announcement">
                         <h3>Descrição</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                        <p>{announcementFound.description}</p>
                     </div>
                 </section>
 
@@ -56,38 +47,27 @@ export const RetrieveAnnouncement = () => {
                     <div className="photos-announcement">
                         <h3>Fotos</h3>
                         <div className="photos">
-                            <div className="photo">
-                                <img src="https://www.chevrolet.com.br/content/dam/chevrolet/mercosur/brazil/portuguese/index/cars/cars-subcontent/04-images/novo-onix-branco-summit.png?imwidth=960" alt="Logo" />
-                            </div>
-                            <div className="photo">
-                                <img src="https://www.chevrolet.com.br/content/dam/chevrolet/mercosur/brazil/portuguese/index/cars/cars-subcontent/04-images/novo-onix-branco-summit.png?imwidth=960" alt="Logo" />
-                            </div>
-                            <div className="photo">
-                                <img src="https://www.chevrolet.com.br/content/dam/chevrolet/mercosur/brazil/portuguese/index/cars/cars-subcontent/04-images/novo-onix-branco-summit.png?imwidth=960" alt="Logo" />
-                            </div>
-                            <div className="photo">
-                                <img src="https://www.chevrolet.com.br/content/dam/chevrolet/mercosur/brazil/portuguese/index/cars/cars-subcontent/04-images/novo-onix-branco-summit.png?imwidth=960" alt="Logo" />
-                            </div>
-                            <div className="photo">
-                                <img src="https://www.chevrolet.com.br/content/dam/chevrolet/mercosur/brazil/portuguese/index/cars/cars-subcontent/04-images/novo-onix-branco-summit.png?imwidth=960" alt="Logo" />
-                            </div>
-                            <div className="photo">
-                                <img src="https://www.chevrolet.com.br/content/dam/chevrolet/mercosur/brazil/portuguese/index/cars/cars-subcontent/04-images/novo-onix-branco-summit.png?imwidth=960" alt="Logo" />
-                            </div>
+                            {
+                                announcementFound.images.length 
+                                ? announcementFound.images.map(image => <div className="photo"> <img src={image.img} alt="Imagem do produto" /></div>)
+                                : <span>Sem fotos</span>
+                            }
                         </div>
                     </div>
                     <div className="advertiser-info">
                         <div className="initial-caracters">
-                            JK
+                            JS
                         </div>
                         <h3>
-                            Jorge Kimura
+                            James Silva
                         </h3>
                         <div className="advertiser-description">
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                         </div>
                         <div className="btn-list-advertiser-announcements">
-                            <button>Ver todos os anúncios</button>
+                            <button onClick={()=> {
+                                navigate('/advertiser_announcement', {replace: true})
+                            }}>Ver todos os anúncios</button>
                         </div>
                     </div>
                     </section>

@@ -15,6 +15,7 @@ export const Container = styled.div`
     }
 
     section{
+        width: 90%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -26,11 +27,13 @@ export const Container = styled.div`
         padding: 35px 32px 67px 24px;
         border-radius: 4px;
         height: 355px;
+        width: 90%;
 
         img{
             object-fit: contain;
             width: 294px;
             height: 253px;
+            margin: 0 auto;
         }
     }
 
@@ -40,6 +43,7 @@ export const Container = styled.div`
         background: var(--color-grey-10);
         border-radius: 4px;
         height: 327px;
+        width: 90%;
 
         h3{
             height: 32px;
@@ -75,7 +79,7 @@ export const Container = styled.div`
                 margin-bottom: 32px;
                 span{
                     width: 51px;
-                    height: 32px;
+                    height: 40px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -98,6 +102,7 @@ export const Container = styled.div`
         background: var(--color-grey-10);
         border-radius: 4px;
         height: 325px;
+        width: 90%;
         margin: 0px 12px 15px 12px;
         padding: 36px 28px;
 
@@ -118,6 +123,7 @@ export const Container = styled.div`
         padding: 36px 26px 36px 36px;
         background: var(--color-grey-10);
         border-radius: 4px;
+        width: 90%;
         /* height: 360px; */
 
         .photos{
@@ -153,6 +159,7 @@ export const Container = styled.div`
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
+        width: 90%;
 
         .initial-caracters {
           display: flex;
