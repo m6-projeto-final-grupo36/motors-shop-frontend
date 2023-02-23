@@ -4,12 +4,14 @@ interface IAdvertiserProfile {
   name: string;
   typeAccount: string;
   description: string;
+  page?: string
 }
 
 export const Advertiser = ({
   name,
   typeAccount,
   description,
+  page
 }: IAdvertiserProfile) => {
   return (
     <Container>
@@ -27,7 +29,9 @@ export const Advertiser = ({
         <div className="divDescription">
           <p className="pDescription">{description}</p>
         </div>
+        {page && 
         <button className="btn">Criar anúncio</button>
+        }
       </div>
     </Container>
   );

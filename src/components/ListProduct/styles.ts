@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const SectionProduct = styled.section`
   width: 100%;
-  height: 450px;
 
   display: flex;
   flex-direction: column;
@@ -10,15 +9,36 @@ export const SectionProduct = styled.section`
   position: relative;
 
   h1 {
-    position: absolute;
-    top: 10px;
-    margin-left: 30px;
+    width: 80px;
+    height: 30px;
+    margin: 44px 0px 62px 26px;
+    font-weight: 600;
+    font-size: 24px;
+    color: #000000;
   }
 
   .listProduct {
     display: flex;
     overflow-y: hidden;
     overflow-x: scroll;
+    min-height: 350px;
+    margin-left: 26px;
+  }
+
+  li{
+    margin-right: 48px;
+  }
+  li:last-child{
+    margin-right: 26px;
+  }
+
+  @media (min-width: 1024px) {
+    h1{
+      margin-left: 60px;
+    }
+    .listProduct{
+      margin-left: 60px;
+    }
   }
 
   .listProduct::-webkit-scrollbar {

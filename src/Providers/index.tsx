@@ -1,5 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { ReactNode } from "react";
+import { AnnouncementProvider } from "./AnnouncementProvider";
 import { UserProvider } from "./UserProvider";
 
 export interface IProvidersProps {
@@ -9,7 +10,11 @@ export interface IProvidersProps {
 export const AppProvider = ({ children }: IProvidersProps) => {
   return (
     <ChakraProvider>
-      <UserProvider>{children}</UserProvider>
+      <UserProvider>
+        <AnnouncementProvider>
+          {children}
+        </AnnouncementProvider>
+      </UserProvider>
     </ChakraProvider>
   );
 };

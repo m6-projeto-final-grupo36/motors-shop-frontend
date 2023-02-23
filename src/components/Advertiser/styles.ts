@@ -10,6 +10,9 @@ export const Container = styled.div`
   max-width: 1240px;
   max-height: 406px;
   margin: 0 auto;
+  position: relative;
+  top: 30px;
+  width: 90%;
 
   .containerTwo {
     display: flex;

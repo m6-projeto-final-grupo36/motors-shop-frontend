@@ -5,12 +5,13 @@ export const Li = styled.li`
   height: 370px;
   display: flex;
   flex-direction: column;
-  margin-left: 30px;
+  margin-bottom: 10px;
   position: relative;
 
   .productImg {
-    width: 312px;
-    height: 152px;
+    margin: 0 auto;
+    width: 100%;
+    height: 150px;
     object-fit: cover;
 
     :hover {
@@ -87,7 +88,7 @@ export const DivInfo = styled.div`
 
   span {
     width: 51px;
-    height: 32px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -105,14 +106,22 @@ export const DivInfo = styled.div`
 
 export const DivButtons = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
+  margin-top: 16px;
+  height: 38px;
 
   button {
+    height: 100%;
+    width: 105px;
     padding: 5px;
     
     border: 2px solid #000;
-    border-radius: 10px;
+    border-radius: 4px;
     
     font-weight: 500;
+  }
+  button:first-child{
+    width: 80px;
+    margin-right: 16px;
   }
 `

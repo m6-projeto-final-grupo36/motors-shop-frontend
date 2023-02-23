@@ -2,13 +2,22 @@ import styled from "styled-components";
 
 export const MainContainer = styled.main`
     background-color: var(--color-grey-6);
+    h1{
+        width: 80px;
+        height: 30px;
+        margin: 60px 0px 40px 26px;
+        font-weight: 600;
+        font-size: 24px;
+        color: #000000;
+    }
+
+    @media (min-width: 1024px) {
+        h1{
+            margin-left: 60px;
+        }
+    }
 `
 
-export const ContainerAdvertiser = styled.div`
-    padding: 40px 15px 15px 15px;
-    height: 400px;
-    width: 100%;
-
+export const ContainerAdvertiser = styled.div`    
     background-color: var(--color-brand-1);
-    border-bottom: solid 200px var(--color-grey-6);
 `

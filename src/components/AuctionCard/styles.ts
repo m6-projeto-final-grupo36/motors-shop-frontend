@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
 export const AuctionLi = styled.li`
-  width: 19rem;
-  height: 24.6875rem;
-
   display: flex;
   flex-direction: column;
   position: relative;
@@ -11,6 +8,15 @@ export const AuctionLi = styled.li`
 
   list-style: none;
   color: var(--color-white-fixed);
+  background-color: white;
+
+  border: solid 1px #000;
+  border-radius: 4px;
+  z-index: 10;
+  margin-left: 26px;
+  margin-bottom: 25px;
+  margin-top: 80px;
+  margin: 0 16px;
 
   &:hover{
     .productImg{
@@ -24,12 +30,14 @@ export const AuctionLi = styled.li`
     width: 100%;
     height: 100%;
 
-    object-fit: cover;
+    
     position: absolute;
     z-index: -1;
 
     
     img{
+      background-color: white;
+      object-fit: contain;
       filter: brightness(70%);
       width: 100%;
       height: 100%;
@@ -67,7 +75,6 @@ export const AuctionLi = styled.li`
     margin-bottom: 28px;
 
     font-weight: 300;
-    width: 275px;
   }
 
   .auctionButton {
@@ -77,7 +84,7 @@ export const AuctionLi = styled.li`
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 
     background-color: var(--color-brand-1);
 
@@ -92,11 +99,14 @@ export const AuctionLi = styled.li`
       display: flex;
       align-items: center;
       justify-content: center;
-      /* margin: 0px 40px 0px 25px; */
+    }
+    button:first-child{
+      margin-right: 16px;
     }
   }
 
   @media (min-width: 1024px) {
+      margin-left: 60px;
       width: 45.9375rem;
       height: 24.25rem;
 
@@ -123,10 +133,6 @@ export const AuctionLi = styled.li`
 
         align-items: center;
         justify-content: flex-start;
-
-        button:first-child{
-          margin-right: 16px;
-        }
       }
   }
 `;
@@ -163,7 +169,6 @@ export const ProductInfoContainer = styled.div`
   flex-direction: column;
 
   span {
-    /* margin-right: 10px; */
     padding: 4px 8px;
 
     font-size: 14px;
@@ -177,8 +182,6 @@ export const ProductInfoContainer = styled.div`
   }
 
   p {
-    /* margin-left: auto;
-    margin-right: 40px; */
     margin-top: 24px;
   }
 
