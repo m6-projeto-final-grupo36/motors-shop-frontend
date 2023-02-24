@@ -33,8 +33,10 @@ export const ProductCard = ({
 
   const {listAnnouncement} = useContext(AnnouncementContext)
 
+  const value_in_real = Math.round(value/100)
+
   return (
-    <Li onClick={() => {
+    <Li page={page ? page : undefined} onClick={() => {
         listAnnouncement(id)
         setTimeout(() => {
           navigate('/detail', {replace: true})
@@ -55,7 +57,7 @@ export const ProductCard = ({
         <span>{km} KM</span>
         <span>{year}</span>
         <p>
-          {value.toLocaleString("pt-br", {
+          {value_in_real.toLocaleString("pt-br", {
             style: "currency",
             currency: "BRL",
           })}

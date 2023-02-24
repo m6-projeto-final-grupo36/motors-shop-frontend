@@ -59,3 +59,20 @@ export const ExploreSection = styled.section`
         }
     }
 `
+
+export const Container = styled.div`
+    .title-auction{
+        width: 80px;
+        height: 30px;
+        margin: 60px 0px 37px 12px;
+        font-weight: 600;
+        font-size: 24px;
+        color: #000000;
+    }
+
+    @media (min-width: 1024px) {
+        .title-auction{
+            margin-left: 60px;
+        }    
+    }
+`

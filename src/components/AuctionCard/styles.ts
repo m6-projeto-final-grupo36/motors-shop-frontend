@@ -10,13 +10,11 @@ export const AuctionLi = styled.li`
   color: var(--color-white-fixed);
   background-color: white;
 
-  border: solid 1px #000;
   border-radius: 4px;
   z-index: 10;
-  margin-left: 26px;
-  margin-bottom: 25px;
-  margin-top: 80px;
-  margin: 0 16px;
+
+  margin: 0 12px;
+  margin-bottom: 50px;
 
   &:hover{
     .productImg{
@@ -73,6 +71,7 @@ export const AuctionLi = styled.li`
   .productDescription {
     margin-left: 22px;
     margin-bottom: 28px;
+    padding-right: 20px;
 
     font-weight: 300;
   }
@@ -105,6 +104,34 @@ export const AuctionLi = styled.li`
     }
   }
 
+  .auctionButtonHomePage{
+      width: 100%;
+      height: 3.875rem;
+  
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      background-color: red;
+
+      background-color: var(--color-brand-1);
+
+      p{
+        font-size: 1rem;
+        font-weight: 600;
+        padding: 19px 20px;
+        min-height: 38px;
+        max-height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      p:first-child{
+        margin-right: 16px;
+      }
+
+    }
+
   @media (min-width: 1024px) {
       margin-left: 60px;
       width: 45.9375rem;
@@ -134,31 +161,38 @@ export const AuctionLi = styled.li`
         align-items: center;
         justify-content: flex-start;
       }
+      .auctionButtonHomePage{
+        padding: 31px 36px;
+      }
   }
 `;
 
-// export const UserContainer = styled.div`
-//   display: flex;
-//   align-items: center;
-//   margin-left: 25px;
-//   margin-bottom: 25px;
+export const UserContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 22px;
+  margin-bottom: 25px;
 
-//   .profileIcon {
-//     width: 30px;
-//     height: 30px;
+  .profileIcon {
+    width: 30px;
+    height: 30px;
 
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-//     border-radius: 150px;
-//     background-color: var(--color-brand-1);
-//   }
+    border-radius: 150px;
+    background-color: var(--color-brand-1);
+  }
 
-//   .userName {
-//     margin-left: 10px;
-//   }
-// `;
+  .userName {
+    margin-left: 10px;
+  }
+
+  @media (min-width: 1024px) {
+    margin-left: 36px;
+  }
+`;
 
 export const ProductInfoContainer = styled.div`
   margin-left: 22px;
