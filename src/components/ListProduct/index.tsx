@@ -1,5 +1,5 @@
 import { IAnnouncement } from "../../Providers/AnnouncementProvider";
-import { IProductCard, ProductCard } from "../ProductCard";
+import { ProductCard } from "../ProductCard";
 import { SectionProduct } from "./styles";
 
 interface IListProduct {
@@ -14,7 +14,7 @@ export const ListProduct = ({productType, productList, productPage}: IListProduc
     <SectionProduct>
       <h1>{productType}</h1>
       <ul className="listProduct">
-        {productList.map((elem) => (
+        { productList.length ? productList.map((elem) => (
           <ProductCard
             key={elem.id}
             id={elem.id}
@@ -28,7 +28,10 @@ export const ListProduct = ({productType, productList, productPage}: IListProduc
             is_active={elem.is_active}
             page={productPage}
           />
-        ))}
+        ))
+          :
+          <span>Sem anúncios</span>
+      }
       </ul>
     </SectionProduct>
   );
