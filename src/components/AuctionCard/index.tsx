@@ -1,6 +1,7 @@
-import { AuctionLi, ProductInfoContainer, } from "./styles";
+import { AuctionLi, ProductInfoContainer, UserContainer, } from "./styles";
 import { useState } from "react";
 import { BiTime } from "react-icons/bi";
+import { HiOutlineArrowNarrowRight } from 'react-icons/hi'
 
 interface IAuctionCard {
   productImg: string;
@@ -10,6 +11,7 @@ interface IAuctionCard {
   productKm: number;
   productValue: number;
   expiryTime: number;
+  page?: string
 }
 
 export const AuctionCard = ({
@@ -19,7 +21,8 @@ export const AuctionCard = ({
   productYear,
   productKm,
   productValue,
-  expiryTime
+  expiryTime,
+  page
 }: IAuctionCard) => {
 
   const useCount = (date: string) => {
@@ -71,13 +74,21 @@ export const AuctionCard = ({
       <span className="timer"><BiTime color="var(--color-brand-1)" fontSize={20}/>{`${hour ? hour : '00'}:${minute ? (minute.length === 2 ? minute : '0' + minute) : '00'}:${second ? (second.length === 2 ? second : '0' + second) : '00'}`}</span>
       <h2 className="productName">{productName}</h2>
       <p className="productDescription">{productDescription}</p>
-      {/* <UserContainer>
-        <p className="profileIcon">
-          {userName.split(' ')[0][0]}
-          {userName.split(" ")[1] && userName.split(" ")[1][0]}  
-        </p>
-        <p className="userName">{userName}</p>
-      </UserContainer> */}
+      {
+        page &&
+        <UserContainer>
+          <p className="profileIcon">
+            RC
+            {/* {userName.split(' ')[0][0]}
+            {userName.split(" ")[1] && userName.split(" ")[1][0]}   */}
+          </p>
+          <p className="userName">
+            Rodrigo Castro
+            {/* {userName} */}
+          </p>
+        </UserContainer>
+
+      }
       <ProductInfoContainer>
         <div>
           <span>{productYear}</span>
@@ -90,10 +101,19 @@ export const AuctionCard = ({
           })}
         </p>
       </ProductInfoContainer>
-      <div className="auctionButton">
-        <button className="btn-edit-auction">Editar</button>
-        <button className="btn-list-auction">Ver como</button>
-      </div>
+      {
+        page 
+        ? <div className="auctionButtonHomePage">
+            <p>Acessar página do leilão</p>
+            <p className="arrow">
+              <HiOutlineArrowNarrowRight fontSize={35} />
+            </p>
+          </div> 
+        : <div className="auctionButton">
+            <button className="btn-edit-auction">Editar</button>
+            <button className="btn-list-auction">Ver como</button>
+          </div>
+      }
     </AuctionLi>
   );
 };

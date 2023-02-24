@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
-export const Li = styled.li`
+interface IList{
+  page?: string
+}
+
+export const Li = styled.li<IList>`
   width: 312px;
-  height: 370px;
+  height: ${({page}) => page ? '370px' : '328px'};
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
