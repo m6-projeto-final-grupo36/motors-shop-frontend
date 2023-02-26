@@ -6,7 +6,6 @@ export const createAnnouncementSchema = yup.object().shape({
     .number()
     .typeError("Precisa ser um número")
     .required("Ano obrigatório"),
-  // .max(4, "Máximo 4 dígitos"),
   mileage: yup
     .number()
     .typeError("Precisa ser um número")
@@ -17,12 +16,17 @@ export const createAnnouncementSchema = yup.object().shape({
     .required("Proço obrigatório"),
   description: yup.string().required("Descrição obrigatória"),
   img_cape: yup.string().required("Imagem de capa obrigatória"),
-  // type_vehicle: yup
-  //   .mixed()
-  //   .notRequired()
-  //   .oneOf(["car", "motorcycle"])
-  //   .default("car"),
-  // type: yup.mixed().notRequired().oneOf(["sales", "auction"]).default("sales"),
   images: yup.array().default([]),
+  is_active: yup.boolean().notRequired().default(true),
+});
+
+export const updateAnnouncementSchema = yup.object().shape({
+  title: yup.string().notRequired(),
+  year: yup.number().typeError("Precisa ser um número").notRequired(),
+  mileage: yup.number().typeError("Precisa ser um número").notRequired(),
+  price: yup.number().typeError("Precisa ser um número").notRequired(),
+  description: yup.string().notRequired(),
+  img_cape: yup.string().notRequired(),
+  images: yup.array().notRequired().default([]),
   is_active: yup.boolean().notRequired().default(true),
 });

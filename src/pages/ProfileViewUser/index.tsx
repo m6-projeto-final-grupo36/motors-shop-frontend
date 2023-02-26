@@ -12,11 +12,18 @@ import {
   CreateAnnouncementForm,
   ICreateAnnouncementRequest,
 } from "./CreateAnnouncementForm";
-import { UpdateAnnouncementForm } from "./UpdateAnnouncementForm";
+import {
+  IUpdateAnnouncementRequest,
+  UpdateAnnouncementForm,
+} from "./UpdateAnnouncementForm";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { createAnnouncementSchema } from "../../schemas/announcement";
+import {
+  createAnnouncementSchema,
+  updateAnnouncementSchema,
+} from "../../schemas/announcement";
 import { api } from "../../services/api";
+import { useDisclosure } from "@chakra-ui/react";
 
 interface IProfileProps {
   page?: string;
@@ -28,6 +35,11 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
     setIsLoadingButtonCreateAnnouncement,
   ] = useState(false);
 
+  const [
+    isLoadingButtonUpdateAnnouncement,
+    setIsLoadingButtonUpdateAnnouncement,
+  ] = useState(false);
+
   const {
     announcements,
     isOpenModalCreateAnnouncement,
@@ -37,6 +49,12 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
     announcementCreate_type,
     announcementCreate_type_vehicle,
   } = useContext(AnnouncementContext);
+
+  const {
+    isOpen: isOpenModalSuccessCreateAnnouncement,
+    onOpen: onOpenModalSuccessCreateAnnouncement,
+    onClose: onCloseModalSuccessCreateAnnouncement,
+  } = useDisclosure();
 
   const cars = announcements.filter(
     (announcement) => announcement.type_vehicle === "car"
@@ -54,6 +72,14 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
     resolver: yupResolver(createAnnouncementSchema),
   });
 
+  const {
+    formState: { errors: errorsUpdateAnnouncement },
+    register: registerUpdateAnnouncement,
+    handleSubmit: handleSubmitUpdateAnnouncement,
+  } = useForm<IUpdateAnnouncementRequest>({
+    resolver: yupResolver(updateAnnouncementSchema),
+  });
+
   const handleCreateAnnouncement = (data: ICreateAnnouncementRequest) => {
     setIsLoadingButtonCreateAnnouncement(true);
     const inputImages = document.getElementsByClassName("new_image_links");
@@ -62,7 +88,9 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
 
     for (let i = 0; i < inputImages.length; i++) {
       const input: HTMLInputElement = inputImages[i] as HTMLInputElement;
-      new_images.push(input.value);
+      if (input.value) {
+        new_images.push(input.value);
+      }
     }
 
     const newData: ICreateAnnouncementRequest = {
@@ -75,6 +103,7 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
     api
       .post("/announcements", newData)
       .then((res) => {
+        onOpenModalSuccessCreateAnnouncement();
         onCloseModalCreateAnnouncement();
         setIsLoadingButtonCreateAnnouncement(false);
         console.log(res);
@@ -83,6 +112,11 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
         setIsLoadingButtonCreateAnnouncement(false);
         console.log(err);
       });
+  };
+
+  const handleUpdateAnnouncement = (data: IUpdateAnnouncementRequest) => {
+    // setIsLoadingButtonUpdateAnnouncement(true);
+    console.log(data);
   };
 
   return (
@@ -107,8 +141,23 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
         onClose={onCloseModalUpdateAnnouncement}
         titleModal="Editar anúncio"
       >
-        <UpdateAnnouncementForm />
+        <UpdateAnnouncementForm
+          errors={errorsUpdateAnnouncement}
+          handleUpdateAnnouncement={handleSubmitUpdateAnnouncement(
+            handleUpdateAnnouncement
+          )}
+          loadingUpdateAnnouncement={isLoadingButtonUpdateAnnouncement}
+          register={registerUpdateAnnouncement}
+        />
       </Modal>
+
+      <Modal
+        isOpen={isOpenModalSuccessCreateAnnouncement}
+        onClose={onCloseModalSuccessCreateAnnouncement}
+        titleModal="Sucesso"
+        subtitleModal="Seu anúncio foi criado com sucesso!"
+        infoModal="Agora você poderá ver seus negócios crescendo em grande escala"
+      />
       <Header />
       <ContainerAdvertiser>
         <Advertiser
