@@ -7,7 +7,7 @@ import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { Modal } from "../../components/Modal";
 import { ILogin, UserContext } from "../../Providers/UserProvider";
-import { loginSchema } from "../../schemas";
+import { loginSchema } from "../../schemas/user";
 import { LoginForm } from "./LoginForm";
 
 export const Login = () => {

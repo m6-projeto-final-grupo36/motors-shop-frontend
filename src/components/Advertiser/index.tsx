@@ -1,18 +1,21 @@
+import { useContext } from "react";
+import { AnnouncementContext } from "../../Providers/AnnouncementProvider";
 import { Container } from "./styles";
 
 interface IAdvertiserProfile {
   name: string;
   typeAccount: string;
   description: string;
-  page?: string
+  page?: string;
 }
 
 export const Advertiser = ({
   name,
   typeAccount,
   description,
-  page
+  page,
 }: IAdvertiserProfile) => {
+  const { onOpenModalCreateAnnouncement } = useContext(AnnouncementContext);
   return (
     <Container>
       <div className="containerTwo">
@@ -29,9 +32,11 @@ export const Advertiser = ({
         <div className="divDescription">
           <p className="pDescription">{description}</p>
         </div>
-        {page && 
-        <button className="btn">Criar anúncio</button>
-        }
+        {page && (
+          <button onClick={onOpenModalCreateAnnouncement} className="btn">
+            Criar anúncio
+          </button>
+        )}
       </div>
     </Container>
   );

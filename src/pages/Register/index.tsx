@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { RegisterForm } from "./RegisterForm";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { registerSchema } from "../../schemas";
+import { registerSchema } from "../../schemas/user";
 import { Box, Flex, Heading, useDisclosure, VStack } from "@chakra-ui/react";
 import { Footer } from "../../components/Footer";
 import { IRegister, UserContext } from "../../Providers/UserProvider";
@@ -53,7 +53,6 @@ export const Register = () => {
 
   return (
     <VStack
-      // h={["100%", "100vh"]}
       justifyContent="space-between"
       backgroundColor="var(--color-grey-8)"
     >
