@@ -22,9 +22,9 @@ export const createAnnouncementSchema = yup.object().shape({
 
 export const updateAnnouncementSchema = yup.object().shape({
   title: yup.string().notRequired(),
-  year: yup.number().typeError("Precisa ser um número").notRequired(),
-  mileage: yup.number().typeError("Precisa ser um número").notRequired(),
-  price: yup.number().typeError("Precisa ser um número").notRequired(),
+  year: yup.string().typeError("Precisa ser um número").notRequired(),
+  mileage: yup.string().typeError("Precisa ser um número").notRequired(),
+  price: yup.string().typeError("Precisa ser um número").notRequired(),
   description: yup.string().notRequired(),
   img_cape: yup.string().notRequired(),
   images: yup.array().notRequired().default([]),

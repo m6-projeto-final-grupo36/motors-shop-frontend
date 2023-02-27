@@ -1,21 +1,33 @@
 import { useDisclosure } from "@chakra-ui/react";
-import { createContext, ReactNode, useEffect, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { api } from "../../services/api";
 
 interface IAnnouncementContext {
   announcementFound: IAnnouncementRetrieve;
   listAnnouncement: (id: string) => Promise<void>;
   announcements: IAnnouncement[];
+  setAnnouncements: Dispatch<SetStateAction<IAnnouncement[]>>;
   isOpenModalCreateAnnouncement: boolean;
   onOpenModalCreateAnnouncement: () => void;
   onCloseModalCreateAnnouncement: () => void;
   isOpenModalUpdateAnnouncement: boolean;
   onOpenModalUpdateAnnouncement: () => void;
   onCloseModalUpdateAnnouncement: () => void;
-  announcementCreate_type: string;
-  setAnnouncementCreate_type: (value: string) => void;
-  announcementCreate_type_vehicle: string;
-  setAnnouncementCreate_type_vehicle: (value: string) => void;
+  announcementSelected_type: string;
+  setAnnouncementSelected_type: (value: string) => void;
+  announcementSelected_type_vehicle: string;
+  setAnnouncementSelected_type_vehicle: (value: string) => void;
+  imgsCreate: string[];
+  imgsUpdate: string[];
+  setImgsUpdate: Dispatch<SetStateAction<string[]>>;
+  setImgsCreate: Dispatch<SetStateAction<string[]>>;
 }
 
 interface IAnnouncementProps {
@@ -37,11 +49,6 @@ export interface IAnnouncement {
   year: string;
 }
 
-interface IImages {
-  id: string;
-  img: string;
-}
-
 interface IAnnouncementRetrieve {
   created_at: Date;
   description: string;
@@ -55,7 +62,7 @@ interface IAnnouncementRetrieve {
   type_vehicle: string;
   updated_at: Date;
   year: string;
-  images: IImages[];
+  images: string[];
 }
 
 export const AnnouncementContext = createContext({} as IAnnouncementContext);
@@ -66,10 +73,14 @@ export const AnnouncementProvider = ({ children }: IAnnouncementProps) => {
     {} as IAnnouncementRetrieve
   );
 
-  const [announcementCreate_type, setAnnouncementCreate_type] =
+  const [announcementSelected_type, setAnnouncementSelected_type] =
     useState("sales");
-  const [announcementCreate_type_vehicle, setAnnouncementCreate_type_vehicle] =
-    useState("car");
+  const [
+    announcementSelected_type_vehicle,
+    setAnnouncementSelected_type_vehicle,
+  ] = useState("car");
+  const [imgsCreate, setImgsCreate] = useState([""] as string[]);
+  const [imgsUpdate, setImgsUpdate] = useState([""] as string[]);
 
   useEffect(() => {
     const listAllAnnouncements = async () => {
@@ -83,8 +94,11 @@ export const AnnouncementProvider = ({ children }: IAnnouncementProps) => {
 
   const listAnnouncement = async (id: string): Promise<void> => {
     await api
-      .get(`/announcements/${id}`)
-      .then((res) => setAnnnouncementFound(res.data))
+      .get<IAnnouncementRetrieve>(`/announcements/${id}`)
+      .then((res) => {
+        setAnnnouncementFound(res.data);
+        setImgsUpdate(res.data.images);
+      })
       .catch((err) => console.log(err));
   };
 
@@ -105,6 +119,7 @@ export const AnnouncementProvider = ({ children }: IAnnouncementProps) => {
       value={{
         listAnnouncement,
         announcements,
+        setAnnouncements,
         announcementFound,
         isOpenModalCreateAnnouncement,
         onCloseModalCreateAnnouncement,
@@ -112,10 +127,14 @@ export const AnnouncementProvider = ({ children }: IAnnouncementProps) => {
         isOpenModalUpdateAnnouncement,
         onCloseModalUpdateAnnouncement,
         onOpenModalUpdateAnnouncement,
-        announcementCreate_type,
-        setAnnouncementCreate_type,
-        announcementCreate_type_vehicle,
-        setAnnouncementCreate_type_vehicle,
+        announcementSelected_type,
+        announcementSelected_type_vehicle,
+        setAnnouncementSelected_type,
+        setAnnouncementSelected_type_vehicle,
+        imgsCreate,
+        setImgsCreate,
+        imgsUpdate,
+        setImgsUpdate,
       }}
     >
       {children}

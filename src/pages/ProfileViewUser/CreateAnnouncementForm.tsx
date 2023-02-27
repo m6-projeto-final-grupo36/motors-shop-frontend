@@ -33,8 +33,12 @@ export const CreateAnnouncementForm = ({
   loadingCreateAnnouncement,
   register,
 }: ICreateAnnouncementForm) => {
-  const { setAnnouncementCreate_type, setAnnouncementCreate_type_vehicle } =
-    useContext(AnnouncementContext);
+  const {
+    setAnnouncementSelected_type,
+    setAnnouncementSelected_type_vehicle,
+    imgsCreate,
+    setImgsCreate,
+  } = useContext(AnnouncementContext);
 
   return (
     <>
@@ -51,7 +55,7 @@ export const CreateAnnouncementForm = ({
               { text: "Venda", value: "sales" },
               { text: "Leilão", value: "auction" },
             ]}
-            handleChange={setAnnouncementCreate_type}
+            handleChange={setAnnouncementSelected_type}
           />
 
           <Text fontWeight="500" as="h4">
@@ -112,7 +116,7 @@ export const CreateAnnouncementForm = ({
               { text: "Carro", value: "car" },
               { text: "Moto", value: "motorcycle" },
             ]}
-            handleChange={setAnnouncementCreate_type_vehicle}
+            handleChange={setAnnouncementSelected_type_vehicle}
           />
 
           <Input
@@ -122,7 +126,7 @@ export const CreateAnnouncementForm = ({
             {...register("img_cape")}
           />
 
-          <InputsImages request_type="create" />
+          <InputsImages imgs={imgsCreate} setImgs={setImgsCreate} />
         </VStack>
 
         <Button

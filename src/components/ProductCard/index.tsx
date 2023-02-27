@@ -13,7 +13,7 @@ export interface IProductCard {
   value: number;
   is_active?: boolean;
   page?: string;
-  id: string
+  id: string;
 }
 
 export const ProductCard = ({
@@ -26,24 +26,23 @@ export const ProductCard = ({
   value,
   is_active,
   id,
-  page
+  page,
 }: IProductCard) => {
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
+  const { listAnnouncement, onOpenModalUpdateAnnouncement } =
+    useContext(AnnouncementContext);
 
-  const {listAnnouncement} = useContext(AnnouncementContext)
-
-  const value_in_real = Math.round(value/100)
+  const value_in_real = Math.round(value / 100);
 
   return (
-    <Li page={page ? page : undefined} onClick={() => {
-        listAnnouncement(id)
-        setTimeout(() => {
-          navigate('/detail', {replace: true})
-        }, 2000);
-      }}>
+    <Li page={page ? page : undefined}>
       <img src={productImg} alt={title} className="productImg" />
-      {is_active ? <span className="active">Ativo</span> : <span className="inactive">Inativo</span>}
+      {is_active ? (
+        <span className="active">Ativo</span>
+      ) : (
+        <span className="inactive">Inativo</span>
+      )}
       <h2>{title}</h2>
       <p className="description">{description}</p>
       <DivProfile>
@@ -63,12 +62,26 @@ export const ProductCard = ({
           })}
         </p>
       </DivInfo>
-      {page && 
-      <DivButtons>
-        <button>Editar</button>
-        <button>Ver como</button>
-      </DivButtons>
-      }
- </Li>
+      {page && (
+        <DivButtons>
+          <button
+            onClick={async () => {
+              await listAnnouncement(id);
+              onOpenModalUpdateAnnouncement();
+            }}
+          >
+            Editar
+          </button>
+          <button
+            onClick={async () => {
+              await listAnnouncement(id);
+              navigate("/detail");
+            }}
+          >
+            Ver como
+          </button>
+        </DivButtons>
+      )}
+    </Li>
   );
 };

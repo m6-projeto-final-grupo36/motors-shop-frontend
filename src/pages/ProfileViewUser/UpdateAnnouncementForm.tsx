@@ -9,9 +9,9 @@ import { InputsImages } from "./InputsImages";
 
 export interface IUpdateAnnouncementRequest {
   title?: string;
-  year?: number;
-  mileage?: number;
-  price?: number;
+  year?: number | "";
+  mileage?: number | "";
+  price?: number | "";
   description?: string;
   img_cape?: string;
   images?: string[];
@@ -33,8 +33,13 @@ export const UpdateAnnouncementForm = ({
   loadingUpdateAnnouncement,
   register,
 }: IUpdateAnnouncementForm) => {
-  const { setAnnouncementCreate_type, setAnnouncementCreate_type_vehicle } =
-    useContext(AnnouncementContext);
+  const {
+    setAnnouncementSelected_type,
+    setAnnouncementSelected_type_vehicle,
+    announcementFound,
+    imgsUpdate,
+    setImgsUpdate,
+  } = useContext(AnnouncementContext);
 
   return (
     <>
@@ -45,13 +50,13 @@ export const UpdateAnnouncementForm = ({
           </Text>
 
           <InputRadio
-            defaultValue="sales"
+            defaultValue={announcementFound.type}
             name="type"
             options={[
               { text: "Venda", value: "sales" },
               { text: "Leilão", value: "auction" },
             ]}
-            handleChange={setAnnouncementCreate_type}
+            handleChange={setAnnouncementSelected_type}
           />
 
           <Text fontWeight="500" as="h4">
@@ -64,6 +69,7 @@ export const UpdateAnnouncementForm = ({
               placeholder="Digitar título"
               error={errors.title}
               {...register("title")}
+              defaultValue={announcementFound.title}
             />
             <HStack>
               <Input
@@ -73,6 +79,7 @@ export const UpdateAnnouncementForm = ({
                 error={errors.year}
                 {...register("year")}
                 type="number"
+                defaultValue={announcementFound.year}
               />
 
               <Input
@@ -81,6 +88,7 @@ export const UpdateAnnouncementForm = ({
                 error={errors.mileage}
                 {...register("mileage")}
                 type="number"
+                defaultValue={announcementFound.mileage}
               />
             </HStack>
           </Flex>
@@ -91,6 +99,7 @@ export const UpdateAnnouncementForm = ({
             error={errors.price}
             {...register("price")}
             type="number"
+            defaultValue={announcementFound.price}
           />
 
           <TextArea
@@ -99,6 +108,7 @@ export const UpdateAnnouncementForm = ({
             error={errors.description}
             {...register("description")}
             maxH="200px"
+            defaultValue={announcementFound.description}
           />
 
           <Text fontWeight="500" as="h4">
@@ -106,13 +116,13 @@ export const UpdateAnnouncementForm = ({
           </Text>
 
           <InputRadio
-            defaultValue="car"
+            defaultValue={announcementFound.type_vehicle}
             name="type_vehicle"
             options={[
               { text: "Carro", value: "car" },
               { text: "Moto", value: "motorcycle" },
             ]}
-            handleChange={setAnnouncementCreate_type_vehicle}
+            handleChange={setAnnouncementSelected_type_vehicle}
           />
 
           <Input
@@ -120,9 +130,10 @@ export const UpdateAnnouncementForm = ({
             placeholder="https://image.com"
             error={errors.img_cape}
             {...register("img_cape")}
+            defaultValue={announcementFound.img_cape}
           />
 
-          <InputsImages request_type="update" />
+          <InputsImages imgs={imgsUpdate} setImgs={setImgsUpdate} />
         </VStack>
 
         <Button
@@ -134,7 +145,7 @@ export const UpdateAnnouncementForm = ({
           type="submit"
           disabled={true}
         >
-          Criar anúncio
+          Editar anúncio
         </Button>
       </Grid>
     </>

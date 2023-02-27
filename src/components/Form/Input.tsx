@@ -18,7 +18,6 @@ import {
 import { IconType } from "react-icons/lib";
 
 interface IInputProps extends ChakraInputProps {
-  new_class?: string;
   name: string;
   label?: string;
   error?:
@@ -43,7 +42,7 @@ const inputVariation: inputVariationOptions = {
 };
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = (
-  { name, new_class, icon: Icon, label, error = undefined, ...rest },
+  { name, icon: Icon, label, error = undefined, ...rest },
   ref
 ) => {
   const [variation, setVariation] = useState("default");
@@ -96,7 +95,6 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = (
           size="lg"
           h="60px"
           {...rest}
-          className={new_class}
         />
 
         {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}

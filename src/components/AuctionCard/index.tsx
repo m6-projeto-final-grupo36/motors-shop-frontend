@@ -1,8 +1,7 @@
 import { AuctionLi, ProductInfoContainer, UserContainer } from "./styles";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { BiTime } from "react-icons/bi";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
-import { AnnouncementContext } from "../../Providers/AnnouncementProvider";
 
 interface IAuctionCard {
   productImg: string;
@@ -25,8 +24,6 @@ export const AuctionCard = ({
   expiryTime,
   page,
 }: IAuctionCard) => {
-  const { onOpenModalUpdateAnnouncement } = useContext(AnnouncementContext);
-
   const useCount = (date: string) => {
     const [hour, setHour] = useState<string>();
     const [minute, setMinute] = useState<string>();
@@ -115,12 +112,7 @@ export const AuctionCard = ({
         </div>
       ) : (
         <div className="auctionButton">
-          <button
-            onClick={onOpenModalUpdateAnnouncement}
-            className="btn-edit-auction"
-          >
-            Editar
-          </button>
+          <button className="btn-edit-auction">Editar</button>
           <button className="btn-list-auction">Ver como</button>
         </div>
       )}

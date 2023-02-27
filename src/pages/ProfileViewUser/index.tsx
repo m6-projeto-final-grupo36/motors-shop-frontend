@@ -4,7 +4,6 @@ import { ListProduct } from "../../components/ListProduct";
 import { Footer } from "../../components/Footer";
 import { MainContainer, ContainerAdvertiser } from "./styles";
 import { AuctionCard } from "../../components/AuctionCard";
-// import { cars, motorcycles } from "../../database";
 import { useContext, useState } from "react";
 import { AnnouncementContext } from "../../Providers/AnnouncementProvider";
 import { Modal } from "../../components/Modal";
@@ -42,18 +41,28 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
 
   const {
     announcements,
+    setAnnouncements,
     isOpenModalCreateAnnouncement,
     onCloseModalCreateAnnouncement,
     isOpenModalUpdateAnnouncement,
     onCloseModalUpdateAnnouncement,
-    announcementCreate_type,
-    announcementCreate_type_vehicle,
+    announcementSelected_type,
+    announcementSelected_type_vehicle,
+    imgsCreate,
+    imgsUpdate,
+    announcementFound,
   } = useContext(AnnouncementContext);
 
   const {
     isOpen: isOpenModalSuccessCreateAnnouncement,
     onOpen: onOpenModalSuccessCreateAnnouncement,
     onClose: onCloseModalSuccessCreateAnnouncement,
+  } = useDisclosure();
+
+  const {
+    isOpen: isOpenModalSuccessUpdateAnnouncement,
+    onOpen: onOpenModalSuccessUpdateAnnouncement,
+    onClose: onCloseModalSuccessUpdateAnnouncement,
   } = useDisclosure();
 
   const cars = announcements.filter(
@@ -82,41 +91,59 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
 
   const handleCreateAnnouncement = (data: ICreateAnnouncementRequest) => {
     setIsLoadingButtonCreateAnnouncement(true);
-    const inputImages = document.getElementsByClassName("new_image_links");
 
-    const new_images: string[] = [];
-
-    for (let i = 0; i < inputImages.length; i++) {
-      const input: HTMLInputElement = inputImages[i] as HTMLInputElement;
-      if (input.value) {
-        new_images.push(input.value);
-      }
-    }
+    const images = imgsCreate.filter((img) => img);
 
     const newData: ICreateAnnouncementRequest = {
       ...data,
-      type: announcementCreate_type,
-      type_vehicle: announcementCreate_type_vehicle,
-      images: new_images,
+      type: announcementSelected_type,
+      type_vehicle: announcementSelected_type_vehicle,
+      images,
     };
 
     api
       .post("/announcements", newData)
       .then((res) => {
+        setAnnouncements(() => {
+          return [...announcements, res.data];
+        });
         onOpenModalSuccessCreateAnnouncement();
         onCloseModalCreateAnnouncement();
         setIsLoadingButtonCreateAnnouncement(false);
-        console.log(res);
       })
-      .catch((err) => {
+      .catch(() => {
         setIsLoadingButtonCreateAnnouncement(false);
-        console.log(err);
       });
   };
 
   const handleUpdateAnnouncement = (data: IUpdateAnnouncementRequest) => {
-    // setIsLoadingButtonUpdateAnnouncement(true);
-    console.log(data);
+    setIsLoadingButtonUpdateAnnouncement(true);
+
+    const images = imgsUpdate.filter((img) => img);
+
+    const newData: IUpdateAnnouncementRequest = {
+      ...data,
+      type: announcementSelected_type,
+      type_vehicle: announcementSelected_type_vehicle,
+      images,
+    };
+
+    api
+      .patch(`/announcements/${announcementFound.id}`, newData)
+      .then((res) => {
+        setAnnouncements(() => {
+          const result = announcements.filter(
+            (ann) => ann.id !== announcementFound.id
+          );
+          return [...result, res.data];
+        });
+        onOpenModalSuccessUpdateAnnouncement();
+        onCloseModalUpdateAnnouncement();
+        setIsLoadingButtonUpdateAnnouncement(false);
+      })
+      .catch(() => {
+        setIsLoadingButtonUpdateAnnouncement(false);
+      });
   };
 
   return (
@@ -156,6 +183,14 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
         onClose={onCloseModalSuccessCreateAnnouncement}
         titleModal="Sucesso"
         subtitleModal="Seu anúncio foi criado com sucesso!"
+        infoModal="Agora você poderá ver seus negócios crescendo em grande escala"
+      />
+
+      <Modal
+        isOpen={isOpenModalSuccessUpdateAnnouncement}
+        onClose={onCloseModalSuccessUpdateAnnouncement}
+        titleModal="Sucesso"
+        subtitleModal="Seu anúncio foi atualizado com sucesso!"
         infoModal="Agora você poderá ver seus negócios crescendo em grande escala"
       />
       <Header />
