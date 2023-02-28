@@ -1,3 +1,4 @@
+import { useDisclosure } from "@chakra-ui/react";
 import { ReactNode, useState } from "react";
 import { createContext } from "react";
 import { api } from "../../services/api";
@@ -10,6 +11,9 @@ interface IUserContext {
   user: IUser;
   setAccount_type: (str: string) => void;
   signIn: (data: ILogin) => Promise<void>;
+  isOpenModalUpdateUser: boolean;
+  onOpenModalUpdateUser: () => void;
+  onCloseModalUpdateUser: () => void;
 }
 
 interface IUserProviderProps {
@@ -85,6 +89,12 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     setData({ accessToken, user });
   };
 
+  const {
+    isOpen: isOpenModalUpdateUser,
+    onOpen: onOpenModalUpdateUser,
+    onClose: onCloseModalUpdateUser,
+  } = useDisclosure();
+
   return (
     <UserContext.Provider
       value={{
@@ -93,6 +103,9 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         accessToken: data.accessToken,
         setAccount_type,
         signIn,
+        isOpenModalUpdateUser,
+        onCloseModalUpdateUser,
+        onOpenModalUpdateUser,
       }}
     >
       {children}

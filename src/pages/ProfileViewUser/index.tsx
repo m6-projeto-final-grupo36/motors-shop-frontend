@@ -22,7 +22,10 @@ import {
   updateAnnouncementSchema,
 } from "../../schemas/announcement";
 import { api } from "../../services/api";
-import { useDisclosure } from "@chakra-ui/react";
+import { Button, Flex, useDisclosure } from "@chakra-ui/react";
+import { IUpdateUserRequest, UpdateUserForm } from "./UpdateUserForm";
+import { updateUserSchema } from "../../schemas/user";
+import { UserContext } from "../../Providers/UserProvider";
 
 interface IProfileProps {
   page?: string;
@@ -39,6 +42,9 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
     setIsLoadingButtonUpdateAnnouncement,
   ] = useState(false);
 
+  const [isLoadingButtonUpdateUser, setIsLoadingButtonUpdateUser] =
+    useState(false);
+
   const {
     announcements,
     setAnnouncements,
@@ -51,7 +57,12 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
     imgsCreate,
     imgsUpdate,
     announcementFound,
+    isOpenModalDeleteAnnouncement,
+    onCloseModalDeleteAnnouncement,
   } = useContext(AnnouncementContext);
+
+  const { isOpenModalUpdateUser, onCloseModalUpdateUser } =
+    useContext(UserContext);
 
   const {
     isOpen: isOpenModalSuccessCreateAnnouncement,
@@ -63,6 +74,12 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
     isOpen: isOpenModalSuccessUpdateAnnouncement,
     onOpen: onOpenModalSuccessUpdateAnnouncement,
     onClose: onCloseModalSuccessUpdateAnnouncement,
+  } = useDisclosure();
+
+  const {
+    isOpen: isOpenModalSuccessDeleteAnnouncement,
+    onOpen: onOpenModalSuccessDeleteAnnouncement,
+    onClose: onCloseModalSuccessDeleteAnnouncement,
   } = useDisclosure();
 
   const cars = announcements.filter(
@@ -87,6 +104,14 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
     handleSubmit: handleSubmitUpdateAnnouncement,
   } = useForm<IUpdateAnnouncementRequest>({
     resolver: yupResolver(updateAnnouncementSchema),
+  });
+
+  const {
+    formState: { errors: errorsUpdateUser },
+    register: registerUpdateUser,
+    handleSubmit: handleSubmitUpdateUser,
+  } = useForm<IUpdateUserRequest>({
+    resolver: yupResolver(updateUserSchema),
   });
 
   const handleCreateAnnouncement = (data: ICreateAnnouncementRequest) => {
@@ -146,6 +171,29 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
       });
   };
 
+  const handleDeleteAnnouncement = () => {
+    api
+      .delete(`/announcements/${announcementFound.id}`)
+      .then(() => {
+        setAnnouncements(() => {
+          const newAnnouncements = announcements.filter(
+            (annou) => annou.id !== announcementFound.id
+          );
+          return newAnnouncements;
+        });
+        onCloseModalDeleteAnnouncement();
+        onOpenModalSuccessDeleteAnnouncement();
+      })
+      .catch(() => {
+        onCloseModalDeleteAnnouncement();
+      });
+  };
+
+  const handleUpdateUser = (data: IUpdateUserRequest) => {
+    console.log(data);
+    setIsLoadingButtonUpdateUser(true);
+  };
+
   return (
     <MainContainer>
       <Modal
@@ -193,7 +241,63 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
         subtitleModal="Seu anúncio foi atualizado com sucesso!"
         infoModal="Agora você poderá ver seus negócios crescendo em grande escala"
       />
+
+      <Modal
+        isOpen={isOpenModalDeleteAnnouncement}
+        onClose={onCloseModalDeleteAnnouncement}
+        titleModal="Excluir anúncio"
+        subtitleModal="Tem certeza que deseja remover este anúncio?"
+        infoModal="Essa ação não pode ser desfeita. Isso excluirá permanentemente seu anúncio.
+        "
+      >
+        <Flex justify="space-between" w="100%" gap="10px">
+          <Button
+            size="lg"
+            whiteSpace="normal"
+            color="var(--color-grey-2)"
+            bgColor="var(--color-grey-6)"
+            type="button"
+            onClick={onCloseModalDeleteAnnouncement}
+          >
+            Cancelar
+          </Button>
+          <Button
+            type="button"
+            paddingY="10px"
+            size="lg"
+            whiteSpace="normal"
+            bgColor="var(--color-feedback-alert-2)"
+            color="var(--color-feedback-alert-1)"
+            onClick={handleDeleteAnnouncement}
+          >
+            Sim, excluir anúncio
+          </Button>
+        </Flex>
+      </Modal>
+
+      <Modal
+        isOpen={isOpenModalSuccessDeleteAnnouncement}
+        onClose={onCloseModalSuccessDeleteAnnouncement}
+        titleModal="Sucesso"
+        subtitleModal="Seu anúncio foi deletado com sucesso!"
+        infoModal="Você pode fechar a janela e criar um novo anúncio."
+      />
+
+      <Modal
+        onClose={onCloseModalUpdateUser}
+        isOpen={isOpenModalUpdateUser}
+        titleModal="Editar perfil"
+      >
+        <UpdateUserForm
+          errors={errorsUpdateUser}
+          handleUpdateUser={handleSubmitUpdateUser(handleUpdateUser)}
+          loadingUpdateUser={isLoadingButtonUpdateUser}
+          register={registerUpdateUser}
+        />
+      </Modal>
+
       <Header />
+
       <ContainerAdvertiser>
         <Advertiser
           name="Samuel Leão"
