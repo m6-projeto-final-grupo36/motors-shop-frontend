@@ -6,6 +6,7 @@ import { Register } from "../pages/Register";
 import { ProfileViewUser } from "../pages/ProfileViewUser";
 import { useContext } from "react";
 import { AnnouncementContext } from "../Providers/AnnouncementProvider";
+import { RecoverPassword } from "../pages/RecoverPassword";
 
 export const ContainerRoutes = () => {
 
@@ -22,6 +23,7 @@ export const ContainerRoutes = () => {
         Object.keys(announcementFound).length &&
         <Route path="/detail" element={<RetrieveAnnouncement />} />
       }
+      <Route path="/recover_password" element={<RecoverPassword/>}/>
       <Route path="*" element={<Navigate replace to={"/"} />} />
     </Routes>
   )

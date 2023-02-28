@@ -25,6 +25,15 @@ export const registerSchema = yup.object().shape({
     .oneOf([yup.ref("password")], "Senhas diferentes"),
 });
 
+
+export const recoverPasswordSchema = yup.object().shape({
+  password: yup.string().required('Senha obrigatória'),
+  confirm_password: yup
+    .string()
+    .required("Confirmação de senha obrigatória")
+    .oneOf([yup.ref("password")], "Senhas diferentes"),
+})
+
 export const updateUserSchema = yup.object().shape({
   name: yup.string().notRequired(),
   email: yup.string().notRequired().email("Email inválido"),

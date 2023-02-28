@@ -1,11 +1,13 @@
-import { Button, Grid, HStack, Text, VStack } from "@chakra-ui/react";
+import { Button, Grid, HStack, InputGroup, InputRightElement, Text, VStack } from "@chakra-ui/react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { Input } from "../../components/Form/Input";
 import { FaUser, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { InputRadio } from "../../components/Form/Radio";
 import { TextArea } from "../../components/Form/TextArea";
 import { IRegister, UserContext } from "../../Providers/UserProvider";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+// import { ViewOffIcon } from "@chakra-ui/icons/dist/ViewOff";
 
 interface IRegisterForm {
   handleRegister: () => void;
@@ -21,7 +23,13 @@ export const RegisterForm = ({
   loadingRegister,
 }: IRegisterForm) => {
   const { setAccount_type } = useContext(UserContext);
+  const [show, setShow] = useState(false)
+  const [showConfirm, setShowConfirm] = useState(false)
 
+  const handleClickPwd = () => setShow(!show)
+
+  const handleClickConfirm = () => setShowConfirm(!showConfirm)
+ 
   return (
     <>
       <Grid as="form" onSubmit={handleRegister} w="100%">
@@ -134,18 +142,35 @@ export const RegisterForm = ({
             handleChange={setAccount_type}
           />
 
-          <Input
-            placeholder="Digitar senha"
-            label="Senha"
-            error={errors.password}
-            {...register("password")}
-          />
-          <Input
-            placeholder="Repetir senha"
-            label="Confirmar senha"
-            error={errors.confirm_password}
-            {...register("confirm_password")}
-          />
+          <InputGroup>
+            <Input
+              placeholder="Digitar senha"
+              label="Senha"
+              type={show ? 'text' : 'password'}
+              error={errors.password}
+              {...register("password")}
+              />
+            <InputRightElement top='40px' width='5rem'>
+              <Button onClick={handleClickPwd}>
+                {show ? <ViewOffIcon /> : <ViewIcon />}
+              </Button>
+            </InputRightElement>
+          </InputGroup>
+
+          <InputGroup>
+            <Input
+              placeholder="Repetir senha"
+              label="Confirmar senha"
+              type={showConfirm ? 'text' : 'password'}
+              error={errors.confirm_password}
+              {...register("confirm_password")}
+              />
+            <InputRightElement top='40px' width='5rem'>
+            <Button onClick={handleClickConfirm}>
+              {showConfirm ? <ViewOffIcon /> : <ViewIcon />}
+            </Button>
+          </InputRightElement>
+          </InputGroup>
         </VStack>
 
         <Button

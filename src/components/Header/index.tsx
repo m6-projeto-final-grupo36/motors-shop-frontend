@@ -61,7 +61,7 @@ export const Header = () => {
   return (
     <HeaderStyled>
       <div className="logo">
-        <img src={Logo} alt="Logo da aplicação" />
+        <img style={{'cursor': 'pointer'}} onClick={() => navigate('/')} src={Logo} alt="Logo da aplicação" />
       </div>
       <div className="desktop">
         <div className="navbar">
