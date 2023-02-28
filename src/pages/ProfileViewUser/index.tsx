@@ -24,8 +24,9 @@ import {
 import { api } from "../../services/api";
 import { Button, Flex, useDisclosure } from "@chakra-ui/react";
 import { IUpdateUserRequest, UpdateUserForm } from "./UpdateUserForm";
-import { updateUserSchema } from "../../schemas/user";
+import { updateAddressSchema, updateUserSchema } from "../../schemas/user";
 import { UserContext } from "../../Providers/UserProvider";
+import { IUpdateAddressRequest, UpdateAddressForm } from "./UpdateAddressForm";
 
 interface IProfileProps {
   page?: string;
@@ -45,6 +46,9 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
   const [isLoadingButtonUpdateUser, setIsLoadingButtonUpdateUser] =
     useState(false);
 
+  const [isLoadingButtonUpdateAddress, setIsLoadingButtonUpdateAddress] =
+    useState(false);
+
   const {
     announcements,
     setAnnouncements,
@@ -61,8 +65,12 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
     onCloseModalDeleteAnnouncement,
   } = useContext(AnnouncementContext);
 
-  const { isOpenModalUpdateUser, onCloseModalUpdateUser } =
-    useContext(UserContext);
+  const {
+    isOpenModalUpdateUser,
+    onCloseModalUpdateUser,
+    onCloseModalUpdateAddress,
+    isOpenModalUpdateAddress,
+  } = useContext(UserContext);
 
   const {
     isOpen: isOpenModalSuccessCreateAnnouncement,
@@ -112,6 +120,14 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
     handleSubmit: handleSubmitUpdateUser,
   } = useForm<IUpdateUserRequest>({
     resolver: yupResolver(updateUserSchema),
+  });
+
+  const {
+    formState: { errors: errorsUpdateAddress },
+    register: registerUpdateAddress,
+    handleSubmit: handleSubmitUpdateAddress,
+  } = useForm<IUpdateAddressRequest>({
+    resolver: yupResolver(updateAddressSchema),
   });
 
   const handleCreateAnnouncement = (data: ICreateAnnouncementRequest) => {
@@ -192,6 +208,11 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
   const handleUpdateUser = (data: IUpdateUserRequest) => {
     console.log(data);
     setIsLoadingButtonUpdateUser(true);
+  };
+
+  const handleUpdateAddress = (data: IUpdateAddressRequest) => {
+    console.log(data);
+    setIsLoadingButtonUpdateAddress(true);
   };
 
   return (
@@ -293,6 +314,19 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
           handleUpdateUser={handleSubmitUpdateUser(handleUpdateUser)}
           loadingUpdateUser={isLoadingButtonUpdateUser}
           register={registerUpdateUser}
+        />
+      </Modal>
+
+      <Modal
+        onClose={onCloseModalUpdateAddress}
+        isOpen={isOpenModalUpdateAddress}
+        titleModal="Editar endereço"
+      >
+        <UpdateAddressForm
+          errors={errorsUpdateAddress}
+          handleUpdateAddress={handleSubmitUpdateAddress(handleUpdateAddress)}
+          loadingUpdateAddress={isLoadingButtonUpdateAddress}
+          register={registerUpdateAddress}
         />
       </Modal>
 
