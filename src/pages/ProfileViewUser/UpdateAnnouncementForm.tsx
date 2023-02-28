@@ -39,6 +39,8 @@ export const UpdateAnnouncementForm = ({
     announcementFound,
     imgsUpdate,
     setImgsUpdate,
+    onOpenModalDeleteAnnouncement,
+    onCloseModalUpdateAnnouncement,
   } = useContext(AnnouncementContext);
 
   return (
@@ -136,17 +138,31 @@ export const UpdateAnnouncementForm = ({
           <InputsImages imgs={imgsUpdate} setImgs={setImgsUpdate} />
         </VStack>
 
-        <Button
-          bgColor="var(--color-brand-1)"
-          color="var(--color-white-fixed)"
-          mt="6"
-          size="lg"
-          isLoading={loadingUpdateAnnouncement}
-          type="submit"
-          disabled={true}
-        >
-          Editar anúncio
-        </Button>
+        <Flex gap="10px" mt="6" flexDirection={["column", "row"]}>
+          <Button
+            size="lg"
+            whiteSpace="normal"
+            color="var(--color-grey-2)"
+            bgColor="var(--color-grey-6)"
+            type="button"
+            onClick={() => {
+              onCloseModalUpdateAnnouncement();
+              onOpenModalDeleteAnnouncement();
+            }}
+          >
+            Excluir anúncio
+          </Button>
+          <Button
+            bgColor="var(--color-brand-1)"
+            color="var(--color-white-fixed)"
+            size="lg"
+            isLoading={loadingUpdateAnnouncement}
+            type="submit"
+            whiteSpace="normal"
+          >
+            Salvar alterações
+          </Button>
+        </Flex>
       </Grid>
     </>
   );

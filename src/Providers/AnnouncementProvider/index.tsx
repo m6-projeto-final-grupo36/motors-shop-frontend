@@ -20,6 +20,9 @@ interface IAnnouncementContext {
   isOpenModalUpdateAnnouncement: boolean;
   onOpenModalUpdateAnnouncement: () => void;
   onCloseModalUpdateAnnouncement: () => void;
+  isOpenModalDeleteAnnouncement: boolean;
+  onOpenModalDeleteAnnouncement: () => void;
+  onCloseModalDeleteAnnouncement: () => void;
   announcementSelected_type: string;
   setAnnouncementSelected_type: (value: string) => void;
   announcementSelected_type_vehicle: string;
@@ -28,6 +31,7 @@ interface IAnnouncementContext {
   imgsUpdate: string[];
   setImgsUpdate: Dispatch<SetStateAction<string[]>>;
   setImgsCreate: Dispatch<SetStateAction<string[]>>;
+  deleteAnnouncement: () => void;
 }
 
 interface IAnnouncementProps {
@@ -102,6 +106,11 @@ export const AnnouncementProvider = ({ children }: IAnnouncementProps) => {
       .catch((err) => console.log(err));
   };
 
+  const deleteAnnouncement = () => {
+    console.log(announcementFound);
+    onCloseModalUpdateAnnouncement();
+  };
+
   const {
     isOpen: isOpenModalCreateAnnouncement,
     onOpen: onOpenModalCreateAnnouncement,
@@ -112,6 +121,12 @@ export const AnnouncementProvider = ({ children }: IAnnouncementProps) => {
     isOpen: isOpenModalUpdateAnnouncement,
     onOpen: onOpenModalUpdateAnnouncement,
     onClose: onCloseModalUpdateAnnouncement,
+  } = useDisclosure();
+
+  const {
+    isOpen: isOpenModalDeleteAnnouncement,
+    onOpen: onOpenModalDeleteAnnouncement,
+    onClose: onCloseModalDeleteAnnouncement,
   } = useDisclosure();
 
   return (
@@ -135,6 +150,10 @@ export const AnnouncementProvider = ({ children }: IAnnouncementProps) => {
         setImgsCreate,
         imgsUpdate,
         setImgsUpdate,
+        deleteAnnouncement,
+        isOpenModalDeleteAnnouncement,
+        onCloseModalDeleteAnnouncement,
+        onOpenModalDeleteAnnouncement,
       }}
     >
       {children}
