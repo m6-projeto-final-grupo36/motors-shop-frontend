@@ -24,3 +24,16 @@ export const registerSchema = yup.object().shape({
     .required("Confirmação de senha obrigatória")
     .oneOf([yup.ref("password")], "Senhas diferentes"),
 });
+
+export const updateUserSchema = yup.object().shape({
+  name: yup.string().notRequired(),
+  email: yup.string().notRequired().email("Email inválido"),
+  cpf: yup.string().notRequired(),
+  phone_number: yup.string().notRequired(),
+  birthdate: yup.date().notRequired(),
+  description: yup.string().notRequired(),
+  password: yup.string().notRequired(),
+  confirm_password: yup
+    .string()
+    .oneOf([yup.ref("password")], "Senhas diferentes"),
+});
