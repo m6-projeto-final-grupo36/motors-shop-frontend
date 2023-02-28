@@ -24,3 +24,11 @@ export const registerSchema = yup.object().shape({
     .required("Confirmação de senha obrigatória")
     .oneOf([yup.ref("password")], "Senhas diferentes"),
 });
+
+export const recoverPasswordSchema = yup.object().shape({
+  password: yup.string().required('Senha obrigatória'),
+  confirm_password: yup
+    .string()
+    .required("Confirmação de senha obrigatória")
+    .oneOf([yup.ref("password")], "Senhas diferentes"),
+})

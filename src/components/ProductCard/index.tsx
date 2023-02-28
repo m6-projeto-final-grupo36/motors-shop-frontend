@@ -1,3 +1,4 @@
+import { list } from "@chakra-ui/react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AnnouncementContext } from "../../Providers/AnnouncementProvider";
@@ -36,7 +37,12 @@ export const ProductCard = ({
   const value_in_real = Math.round(value / 100);
 
   return (
-    <Li page={page ? page : undefined}>
+    <Li page={page ? page : undefined} onClick={async () => {
+      if (!page){
+        await listAnnouncement(id)
+        navigate('/detail')
+      }
+    }}>
       <img src={productImg} alt={title} className="productImg" />
       {is_active ? (
         <span className="active">Ativo</span>

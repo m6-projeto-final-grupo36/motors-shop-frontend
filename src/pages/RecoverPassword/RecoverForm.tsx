@@ -1,41 +1,27 @@
 import { Button, Grid, InputGroup, InputRightElement, Text, VStack } from "@chakra-ui/react";
-import { FaEnvelope } from "react-icons/fa";
 import { Input } from "../../components/Form/Input";
-import { ILogin } from "../../Providers/UserProvider";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { IRecoverPassword } from ".";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
-interface ILoginForm {
-  handleLogin: () => void;
-  errors: FieldErrors<ILogin>;
-  register: UseFormRegister<ILogin>;
-  loadingLogin: boolean;
+interface IRecoverForm{
+    handlePassword: () => void;
+    errors: FieldErrors<IRecoverPassword>;
+    register: UseFormRegister<IRecoverPassword>;
 }
 
-export const LoginForm = ({
-  handleLogin,
-  errors,
-  register,
-  loadingLogin,
-}: ILoginForm) => {
+export const RecoverForm = ({ errors, handlePassword, register }: IRecoverForm) => {
 
   const [show, setShow] = useState(false)
-
+  const [showConfirm, setShowConfirm] = useState(false)
+  
   const handleClickPwd = () => setShow(!show)
+  const handleClickConfirm = () => setShowConfirm(!showConfirm)
 
-  return (
-    <>
-      <Grid as="form" onSubmit={handleLogin} w="100%">
+    return(
+        <Grid as="form" onSubmit={handlePassword} w="100%">
         <VStack mt="32px" spacing="6" alignItems="start">
-          <Input
-            placeholder="Ex: samuel@kenzie.com.br"
-            icon={FaEnvelope}
-            label="Email"
-            error={errors.email}
-            {...register("email")}
-          />
-
           <InputGroup>
             <Input
               placeholder="Digitar senha"
@@ -50,28 +36,30 @@ export const LoginForm = ({
               </Button>
             </InputRightElement>
           </InputGroup>
+          <InputGroup>
+            <Input
+              placeholder="Repetir senha"
+              label="Confirmar senha"
+              type={showConfirm ? 'text' : 'password'}
+              error={errors.confirm_password}
+              {...register("confirm_password")}
+              />
+            <InputRightElement top='40px' width='5rem'>
+            <Button onClick={handleClickConfirm}>
+              {showConfirm ? <ViewOffIcon /> : <ViewIcon />}
+            </Button>
+          </InputRightElement>
+          </InputGroup>
         </VStack>
-        <Text
-          w="100%"
-          textAlign="end"
-          paddingRight="25px"
-          fontSize="14px"
-          color="var(--color-grey-2)"
-          mt="10px"
-        >
-          Esqueci minha senha
-        </Text>
         <Button
           bgColor="var(--color-brand-1)"
           color="var(--color-white-fixed)"
           mt="6"
           size="lg"
-          isLoading={loadingLogin}
           type="submit"
         >
-          Entrar
+          Redefinir senha
         </Button>
       </Grid>
-    </>
-  );
-};
+    )
+}
