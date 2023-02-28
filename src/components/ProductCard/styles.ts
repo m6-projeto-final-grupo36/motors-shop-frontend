@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-interface IList{
-  page?: string
+interface IList {
+  page?: string;
 }
 
 export const Li = styled.li<IList>`
   width: 312px;
-  height: ${({page}) => page ? '370px' : '328px'};
+  height: ${({ page }) => (page ? "370px" : "328px")};
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
@@ -21,7 +21,6 @@ export const Li = styled.li<IList>`
     :hover {
       border: 1px solid var(--color-brand-1);
     }
-
   }
 
   .active {
@@ -31,7 +30,7 @@ export const Li = styled.li<IList>`
     margin: 10px 0px 0px 10px;
 
     background-color: var(--color-brand-1);
-    
+
     text-align: center;
     font-size: 13px;
     color: var(--color-white-fixed);
@@ -44,11 +43,10 @@ export const Li = styled.li<IList>`
     margin: 10px 0px 0px 10px;
 
     background-color: var(--color-grey-4);
-    
+
     text-align: center;
     font-size: 13px;
     color: var(--color-white-fixed);
-
   }
 
   h2 {
@@ -86,20 +84,26 @@ export const DivProfile = styled.div`
 `;
 
 export const DivInfo = styled.div`
+  width: 100%;
   display: flex;
-  align-items: center;
+  justify-content: space-between;
   margin: 5px;
+  gap: 10px;
+
+  div {
+    display: flex;
+    gap: 10px;
+  }
 
   span {
-    width: 51px;
-    height: 40px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-right: 10px;
+    text-align: center;
     background-color: var(--color-brand-4);
-    font-size: 14px;
     color: var(--color-brand-1);
+    font-size: 14px;
+    border-radius: 4px;
+    padding: 0 3px;
   }
 
   p {
@@ -118,14 +122,14 @@ export const DivButtons = styled.div`
     height: 100%;
     width: 105px;
     padding: 5px;
-    
+
     border: 2px solid #000;
     border-radius: 4px;
-    
+
     font-weight: 500;
   }
-  button:first-child{
+  button:first-child {
     width: 80px;
     margin-right: 16px;
   }
-`
+`;

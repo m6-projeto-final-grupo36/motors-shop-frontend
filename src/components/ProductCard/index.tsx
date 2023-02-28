@@ -1,4 +1,3 @@
-import { list } from "@chakra-ui/react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AnnouncementContext } from "../../Providers/AnnouncementProvider";
@@ -37,12 +36,15 @@ export const ProductCard = ({
   const value_in_real = Math.round(value / 100);
 
   return (
-    <Li page={page ? page : undefined} onClick={async () => {
-      if (!page){
-        await listAnnouncement(id)
-        navigate('/detail')
-      }
-    }}>
+    <Li
+      page={page ? page : undefined}
+      onClick={async () => {
+        if (!page) {
+          await listAnnouncement(id);
+          navigate("/detail");
+        }
+      }}
+    >
       <img src={productImg} alt={title} className="productImg" />
       {is_active ? (
         <span className="active">Ativo</span>
@@ -59,8 +61,10 @@ export const ProductCard = ({
         <p>{name}</p>
       </DivProfile>
       <DivInfo>
-        <span>{km} KM</span>
-        <span>{year}</span>
+        <div>
+          <span>{km} KM</span>
+          <span>{year}</span>
+        </div>
         <p>
           {value_in_real.toLocaleString("pt-br", {
             style: "currency",

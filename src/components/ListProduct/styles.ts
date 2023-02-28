@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const SectionProduct = styled.section`
   width: 100%;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,18 +26,18 @@ export const SectionProduct = styled.section`
     margin-left: 26px;
   }
 
-  li{
+  li {
     margin-right: 48px;
   }
-  li:last-child{
+  li:last-child {
     margin-right: 26px;
   }
 
   @media (min-width: 1024px) {
-    h1{
+    h1 {
       margin-left: 60px;
     }
-    .listProduct{
+    .listProduct {
       margin-left: 60px;
     }
   }
