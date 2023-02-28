@@ -1,8 +1,10 @@
-import { Button, Grid, Text, VStack } from "@chakra-ui/react";
+import { Button, Flex, Grid, Text, VStack } from "@chakra-ui/react";
+import { useContext } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { FaEnvelope, FaPhoneAlt, FaUser } from "react-icons/fa";
 import { Input } from "../../components/Form/Input";
 import { TextArea } from "../../components/Form/TextArea";
+import { UserContext } from "../../Providers/UserProvider";
 
 export interface IUpdateUserRequest {
   name?: string;
@@ -28,6 +30,7 @@ export const UpdateUserForm = ({
   loadingUpdateUser,
   register,
 }: IUpdateUserForm) => {
+  const { onCloseModalUpdateUser } = useContext(UserContext);
   return (
     <>
       <Grid as="form" onSubmit={handleUpdateUser} w="100%">
@@ -92,16 +95,34 @@ export const UpdateUserForm = ({
           />
         </VStack>
 
-        <Button
-          bgColor="var(--color-brand-1)"
-          color="var(--color-white-fixed)"
-          mt="6"
-          size="lg"
-          isLoading={loadingUpdateUser}
-          type="submit"
+        <Flex
+          justify="space-between"
+          direction={["column", "row"]}
+          w="100%"
+          gap="10px"
+          mt="8"
         >
-          Finalizar cadastro
-        </Button>
+          <Button
+            size="lg"
+            whiteSpace="normal"
+            color="var(--color-grey-2)"
+            bgColor="var(--color-grey-6)"
+            type="button"
+            onClick={onCloseModalUpdateUser}
+          >
+            Cancelar
+          </Button>
+          <Button
+            bgColor="var(--color-brand-1)"
+            color="var(--color-white-fixed)"
+            size="lg"
+            isLoading={loadingUpdateUser}
+            type="submit"
+            whiteSpace="normal"
+          >
+            Salvar alterações
+          </Button>
+        </Flex>
       </Grid>
     </>
   );
