@@ -6,8 +6,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { sendEmailSchema } from "../../schemas/user";
 import { useContext, useState } from "react";
 import { UserContext } from "../../Providers/UserProvider";
+import { api } from "../../services/api";
 
 interface IRecoverPassword {
+  email: string;
+}
+
+interface IUser {
   email: string;
 }
 
@@ -22,12 +27,35 @@ export const ModalRecoverPassword = () => {
     resolver: yupResolver(sendEmailSchema),
   });
 
-  const { isOpenModalRecoverPassword, onCloseModalRecoverPassword } =
-    useContext(UserContext);
+  const {
+    isOpenModalRecoverPassword,
+    onCloseModalRecoverPassword,
+    onOpenModalSuccessRecoverPassword,
+    onOpenModalErrorRecoverPassword,
+  } = useContext(UserContext);
 
   const handleSendEmail = ({ email }: IRecoverPassword) => {
-    console.log(email);
     setIsloading(true);
+
+    api
+      .get<IUser[]>("/users")
+      .then((res) => {
+        setIsloading(false);
+        const foundEmail = res.data.find((user) => user.email === email);
+
+        if (foundEmail) {
+          //inserir lógica do envio de email de recuperação de senha
+          onCloseModalRecoverPassword();
+          onOpenModalSuccessRecoverPassword();
+        } else {
+          onCloseModalRecoverPassword();
+          onOpenModalErrorRecoverPassword();
+        }
+      })
+      .catch((err) => {
+        setIsloading(false);
+        console.log(err);
+      });
   };
 
   return (
