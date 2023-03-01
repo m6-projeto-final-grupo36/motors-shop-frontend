@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { Modal } from "../../components/Modal";
+import { ModalRecoverPassword } from "../../components/Modal/ModalRecoverPassword";
 import { ILogin, UserContext } from "../../Providers/UserProvider";
 import { loginSchema } from "../../schemas/user";
 import { LoginForm } from "./LoginForm";
@@ -44,11 +45,7 @@ export const Login = () => {
   };
 
   return (
-    <VStack
-      minH="100vh"
-      justifyContent="space-between"
-      backgroundColor="var(--color-grey-8)"
-    >
+    <>
       <Modal
         titleModal="Ops..."
         subtitleModal="Algum erro aconteceu!"
@@ -56,24 +53,32 @@ export const Login = () => {
         isOpen={isModalErrorOpen}
         onClose={onCloseModalError}
       />
-      <Header />
-      <Flex justifyContent="center" w="100%" p="15px">
-        <Box
-          padding={["44px 20px", "44px 48px"]}
-          w="100%"
-          maxW="500px"
-          backgroundColor="var(--color-white-fixed)"
-        >
-          <Heading size="lg">Login</Heading>
-          <LoginForm
-            errors={errors}
-            handleLogin={handleSubmit(handleLogin)}
-            loadingLogin={loadingButtonLogin}
-            register={register}
-          />
-        </Box>
-      </Flex>
-      <Footer />
-    </VStack>
+
+      <ModalRecoverPassword />
+      <VStack
+        minH="100vh"
+        justifyContent="space-between"
+        backgroundColor="var(--color-grey-8)"
+      >
+        <Header />
+        <Flex justifyContent="center" w="100%" p="15px">
+          <Box
+            padding={["44px 20px", "44px 48px"]}
+            w="100%"
+            maxW="500px"
+            backgroundColor="var(--color-white-fixed)"
+          >
+            <Heading size="lg">Login</Heading>
+            <LoginForm
+              errors={errors}
+              handleLogin={handleSubmit(handleLogin)}
+              loadingLogin={loadingButtonLogin}
+              register={register}
+            />
+          </Box>
+        </Flex>
+        <Footer />
+      </VStack>
+    </>
   );
 };
