@@ -1,9 +1,17 @@
-import { Button, Grid, InputGroup, InputRightElement, Text, VStack } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  Grid,
+  InputGroup,
+  InputRightElement,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { FaEnvelope } from "react-icons/fa";
 import { Input } from "../../components/Form/Input";
-import { ILogin } from "../../Providers/UserProvider";
+import { ILogin, UserContext } from "../../Providers/UserProvider";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 interface ILoginForm {
@@ -19,10 +27,11 @@ export const LoginForm = ({
   register,
   loadingLogin,
 }: ILoginForm) => {
+  const [show, setShow] = useState(false);
 
-  const [show, setShow] = useState(false)
+  const handleClickPwd = () => setShow(!show);
 
-  const handleClickPwd = () => setShow(!show)
+  const { onOpenModalRecoverPassword } = useContext(UserContext);
 
   return (
     <>
@@ -40,27 +49,32 @@ export const LoginForm = ({
             <Input
               placeholder="Digitar senha"
               label="Senha"
-              type={show ? 'text' : 'password'}
+              type={show ? "text" : "password"}
               error={errors.password}
               {...register("password")}
-              />
-            <InputRightElement top='40px' width='5rem'>
+            />
+            <InputRightElement top="40px" width="5rem">
               <Button onClick={handleClickPwd}>
                 {show ? <ViewOffIcon /> : <ViewIcon />}
               </Button>
             </InputRightElement>
           </InputGroup>
         </VStack>
-        <Text
-          w="100%"
-          textAlign="end"
-          paddingRight="25px"
-          fontSize="14px"
-          color="var(--color-grey-2)"
-          mt="10px"
-        >
-          Esqueci minha senha
-        </Text>
+        <Flex justifyContent="end">
+          <Text
+            _hover={{ textDecoration: "underline" }}
+            textAlign="end"
+            mr="25px"
+            fontSize="14px"
+            color="var(--color-grey-2)"
+            mt="10px"
+            as="button"
+            type="button"
+            onClick={onOpenModalRecoverPassword}
+          >
+            Esqueci minha senha
+          </Text>
+        </Flex>
         <Button
           bgColor="var(--color-brand-1)"
           color="var(--color-white-fixed)"
