@@ -9,6 +9,8 @@ interface IListProduct {
 }
 
 export const ListProduct = ({productType, productList, productPage}: IListProduct) => {
+  
+  console.log(productList)
 
   return (
     <SectionProduct>
@@ -21,7 +23,7 @@ export const ListProduct = ({productType, productList, productPage}: IListProduc
             title={elem.title}
             description={elem.description}
             km={elem.mileage}
-            name='Rodrigo Castro'
+            name={elem.user.name}
             productImg={elem.img_cape}
             value={elem.price}
             year={elem.year}

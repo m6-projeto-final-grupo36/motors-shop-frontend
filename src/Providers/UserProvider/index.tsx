@@ -67,6 +67,7 @@ interface IUser {
   complement: string;
   type_account: string;
   password: string;
+  id: string;
 }
 
 export interface ILogin {

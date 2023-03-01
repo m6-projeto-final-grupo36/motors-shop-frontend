@@ -54,6 +54,7 @@ export interface IAnnouncement {
   type_vehicle: string;
   updated_at: Date;
   year: string;
+  user: IAnnouncementUser;
 }
 
 interface IAnnouncementRetrieve {
@@ -70,6 +71,28 @@ interface IAnnouncementRetrieve {
   updated_at: Date;
   year: string;
   images: string[];
+  user: IAnnouncementUser;
+  comments: IComment[];
+}
+export interface IComment{
+  created_at: string;
+  id: string;
+  text: string;
+  updated_at: string;
+  user: IAnnouncementUser;
+}
+
+interface IAnnouncementUser{
+  birthdate: string;
+  cell_phone: string; 
+  cpf: string;
+  created_at: string;
+  description: string;
+  email: string;
+  id: string;
+  name: string;
+  type_account: string;
+  updated_at: string; 
 }
 
 export const AnnouncementContext = createContext({} as IAnnouncementContext);
