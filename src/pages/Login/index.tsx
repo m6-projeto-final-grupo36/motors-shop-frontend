@@ -13,7 +13,13 @@ import { LoginForm } from "./LoginForm";
 
 export const Login = () => {
   const [loadingButtonLogin, setLoadingButtonLogin] = useState(false);
-  const { signIn } = useContext(UserContext);
+  const {
+    signIn,
+    isOpenModalSuccessRecoverPassword,
+    onCloseModalSuccessRecoverPassword,
+    isOpenModalErrorRecoverPassword,
+    onCloseModalErrorRecoverPassword,
+  } = useContext(UserContext);
   const navigate = useNavigate();
 
   const {
@@ -55,6 +61,23 @@ export const Login = () => {
       />
 
       <ModalRecoverPassword />
+
+      <Modal
+        titleModal="Sucesso!"
+        subtitleModal="Email de recuperação de senha enviado com sucesso"
+        infoModal="Verifique seu email e siga os passos para alterar sua senha"
+        isOpen={isOpenModalSuccessRecoverPassword}
+        onClose={onCloseModalSuccessRecoverPassword}
+      />
+
+      <Modal
+        titleModal="Ops..."
+        subtitleModal="Email não encontrado"
+        infoModal="Email fornecido não é registrado, faça o cadastro"
+        isOpen={isOpenModalErrorRecoverPassword}
+        onClose={onCloseModalErrorRecoverPassword}
+      />
+
       <VStack
         minH="100vh"
         justifyContent="space-between"

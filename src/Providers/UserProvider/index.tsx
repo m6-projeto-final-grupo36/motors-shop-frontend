@@ -23,6 +23,12 @@ interface IUserContext {
   isOpenModalRecoverPassword: boolean;
   onOpenModalRecoverPassword: () => void;
   onCloseModalRecoverPassword: () => void;
+  isOpenModalSuccessRecoverPassword: boolean;
+  onOpenModalSuccessRecoverPassword: () => void;
+  onCloseModalSuccessRecoverPassword: () => void;
+  isOpenModalErrorRecoverPassword: boolean;
+  onOpenModalErrorRecoverPassword: () => void;
+  onCloseModalErrorRecoverPassword: () => void;
 }
 
 interface IUserProviderProps {
@@ -122,6 +128,18 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     onClose: onCloseModalRecoverPassword,
   } = useDisclosure();
 
+  const {
+    isOpen: isOpenModalSuccessRecoverPassword,
+    onOpen: onOpenModalSuccessRecoverPassword,
+    onClose: onCloseModalSuccessRecoverPassword,
+  } = useDisclosure();
+
+  const {
+    isOpen: isOpenModalErrorRecoverPassword,
+    onOpen: onOpenModalErrorRecoverPassword,
+    onClose: onCloseModalErrorRecoverPassword,
+  } = useDisclosure();
+
   return (
     <UserContext.Provider
       value={{
@@ -142,6 +160,12 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         isOpenModalRecoverPassword,
         onCloseModalRecoverPassword,
         onOpenModalRecoverPassword,
+        isOpenModalSuccessRecoverPassword,
+        onCloseModalSuccessRecoverPassword,
+        onOpenModalSuccessRecoverPassword,
+        isOpenModalErrorRecoverPassword,
+        onCloseModalErrorRecoverPassword,
+        onOpenModalErrorRecoverPassword,
       }}
     >
       {children}
