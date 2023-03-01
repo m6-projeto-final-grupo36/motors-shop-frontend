@@ -17,6 +17,9 @@ interface IUserContext {
   isOpenModalUpdateAddress: boolean;
   onOpenModalUpdateAddress: () => void;
   onCloseModalUpdateAddress: () => void;
+  isOpenModalDeleteUser: boolean;
+  onOpenModalDeleteUser: () => void;
+  onCloseModalDeleteUser: () => void;
 }
 
 interface IUserProviderProps {
@@ -104,6 +107,12 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     onClose: onCloseModalUpdateAddress,
   } = useDisclosure();
 
+  const {
+    isOpen: isOpenModalDeleteUser,
+    onOpen: onOpenModalDeleteUser,
+    onClose: onCloseModalDeleteUser,
+  } = useDisclosure();
+
   return (
     <UserContext.Provider
       value={{
@@ -118,6 +127,9 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         isOpenModalUpdateAddress,
         onCloseModalUpdateAddress,
         onOpenModalUpdateAddress,
+        isOpenModalDeleteUser,
+        onCloseModalDeleteUser,
+        onOpenModalDeleteUser,
       }}
     >
       {children}

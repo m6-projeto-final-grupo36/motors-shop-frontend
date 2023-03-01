@@ -11,6 +11,8 @@ import { useDisclosure } from "@chakra-ui/react";
 import { ModalCreateAnnouncement } from "../../components/Modal/ModalCreateAnnouncement";
 import { ModalDeleteAnnouncement } from "../../components/Modal/ModalDeleteAnnouncement";
 import { ModalUpdateAnnouncement } from "../../components/Modal/ModalUpdateAnnouncement";
+import { ModalUpdateUser } from "../../components/Modal/ModalUpdateUser";
+import { ModalDeleteUser } from "../../components/Modal/ModalDeleteUser";
 
 interface IProfileProps {
   page?: string;
@@ -88,6 +90,10 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
         subtitleModal="Seu anúncio foi deletado com sucesso!"
         infoModal="Você pode fechar a janela e criar um novo anúncio."
       />
+
+      <ModalUpdateUser />
+
+      <ModalDeleteUser />
 
       <Header />
 

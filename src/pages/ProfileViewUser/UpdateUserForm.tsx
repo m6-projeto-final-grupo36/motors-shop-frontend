@@ -30,7 +30,8 @@ export const UpdateUserForm = ({
   loadingUpdateUser,
   register,
 }: IUpdateUserForm) => {
-  const { onCloseModalUpdateUser } = useContext(UserContext);
+  const { onCloseModalUpdateUser, onOpenModalDeleteUser } =
+    useContext(UserContext);
   return (
     <>
       <Grid as="form" onSubmit={handleUpdateUser} w="100%">
@@ -102,6 +103,19 @@ export const UpdateUserForm = ({
           gap="10px"
           mt="8"
         >
+          <Button
+            size="lg"
+            whiteSpace="normal"
+            color="var(--color-grey-2)"
+            bgColor="var(--color-grey-6)"
+            type="button"
+            onClick={() => {
+              onCloseModalUpdateUser();
+              onOpenModalDeleteUser();
+            }}
+          >
+            Excluir conta
+          </Button>
           <Button
             size="lg"
             whiteSpace="normal"
