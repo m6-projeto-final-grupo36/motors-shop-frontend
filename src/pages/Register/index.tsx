@@ -35,11 +35,19 @@ export const Register = () => {
 
   const handleRegister = (data: IRegister) => {
     setLoadingButtonRegister(true);
-    const newData: any = { ...data, account_type };
-    delete newData.confirm_password;
+
+    const { cep, city, complement, number, road, state } = data;
+
+    const newData: any = {
+      ...data,
+      address: { road, state, cep, complement, city, number },
+      type_account: account_type,
+    };
+
+    console.log(newData);
 
     api
-      .post("/register", { ...newData })
+      .post("/users", { ...newData })
       .then(() => {
         setLoadingButtonRegister(false);
         onOpenModalSuccess();

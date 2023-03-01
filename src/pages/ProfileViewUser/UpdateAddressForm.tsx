@@ -8,7 +8,7 @@ export interface IUpdateAddressRequest {
   cep?: string;
   state?: string;
   city?: string;
-  street?: string;
+  road?: string;
   number?: string;
   complement?: string;
 }
@@ -61,8 +61,8 @@ export const UpdateAddressForm = ({
           <Input
             placeholder="Digitar rua"
             label="Rua"
-            error={errors.street}
-            {...register("street")}
+            error={errors.road}
+            {...register("road")}
           />
 
           <HStack>

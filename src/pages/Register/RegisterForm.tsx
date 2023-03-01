@@ -1,4 +1,12 @@
-import { Button, Grid, HStack, InputGroup, InputRightElement, Text, VStack } from "@chakra-ui/react";
+import {
+  Button,
+  Grid,
+  HStack,
+  InputGroup,
+  InputRightElement,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { Input } from "../../components/Form/Input";
 import { FaUser, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
@@ -7,7 +15,6 @@ import { InputRadio } from "../../components/Form/Radio";
 import { TextArea } from "../../components/Form/TextArea";
 import { IRegister, UserContext } from "../../Providers/UserProvider";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-// import { ViewOffIcon } from "@chakra-ui/icons/dist/ViewOff";
 
 interface IRegisterForm {
   handleRegister: () => void;
@@ -23,13 +30,13 @@ export const RegisterForm = ({
   loadingRegister,
 }: IRegisterForm) => {
   const { setAccount_type } = useContext(UserContext);
-  const [show, setShow] = useState(false)
-  const [showConfirm, setShowConfirm] = useState(false)
+  const [show, setShow] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
-  const handleClickPwd = () => setShow(!show)
+  const handleClickPwd = () => setShow(!show);
 
-  const handleClickConfirm = () => setShowConfirm(!showConfirm)
- 
+  const handleClickConfirm = () => setShowConfirm(!showConfirm);
+
   return (
     <>
       <Grid as="form" onSubmit={handleRegister} w="100%">
@@ -61,8 +68,8 @@ export const RegisterForm = ({
             placeholder="(DDD) x xxxx-xxxx"
             icon={FaPhoneAlt}
             label="Celular"
-            error={errors.phone_number}
-            {...register("phone_number")}
+            error={errors.cell_phone}
+            {...register("cell_phone")}
           />
           <Input
             type="date"
@@ -109,8 +116,8 @@ export const RegisterForm = ({
           <Input
             placeholder="Digitar rua"
             label="Rua"
-            error={errors.street}
-            {...register("street")}
+            error={errors.road}
+            {...register("road")}
           />
 
           <HStack>
@@ -134,10 +141,10 @@ export const RegisterForm = ({
 
           <InputRadio
             defaultValue="buyer"
-            name="account_type"
+            name="type_account"
             options={[
               { text: "Comprador", value: "buyer" },
-              { text: "Anunciante", value: "seller" },
+              { text: "Anunciante", value: "advertiser" },
             ]}
             handleChange={setAccount_type}
           />
@@ -146,11 +153,11 @@ export const RegisterForm = ({
             <Input
               placeholder="Digitar senha"
               label="Senha"
-              type={show ? 'text' : 'password'}
+              type={show ? "text" : "password"}
               error={errors.password}
               {...register("password")}
-              />
-            <InputRightElement top='40px' width='5rem'>
+            />
+            <InputRightElement top="40px" width="5rem">
               <Button onClick={handleClickPwd}>
                 {show ? <ViewOffIcon /> : <ViewIcon />}
               </Button>
@@ -161,15 +168,15 @@ export const RegisterForm = ({
             <Input
               placeholder="Repetir senha"
               label="Confirmar senha"
-              type={showConfirm ? 'text' : 'password'}
+              type={showConfirm ? "text" : "password"}
               error={errors.confirm_password}
               {...register("confirm_password")}
-              />
-            <InputRightElement top='40px' width='5rem'>
-            <Button onClick={handleClickConfirm}>
-              {showConfirm ? <ViewOffIcon /> : <ViewIcon />}
-            </Button>
-          </InputRightElement>
+            />
+            <InputRightElement top="40px" width="5rem">
+              <Button onClick={handleClickConfirm}>
+                {showConfirm ? <ViewOffIcon /> : <ViewIcon />}
+              </Button>
+            </InputRightElement>
           </InputGroup>
         </VStack>
 

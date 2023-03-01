@@ -10,7 +10,7 @@ export interface IUpdateUserRequest {
   name?: string;
   email?: string;
   cpf?: string;
-  phone_number?: string;
+  cell_phone?: string;
   birthdate?: string;
   description?: string;
   password?: string;
@@ -63,8 +63,8 @@ export const UpdateUserForm = ({
             placeholder="(DDD) x xxxx-xxxx"
             icon={FaPhoneAlt}
             label="Celular"
-            error={errors.phone_number}
-            {...register("phone_number")}
+            error={errors.cell_phone}
+            {...register("cell_phone")}
           />
           <Input
             type="date"
