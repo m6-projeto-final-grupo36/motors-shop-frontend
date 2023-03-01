@@ -32,6 +32,9 @@ interface IAnnouncementContext {
   setImgsUpdate: Dispatch<SetStateAction<string[]>>;
   setImgsCreate: Dispatch<SetStateAction<string[]>>;
   deleteAnnouncement: () => void;
+  isOpenModalImageVehicle: boolean;
+  onOpenModalImageVehicle: () => void;
+  onCloseModalImageVehicle: () => void;
 }
 
 interface IAnnouncementProps {
@@ -129,6 +132,12 @@ export const AnnouncementProvider = ({ children }: IAnnouncementProps) => {
     onClose: onCloseModalDeleteAnnouncement,
   } = useDisclosure();
 
+  const {
+    isOpen: isOpenModalImageVehicle,
+    onOpen: onOpenModalImageVehicle,
+    onClose: onCloseModalImageVehicle,
+  } = useDisclosure();
+
   return (
     <AnnouncementContext.Provider
       value={{
@@ -154,6 +163,9 @@ export const AnnouncementProvider = ({ children }: IAnnouncementProps) => {
         isOpenModalDeleteAnnouncement,
         onCloseModalDeleteAnnouncement,
         onOpenModalDeleteAnnouncement,
+        isOpenModalImageVehicle,
+        onCloseModalImageVehicle,
+        onOpenModalImageVehicle,
       }}
     >
       {children}

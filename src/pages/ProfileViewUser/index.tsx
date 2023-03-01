@@ -4,73 +4,20 @@ import { ListProduct } from "../../components/ListProduct";
 import { Footer } from "../../components/Footer";
 import { MainContainer, ContainerAdvertiser } from "./styles";
 import { AuctionCard } from "../../components/AuctionCard";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AnnouncementContext } from "../../Providers/AnnouncementProvider";
 import { Modal } from "../../components/Modal";
-import {
-  CreateAnnouncementForm,
-  ICreateAnnouncementRequest,
-} from "./CreateAnnouncementForm";
-import {
-  IUpdateAnnouncementRequest,
-  UpdateAnnouncementForm,
-} from "./UpdateAnnouncementForm";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import {
-  createAnnouncementSchema,
-  updateAnnouncementSchema,
-} from "../../schemas/announcement";
-import { api } from "../../services/api";
-import { Button, Flex, useDisclosure } from "@chakra-ui/react";
-import { IUpdateUserRequest, UpdateUserForm } from "./UpdateUserForm";
-import { updateAddressSchema, updateUserSchema } from "../../schemas/user";
-import { UserContext } from "../../Providers/UserProvider";
-import { IUpdateAddressRequest, UpdateAddressForm } from "./UpdateAddressForm";
+import { useDisclosure } from "@chakra-ui/react";
+import { ModalCreateAnnouncement } from "../../components/Modal/ModalCreateAnnouncement";
+import { ModalDeleteAnnouncement } from "../../components/Modal/ModalDeleteAnnouncement";
+import { ModalUpdateAnnouncement } from "../../components/Modal/ModalUpdateAnnouncement";
 
 interface IProfileProps {
   page?: string;
 }
 
 export const ProfileViewUser = ({ page }: IProfileProps) => {
-  const [
-    isLoadingButtonCreateAnnouncement,
-    setIsLoadingButtonCreateAnnouncement,
-  ] = useState(false);
-
-  const [
-    isLoadingButtonUpdateAnnouncement,
-    setIsLoadingButtonUpdateAnnouncement,
-  ] = useState(false);
-
-  const [isLoadingButtonUpdateUser, setIsLoadingButtonUpdateUser] =
-    useState(false);
-
-  const [isLoadingButtonUpdateAddress, setIsLoadingButtonUpdateAddress] =
-    useState(false);
-
-  const {
-    announcements,
-    setAnnouncements,
-    isOpenModalCreateAnnouncement,
-    onCloseModalCreateAnnouncement,
-    isOpenModalUpdateAnnouncement,
-    onCloseModalUpdateAnnouncement,
-    announcementSelected_type,
-    announcementSelected_type_vehicle,
-    imgsCreate,
-    imgsUpdate,
-    announcementFound,
-    isOpenModalDeleteAnnouncement,
-    onCloseModalDeleteAnnouncement,
-  } = useContext(AnnouncementContext);
-
-  const {
-    isOpenModalUpdateUser,
-    onCloseModalUpdateUser,
-    onCloseModalUpdateAddress,
-    isOpenModalUpdateAddress,
-  } = useContext(UserContext);
+  const { announcements } = useContext(AnnouncementContext);
 
   const {
     isOpen: isOpenModalSuccessCreateAnnouncement,
@@ -98,154 +45,25 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
     (announcement) => announcement.type_vehicle === "motorcycle"
   );
 
-  const {
-    formState: { errors: errorsCreateAnnouncement },
-    register: registerCreateAnnouncement,
-    handleSubmit: handleSubmitCreateAnnouncement,
-  } = useForm<ICreateAnnouncementRequest>({
-    resolver: yupResolver(createAnnouncementSchema),
-  });
-
-  const {
-    formState: { errors: errorsUpdateAnnouncement },
-    register: registerUpdateAnnouncement,
-    handleSubmit: handleSubmitUpdateAnnouncement,
-  } = useForm<IUpdateAnnouncementRequest>({
-    resolver: yupResolver(updateAnnouncementSchema),
-  });
-
-  const {
-    formState: { errors: errorsUpdateUser },
-    register: registerUpdateUser,
-    handleSubmit: handleSubmitUpdateUser,
-  } = useForm<IUpdateUserRequest>({
-    resolver: yupResolver(updateUserSchema),
-  });
-
-  const {
-    formState: { errors: errorsUpdateAddress },
-    register: registerUpdateAddress,
-    handleSubmit: handleSubmitUpdateAddress,
-  } = useForm<IUpdateAddressRequest>({
-    resolver: yupResolver(updateAddressSchema),
-  });
-
-  const handleCreateAnnouncement = (data: ICreateAnnouncementRequest) => {
-    setIsLoadingButtonCreateAnnouncement(true);
-
-    const images = imgsCreate.filter((img) => img);
-
-    const newData: ICreateAnnouncementRequest = {
-      ...data,
-      type: announcementSelected_type,
-      type_vehicle: announcementSelected_type_vehicle,
-      images,
-    };
-
-    api
-      .post("/announcements", newData)
-      .then((res) => {
-        setAnnouncements(() => {
-          return [...announcements, res.data];
-        });
-        onOpenModalSuccessCreateAnnouncement();
-        onCloseModalCreateAnnouncement();
-        setIsLoadingButtonCreateAnnouncement(false);
-      })
-      .catch(() => {
-        setIsLoadingButtonCreateAnnouncement(false);
-      });
-  };
-
-  const handleUpdateAnnouncement = (data: IUpdateAnnouncementRequest) => {
-    setIsLoadingButtonUpdateAnnouncement(true);
-
-    const images = imgsUpdate.filter((img) => img);
-
-    const newData: IUpdateAnnouncementRequest = {
-      ...data,
-      type: announcementSelected_type,
-      type_vehicle: announcementSelected_type_vehicle,
-      images,
-    };
-
-    api
-      .patch(`/announcements/${announcementFound.id}`, newData)
-      .then((res) => {
-        setAnnouncements(() => {
-          const result = announcements.filter(
-            (ann) => ann.id !== announcementFound.id
-          );
-          return [...result, res.data];
-        });
-        onOpenModalSuccessUpdateAnnouncement();
-        onCloseModalUpdateAnnouncement();
-        setIsLoadingButtonUpdateAnnouncement(false);
-      })
-      .catch(() => {
-        setIsLoadingButtonUpdateAnnouncement(false);
-      });
-  };
-
-  const handleDeleteAnnouncement = () => {
-    api
-      .delete(`/announcements/${announcementFound.id}`)
-      .then(() => {
-        setAnnouncements(() => {
-          const newAnnouncements = announcements.filter(
-            (annou) => annou.id !== announcementFound.id
-          );
-          return newAnnouncements;
-        });
-        onCloseModalDeleteAnnouncement();
-        onOpenModalSuccessDeleteAnnouncement();
-      })
-      .catch(() => {
-        onCloseModalDeleteAnnouncement();
-      });
-  };
-
-  const handleUpdateUser = (data: IUpdateUserRequest) => {
-    console.log(data);
-    setIsLoadingButtonUpdateUser(true);
-  };
-
-  const handleUpdateAddress = (data: IUpdateAddressRequest) => {
-    console.log(data);
-    setIsLoadingButtonUpdateAddress(true);
-  };
-
   return (
     <MainContainer>
-      <Modal
-        isOpen={isOpenModalCreateAnnouncement}
-        onClose={onCloseModalCreateAnnouncement}
-        titleModal="Criar anúncio"
-      >
-        <CreateAnnouncementForm
-          handleCreateAnnouncement={handleSubmitCreateAnnouncement(
-            handleCreateAnnouncement
-          )}
-          register={registerCreateAnnouncement}
-          loadingCreateAnnouncement={isLoadingButtonCreateAnnouncement}
-          errors={errorsCreateAnnouncement}
-        />
-      </Modal>
+      <ModalCreateAnnouncement
+        onOpenModalSuccessCreateAnnouncement={
+          onOpenModalSuccessCreateAnnouncement
+        }
+      />
 
-      <Modal
-        isOpen={isOpenModalUpdateAnnouncement}
-        onClose={onCloseModalUpdateAnnouncement}
-        titleModal="Editar anúncio"
-      >
-        <UpdateAnnouncementForm
-          errors={errorsUpdateAnnouncement}
-          handleUpdateAnnouncement={handleSubmitUpdateAnnouncement(
-            handleUpdateAnnouncement
-          )}
-          loadingUpdateAnnouncement={isLoadingButtonUpdateAnnouncement}
-          register={registerUpdateAnnouncement}
-        />
-      </Modal>
+      <ModalUpdateAnnouncement
+        onOpenModalSuccessUpdateAnnouncement={
+          onOpenModalSuccessUpdateAnnouncement
+        }
+      />
+
+      <ModalDeleteAnnouncement
+        onOpenModalSuccessDeleteAnnouncement={
+          onOpenModalSuccessDeleteAnnouncement
+        }
+      />
 
       <Modal
         isOpen={isOpenModalSuccessCreateAnnouncement}
@@ -264,71 +82,12 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
       />
 
       <Modal
-        isOpen={isOpenModalDeleteAnnouncement}
-        onClose={onCloseModalDeleteAnnouncement}
-        titleModal="Excluir anúncio"
-        subtitleModal="Tem certeza que deseja remover este anúncio?"
-        infoModal="Essa ação não pode ser desfeita. Isso excluirá permanentemente seu anúncio.
-        "
-      >
-        <Flex justify="space-between" w="100%" gap="10px">
-          <Button
-            size="lg"
-            whiteSpace="normal"
-            color="var(--color-grey-2)"
-            bgColor="var(--color-grey-6)"
-            type="button"
-            onClick={onCloseModalDeleteAnnouncement}
-          >
-            Cancelar
-          </Button>
-          <Button
-            type="button"
-            paddingY="10px"
-            size="lg"
-            whiteSpace="normal"
-            bgColor="var(--color-feedback-alert-2)"
-            color="var(--color-feedback-alert-1)"
-            onClick={handleDeleteAnnouncement}
-          >
-            Sim, excluir anúncio
-          </Button>
-        </Flex>
-      </Modal>
-
-      <Modal
         isOpen={isOpenModalSuccessDeleteAnnouncement}
         onClose={onCloseModalSuccessDeleteAnnouncement}
         titleModal="Sucesso"
         subtitleModal="Seu anúncio foi deletado com sucesso!"
         infoModal="Você pode fechar a janela e criar um novo anúncio."
       />
-
-      <Modal
-        onClose={onCloseModalUpdateUser}
-        isOpen={isOpenModalUpdateUser}
-        titleModal="Editar perfil"
-      >
-        <UpdateUserForm
-          errors={errorsUpdateUser}
-          handleUpdateUser={handleSubmitUpdateUser(handleUpdateUser)}
-          loadingUpdateUser={isLoadingButtonUpdateUser}
-          register={registerUpdateUser}
-        />
-      </Modal>
-
-      <Modal
-        onClose={onCloseModalUpdateAddress}
-        isOpen={isOpenModalUpdateAddress}
-        titleModal="Editar endereço"
-      >
-        <UpdateAddressForm
-          errors={errorsUpdateAddress}
-          handleUpdateAddress={handleSubmitUpdateAddress(handleUpdateAddress)}
-          loadingUpdateAddress={isLoadingButtonUpdateAddress}
-          register={registerUpdateAddress}
-        />
-      </Modal>
 
       <Header />
 
