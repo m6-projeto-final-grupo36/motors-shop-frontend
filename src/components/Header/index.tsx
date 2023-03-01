@@ -1,7 +1,7 @@
 import Logo from "../../assets/motors-logo.svg";
 import { BiMenu } from "react-icons/bi";
 import { IoCloseOutline } from "react-icons/io5";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { HeaderStyled } from "./styles";
 import {
   Menu,
@@ -13,38 +13,16 @@ import {
 } from "@chakra-ui/menu";
 import { Button } from "@chakra-ui/button";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../Providers/UserProvider";
 
 export const Header = () => {
   const [isClick, setIsClick] = useState<boolean>(false);
 
+  const {data} = useContext(UserContext)
+
   const dropRef = useRef<HTMLDivElement>(null);
 
   const navigate = useNavigate();
-
-  // objeto temporario enquanto não houver o objeto usuario da tabela Users
-  const new_user_buyer = {
-    // id: '100b466f-d302-4fff-bb0c-cf423f60b25e',
-    // name: "James Silva",
-    // email: 'james.silva@mail.com',
-    // cpf: '94784206400',
-    // cell_phone: '22936525487',
-    // birthdate: '2022-04-05',
-    // description: 'Sou um cara legal!',
-    // password: '123456As',
-    // type_account: 'buyer'
-  };
-
-  const new_user_advertiser = {
-    id: "59405f88-1c21-4341-ac23-487c598965be",
-    name: "James Silva",
-    email: "james.silva@mail.com",
-    cpf: "94784206400",
-    cell_phone: "22936525487",
-    birthdate: "2022-04-05",
-    description: "Sou um cara legal!",
-    password: "123456As",
-    type_account: "advertiser",
-  };
 
   useEffect(() => {
     function handleOutClick(event: MouseEvent) {
@@ -73,21 +51,21 @@ export const Header = () => {
         </div>
         <div className="divider-bar"></div>
         <div className="user">
-          {Object.keys(new_user_buyer).length ? (
+          {Object.keys(data).length ? (
             <div className="user-logged">
               <Menu>
                 <MenuButton as={Button}>
                   <div className="initial-caracters">
-                    {/* <span>{new_user_buyer.name.split(' ')[0][0]}{new_user_buyer.name.split(' ')[1][0]}</span> */}
+                    <span>{data.user.name.split(' ')[0][0]}{data.user.name.split(' ')[1][0]}</span>
                   </div>
-                  {/* <span>{new_user_buyer.name}</span> */}
+                  <span>{data.user.name}</span>
                 </MenuButton>
                 <MenuList>
                   <MenuItem>Editar perfil</MenuItem>
                   <MenuItem>Editar endereço</MenuItem>
                   <MenuItem>
                     {
-                      // new_user_buyer.type_account === 'buyer' ? 'Minhas compras' : 'Meus anúncios'
+                      data.user.type_account === 'buyer' ? 'Minhas compras' : 'Meus anúncios'
                     }
                   </MenuItem>
                   <MenuItem>Sair</MenuItem>
@@ -168,21 +146,21 @@ export const Header = () => {
               borderBottom='3px solid var("--color-grey-4")'
             />
             <MenuGroup pl="22px">
-              {Object.keys(new_user_buyer).length ? (
+              {Object.keys(data).length ? (
                 <div className="user-logged">
                   <Menu>
                     <MenuButton className="btn-user" as={Button}>
                       <div className="initial-caracters">
-                        {/* <span>{new_user_buyer.name.split(' ')[0][0]}{new_user_buyer.name.split(' ')[1][0]}</span> */}
+                        <span>{data.user.name.split(' ')[0][0]}{data.user.name.split(' ')[1][0]}</span>
                       </div>
-                      {/* <span>{new_user_buyer.name}</span> */}
+                      <span>{data.user.name}</span>
                     </MenuButton>
                     <MenuList>
                       <MenuItem>Editar perfil</MenuItem>
                       <MenuItem>Editar endereço</MenuItem>
                       <MenuItem>
                         {
-                          // new_user_buyer.type_account === 'buyer' ? 'Minhas compras' : 'Meus anúncios'
+                          data.user.type_account === 'buyer' ? 'Minhas compras' : 'Meus anúncios'
                         }
                       </MenuItem>
                       <MenuItem>Sair</MenuItem>

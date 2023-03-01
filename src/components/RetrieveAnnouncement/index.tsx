@@ -4,7 +4,7 @@ import { AnnouncementContext } from "../../Providers/AnnouncementProvider";
 import { Commentary } from "../Comments";
 import { Footer } from "../Footer";
 import { Header } from "../Header";
-import { Container } from "./styles";
+import { Container, ContainerCommentary } from "./styles";
 
 export const RetrieveAnnouncement = () => {
   const { announcementFound } = useContext(AnnouncementContext);
@@ -60,16 +60,11 @@ export const RetrieveAnnouncement = () => {
             </div>
           </div>
           <div className="advertiser-info">
-            <div className="initial-caracters">JS</div>
-            <h3>James Silva</h3>
+            <div className="initial-caracters">{announcementFound.user.name.split(' ')[0][0]}{announcementFound.user.name.split(' ')[1][0]}</div>
+            <h3>{announcementFound.user.name}</h3>
             <div className="advertiser-description">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur.
+                {announcementFound.user.description}
               </p>
             </div>
             <div className="btn-list-advertiser-announcements">
@@ -85,7 +80,15 @@ export const RetrieveAnnouncement = () => {
         </section>
         <div className="fixed"></div>
       </Container>
-      <Commentary />
+      {/* {
+        announcementFound.comments.length ?  */}
+        <Commentary comments={announcementFound.comments} announcementId={announcementFound.id}/>
+        {/* :
+        <ContainerCommentary>
+          <h3>Comentários</h3>
+          <span>Sem comentários</span>
+        </ContainerCommentary>
+      } */}
       <Footer />
     </>
   );

@@ -331,3 +331,36 @@ export const Container = styled.div`
         }
     }
 `
+
+export const ContainerCommentary = styled.div`
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: var(--color-white-fixed);
+    border-radius: 4px;
+
+    margin: 0 auto;
+    margin-bottom: 2.625rem;
+    width: 90%;
+
+    padding: 0 12px;
+    padding-top: 26px;
+
+    h3{
+        font-size: 1.25rem;
+        line-height: 25px;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+
+        color: var(--color-grey-1);
+    }
+
+    span{
+        max-height: 200px;
+        overflow-y: auto;
+        font-weight: 400;
+        font-size: 16px;
+        color: var(--color-grey-2);
+    }
+`

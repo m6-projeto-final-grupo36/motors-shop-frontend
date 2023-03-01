@@ -1,7 +1,14 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  display: flex;
+   display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 45px;
+
+  .comments{
+    display: flex;
   flex-direction: column;
   gap: 1rem;
   background-color: var(--color-white-fixed);
@@ -120,6 +127,11 @@ export const Container = styled.div`
     margin-left: 12px;
   }
 
+  }
+  @media (min-width: 1200px) {
+    padding: 0 181px;
+  } 
+  
 `;
 
 export const Input = styled.textarea`
@@ -204,6 +216,23 @@ export const ContainerInput = styled.div`
     border: 1.5px solid #4529e6;
     border-radius: 4px;
   }
+ 
+  .btn-disabled{
+    background-color: var(--color-brand-1);
+    color: var(--color-white-fixed);
+
+    margin-top: 1.3rem;
+    width: 7rem;
+    height: 3rem;
+
+    border: 1.5px solid #4529e6;
+    border-radius: 4px;
+  }
+  *:disabled{
+    background-color: var(--color-grey-5);
+    border: 1.5px solid var(--color-grey-5);
+    cursor: not-allowed;
+  }
 
   .feedbacks{
     display: flex;
@@ -283,15 +312,42 @@ export const ContainerInput = styled.div`
 
     .btn{
       position: absolute;
-      bottom: 175px;
-      right: 115px;
+      bottom: 220px;
+      right: 130px;
     }
+    /* .btn-disabled{
+      position: absolute;
+      bottom: 220px;
+      right: 130px;
+    } */
   }
 
+  @media (min-width: 1100px) {
+    .btn{
+      right: 140px;
+    }
+    /* .btn-disabled{
+      right: 140px;
+    } */
+  }
+
+  @media (min-width: 1200px) {
+    .btn{
+      margin-top: 0;
+      right: 290px;
+    }
+    /* .btn-disabled{
+      margin-top: 0;
+      right: 290px;
+    } */
+  }
+  
   @media (min-width: 1440px) {
     .btn{
-      bottom: 180px;
-      right: 160px;
+      right: 315px;
     }
+    /* .btn-disabled{
+      right: 315px;
+    } */
   }
 `
