@@ -1,5 +1,50 @@
 # Documentação do Projeto Final - Motors Shop
 
+## Iniciando o Projeto
+
+Para inciar este projeto, é necessário instalar as dependências, que foram utilizadas na elaboração do projeto. Portanto utilize o comando abaixo para instalar tais dependências:
+````
+yarn install
+````
+
+**Atenção:** é necessário utilizar o `yarn` pois esse projeto foi iniciado com esse gerenciador de pacotes.
+
+Para verificar se já possui o gerenciador yarn instalado utilize o seguinte comando:
+
+````
+yarn --version
+````
+
+Caso não possua o yarn instalado, utilize o comando abaixo para instalar globalmente na sua máquina:
+
+````
+npm install --global yarn
+````
+
+## **Rodando a aplicação**
+Digite o seguinte comando no terminal para rodar a aplicação em sua máquina:
+
+````
+yarn start
+````
+
+Obs.: Rode inicialmente o comando ````yarn dev```` no repositório de Back-End para que possa utilizar corretamente a aplicação.
+
+## Rotas
+
+A aplicação possui 7 rotas sendo:
+<ul>
+  <li>/ - Página Home </li>
+  <li>/login - Login de usuários que já possuem uma conta </li>
+  <li>/register - Cadastro de usuários </li>
+  <li>/advertiser_announcement - Página que contém todos os anúncios de um anunciante </li>
+  <li>/my_announcements - Página que o usuário anunciante pode editar/ver seus anúncios - Apenas usuários anunciantes tem acesso </li>
+  <li>/detail - Página que o usuário pode ver um anúncio detalhado </li>
+  <li>/recover_password - Página para o usuário recuperar a senha - Só é acessada quando o usuário segue as intruções do email </li>
+</ul>
+
+Qualquer rota fora dessas redireciona o usuário à página home.
+
 ## Idioma do codigo
 
 - Inglês
