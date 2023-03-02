@@ -19,11 +19,17 @@ import { ModalUpdateAddress } from "../Modal/ModalUpdateAddress";
 export const Header = () => {
   const [isClick, setIsClick] = useState<boolean>(false);
 
+
   const { data, setData, onOpenModalUpdateAddress } = useContext(UserContext);
 
   const dropRef = useRef<HTMLDivElement>(null);
 
   const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.clear()
+    navigate('/')
+  }
 
   useEffect(() => {
     function handleOutClick(event: MouseEvent) {

@@ -7,6 +7,7 @@ import { sendEmailSchema } from "../../schemas/user";
 import { useContext, useState } from "react";
 import { UserContext } from "../../Providers/UserProvider";
 import { api } from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 interface IRecoverPassword {
   email: string;
@@ -14,6 +15,8 @@ interface IRecoverPassword {
 
 interface IUser {
   email: string;
+  name: string;
+  id: string;
 }
 
 export const ModalRecoverPassword = () => {
@@ -26,6 +29,8 @@ export const ModalRecoverPassword = () => {
   } = useForm<IRecoverPassword>({
     resolver: yupResolver(sendEmailSchema),
   });
+
+  const navigate = useNavigate()
 
   const {
     isOpenModalRecoverPassword,
@@ -42,9 +47,14 @@ export const ModalRecoverPassword = () => {
       .then((res) => {
         setIsloading(false);
         const foundEmail = res.data.find((user) => user.email === email);
-
+        localStorage.setItem('@userFound', `${foundEmail?.id}`)
         if (foundEmail) {
-          //inserir lógica do envio de email de recuperação de senha
+          api.post('/users/forgot_password', {
+            email: foundEmail.email,
+            name: foundEmail.name
+          })
+          .then(res => navigate('/'))
+          .catch(err => console.log(err))
           onCloseModalRecoverPassword();
           onOpenModalSuccessRecoverPassword();
         } else {

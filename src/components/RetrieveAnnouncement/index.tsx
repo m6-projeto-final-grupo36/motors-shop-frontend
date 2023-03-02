@@ -4,7 +4,7 @@ import { AnnouncementContext } from "../../Providers/AnnouncementProvider";
 import { Commentary } from "../Comments";
 import { Footer } from "../Footer";
 import { Header } from "../Header";
-import { Container, ContainerCommentary } from "./styles";
+import { Container } from "./styles";
 
 export const RetrieveAnnouncement = () => {
   const { announcementFound } = useContext(AnnouncementContext);
@@ -80,15 +80,7 @@ export const RetrieveAnnouncement = () => {
         </section>
         <div className="fixed"></div>
       </Container>
-      {/* {
-        announcementFound.comments.length ?  */}
-        <Commentary comments={announcementFound.comments} announcementId={announcementFound.id}/>
-        {/* :
-        <ContainerCommentary>
-          <h3>Comentários</h3>
-          <span>Sem comentários</span>
-        </ContainerCommentary>
-      } */}
+      <Commentary comments={announcementFound.comments} announcementId={announcementFound.id}/>  
       <Footer />
     </>
   );

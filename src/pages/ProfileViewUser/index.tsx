@@ -21,8 +21,14 @@ interface IProfileProps {
 }
 
 export const ProfileViewUser = ({ page }: IProfileProps) => {
-  const { announcements } = useContext(AnnouncementContext);
+
   const { data } = useContext(UserContext);
+
+  const { announcements, announcementFound } = useContext(AnnouncementContext);
+
+  if(Object.keys(announcementFound).length){
+    console.log(announcementFound.user.id)
+  }
 
   const {
     isOpen: isOpenModalSuccessCreateAnnouncement,
