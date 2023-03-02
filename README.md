@@ -104,7 +104,7 @@ Atualizações que não ocasionam alteração no código de produção.
 
 ## Modelo de Organização das Pastas
 
-![alt Pastas](./doc/img/pastas.png)
+![alt Pastas](developer/doc/img/pastas.png)
 
 ### src
 
