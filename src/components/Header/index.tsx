@@ -18,7 +18,7 @@ import { UserContext } from "../../Providers/UserProvider";
 export const Header = () => {
   const [isClick, setIsClick] = useState<boolean>(false);
 
-  const {data} = useContext(UserContext)
+  const {data, logout} = useContext(UserContext)
 
   const dropRef = useRef<HTMLDivElement>(null);
 
@@ -68,7 +68,7 @@ export const Header = () => {
                       data.user.type_account === 'buyer' ? 'Minhas compras' : 'Meus anúncios'
                     }
                   </MenuItem>
-                  <MenuItem>Sair</MenuItem>
+                  <MenuItem onClick={logout}>Sair</MenuItem>
                 </MenuList>
               </Menu>
             </div>

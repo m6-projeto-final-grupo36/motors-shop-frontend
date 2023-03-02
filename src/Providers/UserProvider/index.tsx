@@ -1,6 +1,7 @@
 import { useDisclosure } from "@chakra-ui/react";
 import { ReactNode, useState } from "react";
 import { createContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 
 export const UserContext = createContext({} as IUserContext);
@@ -10,6 +11,7 @@ interface IUserContext {
   data: IAuthUser;
   setAccount_type: (str: string) => void;
   signIn: (data: ILogin) => Promise<void>;
+  logout: () => void;
   isOpenModalUpdateUser: boolean;
   onOpenModalUpdateUser: () => void;
   onCloseModalUpdateUser: () => void;
@@ -104,6 +106,13 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     setData({ token, user });
   };
 
+  const navigate = useNavigate()
+
+  const logout = () => {
+    window.localStorage.clear()
+    navigate("/login")
+  }
+
   const {
     isOpen: isOpenModalUpdateUser,
     onOpen: onOpenModalUpdateUser,
@@ -147,6 +156,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         data,
         setAccount_type,
         signIn,
+        logout,
         isOpenModalUpdateUser,
         onCloseModalUpdateUser,
         onOpenModalUpdateUser,
