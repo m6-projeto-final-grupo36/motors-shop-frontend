@@ -42,7 +42,7 @@ export const Header = () => {
     localStorage.removeItem("@MotorsShop:token");
     localStorage.removeItem("@MotorsShop:user");
     setData({} as IAuthUser);
-    navigate("/home", { replace: true });
+    navigate("/", { replace: true });
   };
 
   const onClickUpdateAddress = () => {
@@ -90,7 +90,11 @@ export const Header = () => {
                     <MenuItem as="button" onClick={onClickUpdateAddress}>
                       Editar endereço
                     </MenuItem>
-                    <MenuItem>
+                    <MenuItem onClick={() => {
+                      if(data.user.type_account === 'advertiser'){
+                        navigate('/my_announcements')
+                      }
+                    }}>
                       {data.user.type_account === "buyer"
                         ? "Minhas compras"
                         : "Meus anúncios"}
@@ -191,7 +195,11 @@ export const Header = () => {
                         <MenuItem as="button" onClick={onClickUpdateAddress}>
                           Editar endereço
                         </MenuItem>
-                        <MenuItem>
+                        <MenuItem onClick={() => {
+                          if(data.user.type_account === 'advertiser'){
+                            navigate('/my_announcements')
+                          }
+                        }}>
                           {data.user.type_account === "buyer"
                             ? "Minhas compras"
                             : "Meus anúncios"}

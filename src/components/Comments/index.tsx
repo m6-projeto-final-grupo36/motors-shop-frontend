@@ -80,7 +80,11 @@ export const Commentary = ({announcementId, comments}: ICommentary) => {
             if (intervalDay <= 0) {
               dateToRender = '0 dias'
             }else if (intervalDay <= 29){
-              dateToRender = `${intervalDay} dias`
+              if (intervalDay === 1){
+                dateToRender = '1 dia'
+              }else{
+                dateToRender = `${intervalDay} dias`
+              }
             }else{
               if(intervalMonth <= 1){
                 dateToRender = '1 mês'

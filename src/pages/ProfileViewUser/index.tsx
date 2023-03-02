@@ -26,8 +26,16 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
 
   const { announcements, announcementFound } = useContext(AnnouncementContext);
 
+  let advertiser
+
+  if(data.user){
+    advertiser = data.user
+  }
+
+  console.log(advertiser)
+
   if(Object.keys(announcementFound).length){
-    console.log(announcementFound.user.id)
+    // console.log(announcementFound.user.id)
   }
 
   const {
@@ -49,16 +57,19 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
   } = useDisclosure();
 
   const cars = announcements.filter(
-    (announcement) => announcement.type_vehicle === "car"
+    (announcement) => announcement.type_vehicle === "car" && announcement.user.id === announcementFound.user.id
   );
 
   const motorcycles = announcements.filter(
-    (announcement) => announcement.type_vehicle === "motorcycle"
+    (announcement) => announcement.type_vehicle === "motorcycle" && announcement.user.id === announcementFound.user.id
   );
+
+  const carAnnouncements = announcements.filter(announcement => announcement.type_vehicle === "car" && announcement.user.id === data.user.id)
+
+  const motorcyclesAnnouncements = announcements.filter(announcement => announcement.type_vehicle === "motorcycle" && announcement.user.id ===  data.user.id)
 
   return (
     <>
-      {Object.keys(data).length && data.user.type_account === "advertiser" ? (
         <MainContainer>
           <ModalCreateAnnouncement
             onOpenModalSuccessCreateAnnouncement={
@@ -110,8 +121,8 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
 
           <ContainerAdvertiser>
             <Advertiser
-              name="Samuel Leão"
-              description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+              name={page ? data.user.name : announcementFound.user.name}
+              description={page ? data.user.description : announcementFound.user.description}
               typeAccount="Anunciante"
               page={page}
             />
@@ -133,18 +144,15 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
           <ListProduct
             productPage={page}
             productType="Carros"
-            productList={cars}
+            productList={page ? carAnnouncements : cars}
           />
           <ListProduct
             productPage={page}
             productType="Motos"
-            productList={motorcycles}
+            productList={page ? motorcyclesAnnouncements : motorcycles}
           />
           <Footer />
         </MainContainer>
-      ) : (
-        <Navigate to="/home" replace={true} />
-      )}
     </>
   );
 };
