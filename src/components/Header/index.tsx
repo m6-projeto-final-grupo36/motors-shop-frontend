@@ -18,11 +18,16 @@ import { UserContext } from "../../Providers/UserProvider";
 export const Header = () => {
   const [isClick, setIsClick] = useState<boolean>(false);
 
-  const {data, logout} = useContext(UserContext)
+  const {data} = useContext(UserContext)
 
   const dropRef = useRef<HTMLDivElement>(null);
 
   const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.clear()
+    navigate('/')
+  }
 
   useEffect(() => {
     function handleOutClick(event: MouseEvent) {
@@ -56,7 +61,9 @@ export const Header = () => {
               <Menu>
                 <MenuButton as={Button}>
                   <div className="initial-caracters">
-                    <span>{data.user.name.split(' ')[0][0]}{data.user.name.split(' ')[1][0]}</span>
+                    <span>{data.user.name.split(' ')[0][0]}
+                    {/* {data.user.name.split(' ')[1][0]} */}
+                    </span>
                   </div>
                   <span>{data.user.name}</span>
                 </MenuButton>
@@ -68,7 +75,7 @@ export const Header = () => {
                       data.user.type_account === 'buyer' ? 'Minhas compras' : 'Meus anúncios'
                     }
                   </MenuItem>
-                  <MenuItem onClick={logout}>Sair</MenuItem>
+                  <MenuItem onClick={() => logout()}>Sair</MenuItem>
                 </MenuList>
               </Menu>
             </div>
@@ -151,7 +158,9 @@ export const Header = () => {
                   <Menu>
                     <MenuButton className="btn-user" as={Button}>
                       <div className="initial-caracters">
-                        <span>{data.user.name.split(' ')[0][0]}{data.user.name.split(' ')[1][0]}</span>
+                        <span>{data.user.name.split(' ')[0][0]}
+                        {/* {data.user.name.split(' ')[1][0]} */}
+                        </span>
                       </div>
                       <span>{data.user.name}</span>
                     </MenuButton>
