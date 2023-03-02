@@ -26,7 +26,10 @@ export const UpdateAddressForm = ({
   loadingUpdateAddress,
   register,
 }: IUpdateAddressForm) => {
-  const { onCloseModalUpdateAddress } = useContext(UserContext);
+  const {
+    onCloseModalUpdateAddress,
+    data: { user },
+  } = useContext(UserContext);
 
   return (
     <>
@@ -41,6 +44,7 @@ export const UpdateAddressForm = ({
             label="CEP"
             error={errors.cep}
             {...register("cep")}
+            // defaultValue={user}
           />
 
           <HStack>

@@ -9,6 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext, useState } from "react";
 import { AnnouncementContext } from "../../Providers/AnnouncementProvider";
 import { api } from "../../services/api";
+import { UserContext } from "../../Providers/UserProvider";
 
 interface IModalCreateAnnouncement {
   onOpenModalSuccessCreateAnnouncement: () => void;
@@ -33,6 +34,10 @@ export const ModalCreateAnnouncement = ({
   } = useContext(AnnouncementContext);
 
   const {
+    data: { token },
+  } = useContext(UserContext);
+
+  const {
     formState: { errors: errorsCreateAnnouncement },
     register: registerCreateAnnouncement,
     handleSubmit: handleSubmitCreateAnnouncement,
@@ -53,7 +58,9 @@ export const ModalCreateAnnouncement = ({
     };
 
     api
-      .post("/announcements", newData)
+      .post("/announcements", newData, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         setAnnouncements(() => {
           return [...announcements, res.data];
