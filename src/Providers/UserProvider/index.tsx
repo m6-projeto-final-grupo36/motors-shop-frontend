@@ -59,7 +59,7 @@ interface IUser {
   cpf: string;
   cell_phone: string;
   birthdate: Date;
-  description?: string;
+  description: string;
   cep: string;
   state: string;
   city: string;

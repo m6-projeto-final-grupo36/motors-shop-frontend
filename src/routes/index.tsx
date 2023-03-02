@@ -15,20 +15,25 @@ export const ContainerRoutes = () => {
 
   const {data} = useContext(UserContext)
 
+  // console.log(data)
+  // console.log('--------------')
+  // console.log(announcementFound)
+
   let user = ''
   
   if(Object.keys(data).length){
     user = data.user.type_account
   }
 
-
   const userId = localStorage.getItem('@userFound')
+
 
   return(
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      
       <Route path="/advertiser_announcement" element={<ProfileViewUser />} />
       {
         user === 'advertiser' && 
