@@ -2,6 +2,7 @@ import { Button, Flex } from "@chakra-ui/react";
 import { useContext } from "react";
 import { Modal } from ".";
 import { AnnouncementContext } from "../../Providers/AnnouncementProvider";
+import { UserContext } from "../../Providers/UserProvider";
 import { api } from "../../services/api";
 
 interface IModalDeleteAnnouncement {
@@ -19,9 +20,15 @@ export const ModalDeleteAnnouncement = ({
     setAnnouncements,
   } = useContext(AnnouncementContext);
 
+  const {
+    data: { token },
+  } = useContext(UserContext);
+
   const handleDeleteAnnouncement = () => {
     api
-      .delete(`/announcements/${announcementFound.id}`)
+      .delete(`/announcements/${announcementFound.id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then(() => {
         setAnnouncements(() => {
           const newAnnouncements = announcements.filter(

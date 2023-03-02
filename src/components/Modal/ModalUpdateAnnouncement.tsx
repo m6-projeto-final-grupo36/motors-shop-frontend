@@ -9,6 +9,7 @@ import { api } from "../../services/api";
 import { useForm } from "react-hook-form";
 import { updateAnnouncementSchema } from "../../schemas/announcement";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { UserContext } from "../../Providers/UserProvider";
 
 interface IModalUpdateAnnouncement {
   onOpenModalSuccessUpdateAnnouncement: () => void;
@@ -34,6 +35,10 @@ export const ModalUpdateAnnouncement = ({
   } = useContext(AnnouncementContext);
 
   const {
+    data: { token, user },
+  } = useContext(UserContext);
+
+  const {
     formState: { errors: errorsUpdateAnnouncement },
     register: registerUpdateAnnouncement,
     handleSubmit: handleSubmitUpdateAnnouncement,
@@ -54,12 +59,18 @@ export const ModalUpdateAnnouncement = ({
     };
 
     api
-      .patch(`/announcements/${announcementFound.id}`, newData)
+      .patch(`/announcements/${announcementFound.id}`, newData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((res) => {
+        console.log("res.data", res.data);
         setAnnouncements(() => {
           const result = announcements.filter(
             (ann) => ann.id !== announcementFound.id
           );
+          res.data.user = user;
           return [...result, res.data];
         });
         onOpenModalSuccessUpdateAnnouncement();
