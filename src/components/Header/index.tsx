@@ -16,11 +16,14 @@ import { useNavigate } from "react-router-dom";
 import { IAuthUser, UserContext } from "../../Providers/UserProvider";
 import { ModalUpdateAddress } from "../Modal/ModalUpdateAddress";
 import { ModalUpdateUser } from "../Modal/ModalUpdateUser";
+import { ModalDeleteUser } from "../Modal/ModalDeleteUser";
 
 export const Header = () => {
   const [isClick, setIsClick] = useState<boolean>(false);
 
-  const { data, setData, onOpenModalUpdateAddress, onOpenModalUpdateUser } = useContext(UserContext);
+
+  const { data, setData, onOpenModalUpdateAddress, onOpenModalUpdateUser } =
+    useContext(UserContext);
 
   const dropRef = useRef<HTMLDivElement>(null);
 
@@ -53,6 +56,8 @@ export const Header = () => {
     <>
       <ModalUpdateUser />
       <ModalUpdateAddress />
+      <ModalUpdateUser />
+      <ModalDeleteUser />
       <HeaderStyled>
         <div className="logo">
           <img
@@ -86,7 +91,11 @@ export const Header = () => {
                     <span>{data.user.name}</span>
                   </MenuButton>
                   <MenuList>
-                    <MenuItem as='button' onClick={onOpenModalUpdateUser}>Editar perfil</MenuItem>
+
+                    <MenuItem as="button" onClick={onOpenModalUpdateUser}>
+                      Editar perfil
+                    </MenuItem>
+
                     <MenuItem as="button" onClick={onClickUpdateAddress}>
                       Editar endereço
                     </MenuItem>
@@ -191,7 +200,9 @@ export const Header = () => {
                         <span>{data.user.name}</span>
                       </MenuButton>
                       <MenuList>
-                        <MenuItem>Editar perfil</MenuItem>
+                        <MenuItem as="button" onClick={onOpenModalUpdateUser}>
+                          Editar perfil
+                        </MenuItem>
                         <MenuItem as="button" onClick={onClickUpdateAddress}>
                           Editar endereço
                         </MenuItem>

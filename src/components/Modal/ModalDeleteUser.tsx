@@ -1,29 +1,37 @@
 import { Button, Flex } from "@chakra-ui/react";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Modal } from ".";
-import { UserContext } from "../../Providers/UserProvider";
+import { IUser, UserContext } from "../../Providers/UserProvider";
+import { api } from "../../services/api";
+
+export interface IAuthUser {
+  token: string;
+  user: IUser;
+}
 
 export const ModalDeleteUser = () => {
-  const { isOpenModalDeleteUser, onCloseModalDeleteUser } =
+  const { isOpenModalDeleteUser, onCloseModalDeleteUser, data, setData } =
     useContext(UserContext);
 
+  const navigate = useNavigate();
+
   const handleDeleteUser = () => {
-    console.log("inserir lógica para deletar usuário logado");
-    // api
-    //   .delete(`/announcements/${announcementFound.id}`)
-    //   .then(() => {
-    //     setAnnouncements(() => {
-    //       const newAnnouncements = announcements.filter(
-    //         (annou) => annou.id !== announcementFound.id
-    //       );
-    //       return newAnnouncements;
-    //     });
-    //     onCloseModalDeleteAnnouncement();
-    //     onOpenModalSuccessDeleteAnnouncement();
-    //   })
-    //   .catch(() => {
-    //     onCloseModalDeleteAnnouncement();
-    //   });
+    api
+      .delete(`/users/${data.user.id}`, {
+        headers: { Authorization: `Bearer ${data.token}` },
+      })
+      .then(() => {
+        localStorage.removeItem("@MotorsShop:token");
+        localStorage.removeItem("@MotorsShop:user");
+        setData({} as IAuthUser);
+        onCloseModalDeleteUser();
+        navigate("/home", { replace: true });
+      })
+      .catch((err) => {
+        console.log(err);
+        onCloseModalDeleteUser();
+      });
   };
 
   return (
