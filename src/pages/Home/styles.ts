@@ -31,7 +31,7 @@ export const ExploreSection = styled.section`
         margin: 0 auto;
     }
 
-    .buttonContainer button {
+    .buttonContainer a {
         border: 1px solid var(--color-grey-10);
         border-radius: 5px;
         margin-bottom: 20px;
@@ -52,7 +52,7 @@ export const ExploreSection = styled.section`
             justify-content: center;
         }
 
-        .buttonContainer button {
+        .buttonContainer a {
             padding: 10px 0px;
             width: 200px;
             margin-left: 20px;

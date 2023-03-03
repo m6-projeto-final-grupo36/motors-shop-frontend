@@ -24,12 +24,12 @@ export const Home = () => {
         <h1>Velocidade e experiência em um lugar feito para você</h1>
         <p>Um ambiente feito para você explorar o seu melhor</p>
         <div className="buttonContainer">
-          <button onClick={() => window.scrollTo(0, 1030) /* TO-DO arrumar função */}>Carros</button>
-          <button onClick={() => window.scrollTo(0, 1500) /* TO-DO arrumar função */}>Motos</button>
+          <a href="#cars">Carros</a>
+          <a href="#motorcycles">Motos</a>
         </div>
       </ExploreSection>
       <>
-        <h1 className="title-auction">Leilão</h1>
+        <h1 className="title-auction" id="auction">Leilão</h1>
         <AuctionCard
           page='Home'
           expiryTime={23}
@@ -41,8 +41,8 @@ export const Home = () => {
           productYear={2021}
         />
       </>
-      <ListProduct productType="Carros" productList={cars} />
-      <ListProduct productType="Motos" productList={motorcycles} />
+      <ListProduct id="cars" productType="Carros" productList={cars} />
+      <ListProduct id="motorcycles" productType="Motos" productList={motorcycles} />
       <Footer />
     </Container>
   );
