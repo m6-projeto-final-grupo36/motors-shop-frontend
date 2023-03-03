@@ -60,7 +60,10 @@ export const RetrieveAnnouncement = () => {
             </div>
           </div>
           <div className="advertiser-info">
-            <div className="initial-caracters">{announcementFound.user.name.split(' ')[0][0]}{announcementFound.user.name.split(' ')[1][0]}</div>
+            <div className="initial-caracters">
+              {announcementFound.user.name.split(' ')[0][0]}
+              {announcementFound.user.name.split(" ")[1] && announcementFound.user.name.split(" ")[1][0]}
+            </div>
             <h3>{announcementFound.user.name}</h3>
             <div className="advertiser-description">
               <p>

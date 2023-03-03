@@ -6,6 +6,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { createCommentSchema } from "../../schemas/comments";
 import { api } from "../../services/api";
+import moment from 'moment'
+import "moment/locale/pt-br";
+
 
 interface ICommentary{
   comments: IComment[];
@@ -58,49 +61,19 @@ export const Commentary = ({announcementId, comments}: ICommentary) => {
         <>
         {
           commentsToRender.length ? commentsToRender.map(elem => {
-            
-            let dateToRender = '0'
-
-            let intervalDay = 0
-
-            let intervalMonth = 0
-
-            const day = elem.updated_at.split('-')[2]
-
-            const month = elem.updated_at.split('-')[1]
-
-            const dayToday = new Date().getDate()
-           
-            const monthToday = new Date().getMonth() + 1
-            
-            intervalDay = dayToday - +day
-            
-            intervalMonth = monthToday - +month
-
-            if (intervalDay <= 0) {
-              dateToRender = '0 dias'
-            }else if (intervalDay <= 29){
-              if (intervalDay === 1){
-                dateToRender = '1 dia'
-              }else{
-                dateToRender = `${intervalDay} dias`
-              }
-            }else{
-              if(intervalMonth <= 1){
-                dateToRender = '1 mês'
-              }else if (intervalMonth <= 12){
-                dateToRender = `${intervalMonth} meses`
-              }
-            }
+            const date = moment(`${elem.updated_at}`, 'YYYY-MM-DD').fromNow()
 
           return (<div className="cardCommentary">
             <div className="cardHeader">
               <div className="cardImg">
-                <p className="cardNameImg">{elem.user.name.split(' ')[0][0]}{elem.user.name.split(' ')[1][0]}</p>
+                <p className="cardNameImg">
+                  {elem.user.name.split(' ')[0][0]}
+                  {data.user.name.split(" ")[1] && data.user.name.split(" ")[1][0]}
+                </p>
               </div>
               <div className="cardTitle">{elem.user.name}</div>
               <p className="point"></p>
-              <p className="date">há {dateToRender}</p>
+              <p className="date">{date}</p>
             </div>
             <div className="cardComments">
               <p className="comment">
@@ -123,7 +96,10 @@ export const Commentary = ({announcementId, comments}: ICommentary) => {
           {
             Object.keys(data).length ?
             <div className="cardImg5">
-              <p className="cardNameImg">{data.user.name.split(' ')[0][0]}{data.user.name.split(' ')[1][0]}</p>
+              <p className="cardNameImg">
+                {data.user.name.split(' ')[0][0]}
+                {data.user.name.split(" ")[1] && data.user.name.split(" ")[1][0]}
+              </p>
             </div>
             :
             <span style={{'display': 'none'}}></span>
@@ -145,7 +121,7 @@ export const Commentary = ({announcementId, comments}: ICommentary) => {
           <div className="divButton">
             {
               Object.keys(data).length ? 
-              <button type="submit" className="btn" onClick={() => console.log()}>Comentar</button>
+              <button type="submit" className="btn">Comentar</button>
               :
               <button className="btn" disabled>Comentar</button>
             }

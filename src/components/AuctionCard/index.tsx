@@ -12,6 +12,7 @@ interface IAuctionCard {
   productValue: number;
   expiryTime: number;
   page?: string;
+  username: string
 }
 
 export const AuctionCard = ({
@@ -23,6 +24,7 @@ export const AuctionCard = ({
   productValue,
   expiryTime,
   page,
+  username
 }: IAuctionCard) => {
   const useCount = (date: string) => {
     const [hour, setHour] = useState<string>();
@@ -53,7 +55,7 @@ export const AuctionCard = ({
     return [hour, minute, second];
   };
 
-  let [hour, minute, second] = useCount(`Feb 25, 2023 ${expiryTime}:00:00`);
+  let [hour, minute, second] = useCount(`Mar 09, 2023 ${expiryTime}:00:00`);
 
   if (+hour! < 0) {
     hour = "00";
@@ -81,13 +83,11 @@ export const AuctionCard = ({
       {page && (
         <UserContainer>
           <p className="profileIcon">
-            RC
-            {/* {userName.split(' ')[0][0]}
-            {userName.split(" ")[1] && userName.split(" ")[1][0]}   */}
+            {username.split(' ')[0][0]}
+            {username.split(" ")[1] && username.split(" ")[1][0]}  
           </p>
           <p className="userName">
-            Rodrigo Castro
-            {/* {userName} */}
+            {username}
           </p>
         </UserContainer>
       )}
