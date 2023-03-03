@@ -69,7 +69,8 @@ export const ModalCreateAnnouncement = ({
         onCloseModalCreateAnnouncement();
         setIsLoadingButtonCreateAnnouncement(false);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err)
         setIsLoadingButtonCreateAnnouncement(false);
       });
   };

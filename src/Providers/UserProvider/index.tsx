@@ -62,15 +62,9 @@ export interface IUser {
   cpf: string;
   description?: string;
   type_account: string;
-  id: string;
-  cep: string;
+  id: string;  
   created_at: Date;
   updated_at: Date;
-  state: string;
-  city: string;
-  road: string;
-  number: string;
-  complement: string;
 }
 
 interface IAddress {

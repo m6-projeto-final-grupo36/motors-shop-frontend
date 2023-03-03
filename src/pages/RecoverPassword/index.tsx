@@ -5,6 +5,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { recoverPasswordSchema } from "../../schemas/user";
 import { RecoverForm } from "./RecoverForm";
+import { api } from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 export interface IRecoverPassword{
     password: string;
@@ -12,6 +14,10 @@ export interface IRecoverPassword{
 }
 
 export const RecoverPassword = () => {
+
+    const userId = localStorage.getItem('@userFound')
+
+    const navigate = useNavigate()
 
     const {
         formState: { errors },
@@ -23,10 +29,13 @@ export const RecoverPassword = () => {
 
       const handlePassword = (data: IRecoverPassword) => {
         console.log(data)
-        // TO-DO realizar requisição de atualização de usuário
-        // Dependo do estado que terá as informações do usuário quando o próprio colocar o email
-        // Irei utilizar do id para atualizar a senha
-        // Após a troca da senha levar o usuário à página /login
+        console.log(userId)
+        api.patch(`/users/reset_password/${userId}`, {...data})
+        .then(res => {
+            navigate('/login', {replace: true})
+            localStorage.clear()
+        })
+        .catch(err => console.log(err))
       }
 
     return(
