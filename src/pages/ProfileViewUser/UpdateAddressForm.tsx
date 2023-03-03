@@ -44,7 +44,7 @@ export const UpdateAddressForm = ({
             label="CEP"
             error={errors.cep}
             {...register("cep")}
-            // defaultValue={user}
+            defaultValue={user.address.cep}
           />
 
           <HStack>
@@ -53,12 +53,14 @@ export const UpdateAddressForm = ({
               label="Estado"
               error={errors.state}
               {...register("state")}
+              defaultValue={user.address.cep}
             />
             <Input
               placeholder="Digitar cidade"
               label="Cidade"
               error={errors.city}
               {...register("city")}
+              defaultValue={user.address.city}
             />
           </HStack>
 
@@ -67,6 +69,7 @@ export const UpdateAddressForm = ({
             label="Rua"
             error={errors.road}
             {...register("road")}
+            defaultValue={user.address.road}
           />
 
           <HStack>
@@ -75,12 +78,16 @@ export const UpdateAddressForm = ({
               label="Número"
               error={errors.number}
               {...register("number")}
+              defaultValue={user.address.number}
             />
             <Input
               placeholder="Ex: apart 307"
               label="Complemento"
               error={errors.complement}
               {...register("complement")}
+              defaultValue={
+                user.address.complement ? user.address.complement : ""
+              }
             />
           </HStack>
         </VStack>

@@ -30,7 +30,7 @@ export const UpdateUserForm = ({
   loadingUpdateUser,
   register,
 }: IUpdateUserForm) => {
-  const { onCloseModalUpdateUser, onOpenModalDeleteUser } =
+  const { onCloseModalUpdateUser, onOpenModalDeleteUser, data } =
     useContext(UserContext);
   return (
     <>
@@ -45,6 +45,7 @@ export const UpdateUserForm = ({
             label="Nome"
             error={errors.name}
             {...register("name")}
+            defaultValue={data.user.name}
           />
           <Input
             placeholder="Ex: samuel@kenzie.com.br"
@@ -52,12 +53,14 @@ export const UpdateUserForm = ({
             label="Email"
             error={errors.email}
             {...register("email")}
+            defaultValue={data.user.email}
           />
           <Input
             placeholder="000.000.000-00"
             label="CPF"
             error={errors.cpf}
             {...register("cpf")}
+            defaultValue={data.user.cpf}
           />
           <Input
             placeholder="(DDD) x xxxx-xxxx"
@@ -65,6 +68,7 @@ export const UpdateUserForm = ({
             label="Celular"
             error={errors.cell_phone}
             {...register("cell_phone")}
+            defaultValue={data.user.cell_phone}
           />
           <Input
             type="date"
@@ -72,6 +76,7 @@ export const UpdateUserForm = ({
             label="Data de nascimento"
             error={errors.birthdate}
             {...register("birthdate")}
+            // defaultValue={data.user.birthdate}
           />
 
           <TextArea
@@ -80,6 +85,7 @@ export const UpdateUserForm = ({
             error={errors.description}
             {...register("description")}
             maxH="200px"
+            defaultValue={data.user.description}
           />
 
           <Input

@@ -8,13 +8,18 @@ import {
 import { updateAddressSchema } from "../../schemas/user";
 import { useForm } from "react-hook-form";
 import { UserContext } from "../../Providers/UserProvider";
+import { api } from "../../services/api";
 
 export const ModalUpdateAddress = () => {
   const [isLoadingButtonUpdateAddress, setIsLoadingButtonUpdateAddress] =
     useState(false);
 
-  const { onCloseModalUpdateAddress, isOpenModalUpdateAddress } =
-    useContext(UserContext);
+  const {
+    onCloseModalUpdateAddress,
+    isOpenModalUpdateAddress,
+    data: { user, token },
+    setData,
+  } = useContext(UserContext);
 
   const {
     formState: { errors: errorsUpdateAddress },
@@ -25,8 +30,24 @@ export const ModalUpdateAddress = () => {
   });
 
   const handleUpdateAddress = (data: IUpdateAddressRequest) => {
-    console.log(data);
+    console.log("------------", data);
     setIsLoadingButtonUpdateAddress(true);
+
+    api
+      .patch(`/users/${user.id}`, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        user.address = res.data.address;
+        setData({ token, user });
+        setIsLoadingButtonUpdateAddress(false);
+        onCloseModalUpdateAddress();
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoadingButtonUpdateAddress(false);
+        onCloseModalUpdateAddress();
+      });
   };
 
   return (

@@ -53,22 +53,34 @@ export interface IRegister {
   confirm_password: string;
 }
 
-interface IUser {
+export interface IUser {
+  address: IAddress;
+  birthdate: Date;
   name: string;
+  cell_phone: string;
   email: string;
   cpf: string;
-  cell_phone: string;
-  birthdate: Date;
   description?: string;
+  type_account: string;
+  id: string;
   cep: string;
+  created_at: Date;
+  updated_at: Date;
   state: string;
   city: string;
   road: string;
   number: string;
   complement: string;
-  type_account: string;
-  password: string;
-  id: string;
+}
+
+interface IAddress {
+  id?: string;
+  cep: string;
+  state: string;
+  city: string;
+  road: string;
+  number: number;
+  complement: string | null | undefined;
 }
 
 export interface ILogin {
