@@ -70,9 +70,9 @@ export const Header = () => {
         <div className="desktop">
           <div className="navbar">
             <nav>
-              <a href="#">Carros</a>
-              <a href="#">Motos</a>
-              <a href="#">Leilão</a>
+              <a href="#cars">Carros</a>
+              <a href="#motorcycles">Motos</a>
+              <a href="#auction">Leilão</a>
             </nav>
           </div>
           <div className="divider-bar"></div>

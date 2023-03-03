@@ -129,7 +129,7 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
           </ContainerAdvertiser>
           {page && (
             <>
-              <h1>Leilão</h1>
+              <h1 id="auction">Leilão</h1>
               <AuctionCard
                 expiryTime={23}
                 productDescription="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
@@ -142,11 +142,13 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
             </>
           )}
           <ListProduct
+            id="cars"
             productPage={page}
             productType="Carros"
             productList={page ? carAnnouncements : cars}
           />
           <ListProduct
+            id="motorcycles"
             productPage={page}
             productType="Motos"
             productList={page ? motorcyclesAnnouncements : motorcycles}
