@@ -24,6 +24,16 @@ export const HeaderStyled = styled.header`
       font-size: 18px;
     }
 
+    .mobile-link{
+      font-weight:600;
+      padding-left:16px;
+      color:var(--color-grey-2);
+      margin-top:32px;
+      margin-bottom:44px;
+      font-size:16px;
+      display: flex;
+    }
+
     hr {
       border: 0.0938rem solid var(--color-grey-4);
     }

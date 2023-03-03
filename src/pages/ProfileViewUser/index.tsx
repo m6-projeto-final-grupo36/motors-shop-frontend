@@ -14,7 +14,6 @@ import { ModalUpdateAnnouncement } from "../../components/Modal/ModalUpdateAnnou
 import { ModalUpdateUser } from "../../components/Modal/ModalUpdateUser";
 import { ModalDeleteUser } from "../../components/Modal/ModalDeleteUser";
 import { UserContext } from "../../Providers/UserProvider";
-import { Navigate } from "react-router-dom";
 
 interface IProfileProps {
   page?: string;
