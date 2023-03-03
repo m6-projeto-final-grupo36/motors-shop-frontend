@@ -28,8 +28,6 @@ export const RecoverPassword = () => {
       });
 
       const handlePassword = (data: IRecoverPassword) => {
-        console.log(data)
-        console.log(userId)
         api.patch(`/users/reset_password/${userId}`, {...data})
         .then(res => {
             navigate('/login', {replace: true})

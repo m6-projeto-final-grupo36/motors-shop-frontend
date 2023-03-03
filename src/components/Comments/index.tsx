@@ -62,13 +62,12 @@ export const Commentary = ({announcementId, comments}: ICommentary) => {
         {
           commentsToRender.length ? commentsToRender.map(elem => {
             const date = moment(`${elem.updated_at}`, 'YYYY-MM-DD').fromNow()
-
           return (<div className="cardCommentary">
             <div className="cardHeader">
               <div className="cardImg">
                 <p className="cardNameImg">
                   {elem.user.name.split(' ')[0][0]}
-                  {data.user.name.split(" ")[1] && data.user.name.split(" ")[1][0]}
+                  {elem.user.name.split(" ")[1] && elem.user.name.split(" ")[1][0]}
                 </p>
               </div>
               <div className="cardTitle">{elem.user.name}</div>
@@ -95,7 +94,7 @@ export const Commentary = ({announcementId, comments}: ICommentary) => {
         <div className="cardHeader">
           {
             Object.keys(data).length ?
-            <div className="cardImg5">
+            <div className="cardImg">
               <p className="cardNameImg">
                 {data.user.name.split(' ')[0][0]}
                 {data.user.name.split(" ")[1] && data.user.name.split(" ")[1][0]}

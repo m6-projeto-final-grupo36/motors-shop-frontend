@@ -30,7 +30,6 @@ export const ModalUpdateAddress = () => {
   });
 
   const handleUpdateAddress = (data: IUpdateAddressRequest) => {
-    console.log("------------", data);
     setIsLoadingButtonUpdateAddress(true);
 
     api

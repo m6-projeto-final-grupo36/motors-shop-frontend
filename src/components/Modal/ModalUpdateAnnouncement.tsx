@@ -65,7 +65,6 @@ export const ModalUpdateAnnouncement = ({
         },
       })
       .then((res) => {
-        console.log("res.data", res.data);
         setAnnouncements(() => {
           const result = announcements.filter(
             (ann) => ann.id !== announcementFound.id

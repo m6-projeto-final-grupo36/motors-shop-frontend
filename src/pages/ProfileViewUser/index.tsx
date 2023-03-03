@@ -25,17 +25,6 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
 
   const { announcements, announcementFound } = useContext(AnnouncementContext);
 
-  let advertiser
-
-  if(data.user){
-    advertiser = data.user
-  }
-
-
-  if(Object.keys(announcementFound).length){
-    // console.log(announcementFound.user.id)
-  }
-
   const {
     isOpen: isOpenModalSuccessCreateAnnouncement,
     onOpen: onOpenModalSuccessCreateAnnouncement,
@@ -63,7 +52,12 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
     });
 
   const motorcycles = announcements.filter(
-    (announcement) => announcement.type_vehicle === "motorcycle" && announcement.user.id === announcementFound.user.id
+    (announcement) => 
+    {
+      if(Object.keys(announcementFound).length){
+        return announcement.type_vehicle === "motorcycle" && announcement.user.id === announcementFound.user.id
+      }
+    }
   );
 
   const carAnnouncements = announcements.filter(announcement => {
@@ -72,7 +66,11 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
     }
   })
 
-  const motorcyclesAnnouncements = announcements.filter(announcement => announcement.type_vehicle === "motorcycle" && announcement.user.id ===  data.user.id)
+  const motorcyclesAnnouncements = announcements.filter(announcement => {
+    if(Object.keys(data).length){
+      return announcement.type_vehicle === "motorcycle" && announcement.user.id ===  data.user.id
+    }
+})
 
   return (
     <>

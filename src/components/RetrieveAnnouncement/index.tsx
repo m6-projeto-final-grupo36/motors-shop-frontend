@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AnnouncementContext } from "../../Providers/AnnouncementProvider";
+import { UserContext } from "../../Providers/UserProvider";
 import { Commentary } from "../Comments";
 import { Footer } from "../Footer";
 import { Header } from "../Header";
@@ -8,6 +9,8 @@ import { Container } from "./styles";
 
 export const RetrieveAnnouncement = () => {
   const { announcementFound } = useContext(AnnouncementContext);
+
+  const {data} = useContext(UserContext)
 
   const navigate = useNavigate();
 
@@ -34,7 +37,12 @@ export const RetrieveAnnouncement = () => {
               </span>
             </div>
             <div className="btn-buy">
-              <button>Comprar</button>
+              {
+                 Object.keys(data).length ? 
+                 <a className="btn" href={`https://api.whatsapp.com/send?phone=${announcementFound.user.cell_phone}`}>Comprar</a>
+                 :
+                 <button className="btn" disabled>Comprar</button>
+              }
             </div>
           </div>
           <div className="description-announcement">
