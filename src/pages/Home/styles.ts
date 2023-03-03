@@ -70,6 +70,14 @@ export const Container = styled.div`
         color: #000000;
     }
 
+    .list-auctions{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        overflow-x: auto;
+        margin-left: 12px;
+    }
+
     @media (min-width: 1024px) {
         .title-auction{
             margin-left: 60px;
