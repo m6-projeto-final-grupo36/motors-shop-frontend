@@ -20,6 +20,15 @@ export const MainContainer = styled.main`
         margin-left: 12px;
   }
 
+  .list-auctions::-webkit-scrollbar {
+        height: 6px;
+  }
+
+  .list-auctions::-webkit-scrollbar-thumb {
+      background-color: var(--color-brand-1);
+      border-radius: 20px;
+  }
+
   @media (min-width: 1024px) {
     h1 {
       margin-left: 60px;

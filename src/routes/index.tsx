@@ -15,10 +15,6 @@ export const ContainerRoutes = () => {
 
   const {data} = useContext(UserContext)
 
-  // console.log(data)
-  // console.log('--------------')
-  // console.log(announcementFound)
-
   let user = ''
   
   if(Object.keys(data).length){
