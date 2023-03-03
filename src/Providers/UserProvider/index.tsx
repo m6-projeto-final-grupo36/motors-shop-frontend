@@ -60,9 +60,9 @@ export interface IUser {
   cell_phone: string;
   email: string;
   cpf: string;
-  description?: string;
+  description: string;
   type_account: string;
-  id: string;  
+  id: string;
   created_at: Date;
   updated_at: Date;
 }
