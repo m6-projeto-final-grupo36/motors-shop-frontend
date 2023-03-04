@@ -44,10 +44,12 @@ export const Commentary = ({announcementId, comments}: ICommentary) => {
   });
 
   const handleComment = async(data: ICommentRetrieve) => {
+
+    const newComment = data.text.trim()
    
     api.defaults.headers.common['Authorization'] = `Bearer ${user}`
     await api.post(`/comments/${announcementId}`, {
-      ...data
+      text: newComment
     })
     .then(res => setCommentsToRender((oldValues) => [...oldValues, res.data]))
     .catch(err => console.log(err))
