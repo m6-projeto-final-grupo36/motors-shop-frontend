@@ -24,14 +24,22 @@ export const Home = () => {
         <h1>Velocidade e experiência em um lugar feito para você</h1>
         <p>Um ambiente feito para você explorar o seu melhor</p>
         <div className="buttonContainer">
-          <button onClick={() => window.scrollTo(0, 1030) /* TO-DO arrumar função */}>Carros</button>
-          <button onClick={() => window.scrollTo(0, 1500) /* TO-DO arrumar função */}>Motos</button>
+          <button
+            onClick={() => window.scrollTo(0, 1030) /* TO-DO arrumar função */}
+          >
+            Carros
+          </button>
+          <button
+            onClick={() => window.scrollTo(0, 1500) /* TO-DO arrumar função */}
+          >
+            Motos
+          </button>
         </div>
       </ExploreSection>
       <>
         <h1 className="title-auction">Leilão</h1>
         <AuctionCard
-          page='Home'
+          page="Home"
           expiryTime={23}
           productDescription="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
           productImg="https://www.chevrolet.com.br/content/dam/chevrolet/mercosur/brazil/portuguese/index/cars/cars-subcontent/04-images/novo-onix-branco-summit.png?imwidth=960"

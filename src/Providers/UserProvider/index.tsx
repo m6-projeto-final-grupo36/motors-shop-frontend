@@ -56,25 +56,25 @@ export interface IRegister {
 export interface IUser {
   address: IAddress;
   birthdate: Date;
-  name: string;
   cell_phone: string;
-  email: string;
   cpf: string;
-  description: string;
-  type_account: string;
-  id: string;
   created_at: Date;
+  description: string;
+  email: string;
+  id: string;
+  name: string;
+  type_account: string;
   updated_at: Date;
 }
 
 interface IAddress {
-  id?: string;
   cep: string;
-  state: string;
+  id?: string;
   city: string;
-  road: string;
-  number: number;
   complement: string | null | undefined;
+  number: number;
+  road: string;
+  state: string;
 }
 
 export interface ILogin {

@@ -21,7 +21,6 @@ import { ModalDeleteUser } from "../Modal/ModalDeleteUser";
 export const Header = () => {
   const [isClick, setIsClick] = useState<boolean>(false);
 
-
   const { data, setData, onOpenModalUpdateAddress, onOpenModalUpdateUser } =
     useContext(UserContext);
 
@@ -91,7 +90,6 @@ export const Header = () => {
                     <span>{data.user.name}</span>
                   </MenuButton>
                   <MenuList>
-
                     <MenuItem as="button" onClick={onOpenModalUpdateUser}>
                       Editar perfil
                     </MenuItem>
@@ -99,11 +97,13 @@ export const Header = () => {
                     <MenuItem as="button" onClick={onClickUpdateAddress}>
                       Editar endereço
                     </MenuItem>
-                    <MenuItem onClick={() => {
-                      if(data.user.type_account === 'advertiser'){
-                        navigate('/my_announcements')
-                      }
-                    }}>
+                    <MenuItem
+                      onClick={() => {
+                        if (data.user.type_account === "advertiser") {
+                          navigate("/my_announcements");
+                        }
+                      }}
+                    >
                       {data.user.type_account === "buyer"
                         ? "Minhas compras"
                         : "Meus anúncios"}
@@ -206,11 +206,13 @@ export const Header = () => {
                         <MenuItem as="button" onClick={onClickUpdateAddress}>
                           Editar endereço
                         </MenuItem>
-                        <MenuItem onClick={() => {
-                          if(data.user.type_account === 'advertiser'){
-                            navigate('/my_announcements')
-                          }
-                        }}>
+                        <MenuItem
+                          onClick={() => {
+                            if (data.user.type_account === "advertiser") {
+                              navigate("/my_announcements");
+                            }
+                          }}
+                        >
                           {data.user.type_account === "buyer"
                             ? "Minhas compras"
                             : "Meus anúncios"}

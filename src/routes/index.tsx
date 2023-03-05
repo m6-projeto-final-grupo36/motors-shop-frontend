@@ -10,47 +10,38 @@ import { RecoverPassword } from "../pages/RecoverPassword";
 import { UserContext } from "../Providers/UserProvider";
 
 export const ContainerRoutes = () => {
+  const { announcementFound } = useContext(AnnouncementContext);
 
-  const {announcementFound} = useContext(AnnouncementContext)
+  const { data } = useContext(UserContext);
 
-  const {data} = useContext(UserContext)
+  let user = "";
 
-  // console.log(data)
-  // console.log('--------------')
-  // console.log(announcementFound)
-
-  let user = ''
-  
-  if(Object.keys(data).length){
-    user = data.user.type_account
+  if (Object.keys(data).length) {
+    user = data.user.type_account;
   }
 
-  const userId = localStorage.getItem('@userFound')
+  const userId = localStorage.getItem("@userFound");
 
-
-  return(
+  return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      
+
       <Route path="/advertiser_announcement" element={<ProfileViewUser />} />
-      {
-        user === 'advertiser' && 
-        <Route path="/my_announcements" element={<ProfileViewUser page='my_announcements' />} />
-      }
-      {
-        Object.keys(announcementFound).length &&
+      {user === "advertiser" && (
+        <Route
+          path="/my_announcements"
+          element={<ProfileViewUser page="my_announcements" />}
+        />
+      )}
+      {Object.keys(announcementFound).length && (
         <Route path="/detail" element={<RetrieveAnnouncement />} />
-      }
-      {
-        userId && 
-        <Route path="/recover_password" element={<RecoverPassword/>}/>
-      }
+      )}
+      {userId && (
+        <Route path="/recover_password" element={<RecoverPassword />} />
+      )}
       <Route path="*" element={<Navigate replace to={"/"} />} />
     </Routes>
-  )
-}
-
-
-
+  );
+};

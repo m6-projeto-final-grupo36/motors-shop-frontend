@@ -30,7 +30,7 @@ export const ModalRecoverPassword = () => {
     resolver: yupResolver(sendEmailSchema),
   });
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const {
     isOpenModalRecoverPassword,
@@ -47,14 +47,15 @@ export const ModalRecoverPassword = () => {
       .then((res) => {
         setIsloading(false);
         const foundEmail = res.data.find((user) => user.email === email);
-        localStorage.setItem('@userFound', `${foundEmail?.id}`)
+        localStorage.setItem("@userFound", `${foundEmail?.id}`);
         if (foundEmail) {
-          api.post('/users/forgot_password', {
-            email: foundEmail.email,
-            name: foundEmail.name
-          })
-          .then(res => navigate('/'))
-          .catch(err => console.log(err))
+          api
+            .post("/users/forgot_password", {
+              email: foundEmail.email,
+              name: foundEmail.name,
+            })
+            .then((res) => navigate("/"))
+            .catch((err) => console.log(err));
           onCloseModalRecoverPassword();
           onOpenModalSuccessRecoverPassword();
         } else {

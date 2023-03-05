@@ -55,7 +55,7 @@ export const updateUserSchema = yup.object().shape({
 
 export const updateAddressSchema = yup.object().shape({
   cep: yup.string().notRequired(),
-  state: yup.string().notRequired(),
+  state: yup.string().notRequired().max(2, "Máximo 2 caracteres"),
   city: yup.string().notRequired(),
   road: yup.string().notRequired(),
   number: yup.string().notRequired(),
