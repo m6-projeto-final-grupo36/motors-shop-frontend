@@ -74,17 +74,18 @@ interface IAnnouncementRetrieve {
   user: IAnnouncementUser;
   comments: IComment[];
 }
-export interface IComment{
-  created_at: string;
+
+export interface IComment {
+  created_at: Date;
   id: string;
   text: string;
   updated_at: string;
   user: IAnnouncementUser;
 }
 
-interface IAnnouncementUser{
+interface IAnnouncementUser {
   birthdate: string;
-  cell_phone: string; 
+  cell_phone: string;
   cpf: string;
   created_at: string;
   description: string;
@@ -92,7 +93,7 @@ interface IAnnouncementUser{
   id: string;
   name: string;
   type_account: string;
-  updated_at: string; 
+  updated_at: string;
 }
 
 export const AnnouncementContext = createContext({} as IAnnouncementContext);

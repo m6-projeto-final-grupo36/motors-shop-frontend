@@ -16,9 +16,9 @@ export const AuctionLi = styled.li`
   margin: 0 12px;
   margin-bottom: 50px;
 
-  &:hover{
-    .productImg{
-      img{
+  &:hover {
+    .productImg {
+      img {
         filter: brightness(30%);
       }
     }
@@ -27,12 +27,10 @@ export const AuctionLi = styled.li`
   .productImg {
     width: 100%;
     height: 100%;
-    
     position: absolute;
     z-index: -1;
 
-    
-    img{
+    img {
       background-color: white;
       object-fit: contain;
       filter: brightness(70%);
@@ -44,7 +42,7 @@ export const AuctionLi = styled.li`
   .timer {
     width: 123px;
     height: 36px;
-    margin: 33px 0px 35px 22px; 
+    margin: 33px 0px 35px 22px;
 
     display: flex;
     align-items: center;
@@ -54,7 +52,6 @@ export const AuctionLi = styled.li`
     border-radius: 20px;
 
     color: var(--color-grey-0);
-  
   }
 
   .productName {
@@ -98,71 +95,70 @@ export const AuctionLi = styled.li`
       align-items: center;
       justify-content: center;
     }
-    button:first-child{
+    button:first-child {
       margin-right: 16px;
     }
   }
 
-  .auctionButtonHomePage{
-      width: 100%;
-      height: 3.875rem;
-  
+  .auctionButtonHomePage {
+    width: 100%;
+    height: 3.875rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: red;
+
+    background-color: var(--color-brand-1);
+
+    p {
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 19px 20px;
+      min-height: 38px;
+      max-height: 38px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-
-      background-color: red;
-
-      background-color: var(--color-brand-1);
-
-      p{
-        font-size: 1rem;
-        font-weight: 600;
-        padding: 19px 20px;
-        min-height: 38px;
-        max-height: 38px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      p:first-child{
-        margin-right: 16px;
-      }
-
+      justify-content: center;
     }
+    p:first-child {
+      margin-right: 16px;
+    }
+  }
 
   @media (min-width: 1024px) {
-      margin-left: 60px;
-      width: 45.9375rem;
-      height: 24.25rem;
+    margin-left: 60px;
+    width: 45.9375rem;
+    height: 24.25rem;
 
-      .timer{
-        margin: 24px 0px 69px 36px;
-      }
+    .timer {
+      margin: 24px 0px 69px 36px;
+    }
 
-      .productName {
-        width: 658px;
-        height: 25px;
-        margin: 0 41px 16px 36px;
-      }
+    .productName {
+      width: 658px;
+      height: 25px;
+      margin: 0 41px 16px 36px;
+    }
 
-      .productDescription {
-        width: 663px;
-        height: 28px;
-        margin: 0 36px 46px 36px;
-      }
+    .productDescription {
+      width: 663px;
+      height: 28px;
+      margin: 0 36px 46px 36px;
+    }
 
-      .auctionButton {
-        height: 3.875rem;
-        padding-left: 36px;
-        padding-top: 12px;
+    .auctionButton {
+      height: 3.875rem;
+      padding-left: 36px;
+      padding-top: 12px;
 
-        align-items: center;
-        justify-content: flex-start;
-      }
-      .auctionButtonHomePage{
-        padding: 31px 36px;
-      }
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .auctionButtonHomePage {
+      padding: 31px 36px;
+    }
   }
 `;
 
@@ -210,7 +206,7 @@ export const ProductInfoContainer = styled.div`
     background-color: var(--color-brand-4);
     border-radius: 10px;
   }
-  span:first-child{
+  span:first-child {
     margin-right: 12px;
   }
 
@@ -223,7 +219,7 @@ export const ProductInfoContainer = styled.div`
     flex-direction: row;
     justify-content: space-between;
 
-    p{
+    p {
       margin-top: 0;
     }
   }

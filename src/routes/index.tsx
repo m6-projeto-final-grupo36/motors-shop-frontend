@@ -10,7 +10,6 @@ import { RecoverPassword } from "../pages/RecoverPassword";
 import { UserContext } from "../Providers/UserProvider";
 
 export const ContainerRoutes = () => {
-
   const {announcementFound} = useContext(AnnouncementContext)
 
   const {data} = useContext(UserContext)
@@ -22,7 +21,6 @@ export const ContainerRoutes = () => {
   }
 
   const userId = localStorage.getItem('@userFound')
-
 
   return(
     <Routes>
@@ -46,7 +44,4 @@ export const ContainerRoutes = () => {
       <Route path="*" element={<Navigate replace to={"/"} />} />
     </Routes>
   )
-}
-
-
-
+};

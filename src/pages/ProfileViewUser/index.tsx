@@ -20,7 +20,6 @@ interface IProfileProps {
 }
 
 export const ProfileViewUser = ({ page }: IProfileProps) => {
-
   const { data } = useContext(UserContext);
 
   const { announcements, announcementFound } = useContext(AnnouncementContext);
@@ -43,7 +42,7 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
     onClose: onCloseModalSuccessDeleteAnnouncement,
   } = useDisclosure();
 
-  const cars = announcements.filter(
+const cars = announcements.filter(
     (announcement) => 
     {
       if(Object.keys(announcementFound).length){
@@ -71,68 +70,69 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
       return announcement.type_vehicle === "motorcycle" && announcement.user.id ===  data.user.id
     }
 })
-
   return (
     <>
-        <MainContainer>
-          <ModalCreateAnnouncement
-            onOpenModalSuccessCreateAnnouncement={
-              onOpenModalSuccessCreateAnnouncement
+      <MainContainer>
+        <ModalCreateAnnouncement
+          onOpenModalSuccessCreateAnnouncement={
+            onOpenModalSuccessCreateAnnouncement
+          }
+        />
+
+        <ModalUpdateAnnouncement
+          onOpenModalSuccessUpdateAnnouncement={
+            onOpenModalSuccessUpdateAnnouncement
+          }
+        />
+
+        <ModalDeleteAnnouncement
+          onOpenModalSuccessDeleteAnnouncement={
+            onOpenModalSuccessDeleteAnnouncement
+          }
+        />
+
+        <Modal
+          isOpen={isOpenModalSuccessCreateAnnouncement}
+          onClose={onCloseModalSuccessCreateAnnouncement}
+          titleModal="Sucesso"
+          subtitleModal="Seu anúncio foi criado com sucesso!"
+          infoModal="Agora você poderá ver seus negócios crescendo em grande escala"
+        />
+
+        <Modal
+          isOpen={isOpenModalSuccessUpdateAnnouncement}
+          onClose={onCloseModalSuccessUpdateAnnouncement}
+          titleModal="Sucesso"
+          subtitleModal="Seu anúncio foi atualizado com sucesso!"
+          infoModal="Agora você poderá ver seus negócios crescendo em grande escala"
+        />
+
+        <Modal
+          isOpen={isOpenModalSuccessDeleteAnnouncement}
+          onClose={onCloseModalSuccessDeleteAnnouncement}
+          titleModal="Sucesso"
+          subtitleModal="Seu anúncio foi deletado com sucesso!"
+          infoModal="Você pode fechar a janela e criar um novo anúncio."
+        />
+
+        <ModalUpdateUser />
+
+        <ModalDeleteUser />
+
+        <Header />
+
+        <ContainerAdvertiser>
+          <Advertiser
+            name={page ? data.user.name : announcementFound.user.name}
+            description={
+              page ? data.user.description : announcementFound.user.description
             }
+            typeAccount="Anunciante"
+            page={page}
           />
-
-          <ModalUpdateAnnouncement
-            onOpenModalSuccessUpdateAnnouncement={
-              onOpenModalSuccessUpdateAnnouncement
-            }
-          />
-
-          <ModalDeleteAnnouncement
-            onOpenModalSuccessDeleteAnnouncement={
-              onOpenModalSuccessDeleteAnnouncement
-            }
-          />
-
-          <Modal
-            isOpen={isOpenModalSuccessCreateAnnouncement}
-            onClose={onCloseModalSuccessCreateAnnouncement}
-            titleModal="Sucesso"
-            subtitleModal="Seu anúncio foi criado com sucesso!"
-            infoModal="Agora você poderá ver seus negócios crescendo em grande escala"
-          />
-
-          <Modal
-            isOpen={isOpenModalSuccessUpdateAnnouncement}
-            onClose={onCloseModalSuccessUpdateAnnouncement}
-            titleModal="Sucesso"
-            subtitleModal="Seu anúncio foi atualizado com sucesso!"
-            infoModal="Agora você poderá ver seus negócios crescendo em grande escala"
-          />
-
-          <Modal
-            isOpen={isOpenModalSuccessDeleteAnnouncement}
-            onClose={onCloseModalSuccessDeleteAnnouncement}
-            titleModal="Sucesso"
-            subtitleModal="Seu anúncio foi deletado com sucesso!"
-            infoModal="Você pode fechar a janela e criar um novo anúncio."
-          />
-
-          <ModalUpdateUser />
-
-          <ModalDeleteUser />
-
-          <Header />
-
-          <ContainerAdvertiser>
-            <Advertiser
-              name={page ? data.user.name : announcementFound.user.name}
-              description={page ? data.user.description : announcementFound.user.description}
-              typeAccount="Anunciante"
-              page={page}
-            />
-          </ContainerAdvertiser>
-          {page && (
-            <>
+        </ContainerAdvertiser>
+        {page && (
+          <>
               <h1 id="auction">Leilão</h1>
               <ul className="list-auctions">
                 <AuctionCard

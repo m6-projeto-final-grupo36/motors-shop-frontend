@@ -7,7 +7,7 @@ import {
 } from "../../pages/ProfileViewUser/UpdateAddressForm";
 import { updateAddressSchema } from "../../schemas/user";
 import { useForm } from "react-hook-form";
-import { UserContext } from "../../Providers/UserProvider";
+import { IUser, UserContext } from "../../Providers/UserProvider";
 import { api } from "../../services/api";
 
 export const ModalUpdateAddress = () => {
@@ -33,12 +33,12 @@ export const ModalUpdateAddress = () => {
     setIsLoadingButtonUpdateAddress(true);
 
     api
-      .patch(`/users/${user.id}`, data, {
+      .patch<IUser>(`/users/address/${user.id}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        user.address = res.data.address;
-        setData({ token, user });
+        localStorage.setItem("@MotorsShop:user", JSON.stringify(res.data));
+        setData({ token, user: res.data });
         setIsLoadingButtonUpdateAddress(false);
         onCloseModalUpdateAddress();
       })

@@ -32,6 +32,13 @@ export const UpdateUserForm = ({
 }: IUpdateUserForm) => {
   const { onCloseModalUpdateUser, onOpenModalDeleteUser, data } =
     useContext(UserContext);
+
+  const formatDate = () => {
+    const oldDate = data.user.birthdate.toString();
+    const result = oldDate.slice(0, 10);
+    return result;
+  };
+
   return (
     <>
       <Grid as="form" onSubmit={handleUpdateUser} w="100%">
@@ -76,7 +83,7 @@ export const UpdateUserForm = ({
             label="Data de nascimento"
             error={errors.birthdate}
             {...register("birthdate")}
-            // defaultValue={data.user.birthdate}
+            defaultValue={formatDate()}
           />
 
           <TextArea

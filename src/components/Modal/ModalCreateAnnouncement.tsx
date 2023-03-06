@@ -70,7 +70,7 @@ export const ModalCreateAnnouncement = ({
         setIsLoadingButtonCreateAnnouncement(false);
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         setIsLoadingButtonCreateAnnouncement(false);
       });
   };

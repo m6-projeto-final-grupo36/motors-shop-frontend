@@ -11,9 +11,7 @@ export const AppProvider = ({ children }: IProvidersProps) => {
   return (
     <ChakraProvider>
       <UserProvider>
-        <AnnouncementProvider>
-          {children}
-        </AnnouncementProvider>
+        <AnnouncementProvider>{children}</AnnouncementProvider>
       </UserProvider>
     </ChakraProvider>
   );

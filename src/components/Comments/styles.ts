@@ -1,101 +1,100 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-   display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 45px;
-
-  .comments{
-    display: flex;
+  display: flex;
   flex-direction: column;
-  gap: 1rem;
-  background-color: var(--color-white-fixed);
-  border-radius: 4px;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 45px;
 
-  margin: 0 auto;
-  margin-bottom: 2.625rem;
-  width: 90%;
+  .cardCommentary {
+    position: relative;
+    border-bottom: 1px solid black;
+  }
 
-  padding: 0 12px;
-  padding-top: 26px;
-
-  .cardHeader {
+  .comments {
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: var(--color-white-fixed);
+    border-radius: 4px;
 
-    min-width: 287px;
-    max-width: 287px;
-  }
+    margin: 0 auto;
+    margin-bottom: 2.625rem;
+    width: 90%;
 
-  .cardTitle{
-    font-size: 0.875rem;
-    font-weight: 500;
-    margin: 0 0.5rem;
-    min-width: 120px;
-    max-width: 120px;
-  }
+    padding: 0 12px;
+    padding-top: 26px;
 
-  .title {
-    font-size: 1.25rem;
-    line-height: 25px;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
+    .cardHeader {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
 
-    color: var(--color-grey-1);
-  }
+      min-width: 287px;
+      max-width: 287px;
+    }
 
-  .cardImg {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    .cardTitle {
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin: 0 0.5rem;
+      min-width: 120px;
+      max-width: 120px;
+    }
 
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
+    .title {
+      font-size: 1.25rem;
+      line-height: 25px;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
 
-    background-color: var(--color-random-1);
-  }
+      color: var(--color-grey-1);
+    }
 
-  .point {
+
+    .cardImg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+
+      background-color: var(--color-random-1);
+    }
+
+    .point {
     width: 4px;
     height: 4px;
     border-radius: 50%;
     margin-right: 13px;
     background-color: var(--color-grey-4);
   }
-
   .date {
     color: var(--color-grey-3);
     font-size: 0.75rem;
     font-weight: 400;
     line-height: 24px;
   }
-
   .cardComments {
     margin-top: 1rem;
     margin-bottom: 2.75rem;
   }
-
   .cardNameImg {
     color: var(--color-white-fixed);
   }
-
   .comment {
     color: var(--color-grey-2);
   }
-
   @media (min-width: 1024px) {
     margin-left: 12px;
   }
-
   }
   @media (min-width: 1200px) {
     padding: 0 181px;
   } 
-  
 `;
 
 export const Input = styled.textarea`
@@ -143,7 +142,7 @@ export const ContainerInput = styled.div`
     max-width: 287px;
   }
 
-  .cardTitle{
+  .cardTitle {
     font-size: 0.875rem;
     font-weight: 500;
     margin: 0 0.5rem;
@@ -189,6 +188,7 @@ export const ContainerInput = styled.div`
     border: 1.5px solid #4529e6;
     border-radius: 4px;
   }
+
  
   *:disabled{
     background-color: var(--color-grey-5);
@@ -196,7 +196,7 @@ export const ContainerInput = styled.div`
     cursor: not-allowed;
   }
 
-  .feedbacks{
+  .feedbacks {
     display: flex;
     flex-flow: column wrap;
   }
@@ -254,16 +254,16 @@ export const ContainerInput = styled.div`
 
   @media (min-width: 768px) {
     height: 23rem;
-    .feedbacks{
+    .feedbacks {
       flex-flow: row wrap;
       align-items: center;
     }
 
-    .pFeedback2{
+    .pFeedback2 {
       margin-right: 8px;
     }
 
-    .pFeedback3{
+    .pFeedback3 {
       width: initial;
     }
   }
@@ -272,7 +272,7 @@ export const ContainerInput = styled.div`
     margin-left: 12px;
     height: 18.0625rem;
 
-    .btn{
+    .btn {
       position: absolute;
       bottom: 220px;
       right: 130px;
@@ -280,21 +280,29 @@ export const ContainerInput = styled.div`
   }
 
   @media (min-width: 1100px) {
-    .btn{
+    .btn {
       right: 140px;
     }
   }
 
   @media (min-width: 1200px) {
-    .btn{
+    .btn {
       margin-top: 0;
       right: 290px;
     }
   }
-  
+
   @media (min-width: 1440px) {
-    .btn{
+    .btn {
       right: 315px;
     }
   }
-`
+`;
+
+export const DivButtons = styled.div`
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  bottom: 10px;
+  right: 5px;
+`;

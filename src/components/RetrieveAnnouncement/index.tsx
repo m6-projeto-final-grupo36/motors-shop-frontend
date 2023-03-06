@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AnnouncementContext } from "../../Providers/AnnouncementProvider";
 import { UserContext } from "../../Providers/UserProvider";
@@ -6,16 +6,27 @@ import { Commentary } from "../Comments";
 import { Footer } from "../Footer";
 import { Header } from "../Header";
 import { Container } from "./styles";
+import { v4 } from "uuid";
+import { Flex, Image, useDisclosure } from "@chakra-ui/react";
+import { Modal } from "../Modal";
 
 export const RetrieveAnnouncement = () => {
   const { announcementFound } = useContext(AnnouncementContext);
+  const [selectedImage, setSelectedImage] = useState("");
 
   const {data} = useContext(UserContext)
 
   const navigate = useNavigate();
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <>
+      <Modal titleModal="Imagem do veículo" isOpen={isOpen} onClose={onClose}>
+        <Flex w="100%" padding="20px">
+          <Image w="100%" borderRadius="5px" src={selectedImage} />
+        </Flex>
+      </Modal>
       <Header />
       <Container>
         <section>
@@ -57,9 +68,16 @@ export const RetrieveAnnouncement = () => {
             <div className="photos">
               {announcementFound.images.length ? (
                 announcementFound.images.map((image) => (
-                  <div className="photo">
+                  <div className="photo" key={v4()}>
                     {" "}
-                    <img src={image} alt="Imagem do produto" />
+                    <img
+                      onClick={() => {
+                        setSelectedImage(image);
+                        onOpen();
+                      }}
+                      src={image}
+                      alt="Imagem do produto"
+                    />
                   </div>
                 ))
               ) : (
@@ -74,9 +92,7 @@ export const RetrieveAnnouncement = () => {
             </div>
             <h3>{announcementFound.user.name}</h3>
             <div className="advertiser-description">
-              <p>
-                {announcementFound.user.description}
-              </p>
+              <p>{announcementFound.user.description}</p>
             </div>
             <div className="btn-list-advertiser-announcements">
               <button
@@ -91,7 +107,10 @@ export const RetrieveAnnouncement = () => {
         </section>
         <div className="fixed"></div>
       </Container>
-      <Commentary comments={announcementFound.comments} announcementId={announcementFound.id}/>  
+      <Commentary
+        comments={announcementFound.comments}
+        announcementId={announcementFound.id}
+      />
       <Footer />
     </>
   );
