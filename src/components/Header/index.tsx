@@ -53,7 +53,6 @@ export const Header = () => {
 
   return (
     <>
-      <ModalUpdateUser />
       <ModalUpdateAddress />
       <ModalUpdateUser />
       <ModalDeleteUser />

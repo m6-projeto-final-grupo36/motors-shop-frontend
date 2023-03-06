@@ -53,6 +53,7 @@ export const ModalUpdateAnnouncement = ({
 
     const newData: IUpdateAnnouncementRequest = {
       ...data,
+      price: data.price && data.price * 100,
       type: announcementSelected_type,
       type_vehicle: announcementSelected_type_vehicle,
       images,

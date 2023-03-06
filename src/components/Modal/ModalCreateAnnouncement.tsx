@@ -52,6 +52,7 @@ export const ModalCreateAnnouncement = ({
 
     const newData: ICreateAnnouncementRequest = {
       ...data,
+      price: data.price * 100,
       type: announcementSelected_type,
       type_vehicle: announcementSelected_type_vehicle,
       images,

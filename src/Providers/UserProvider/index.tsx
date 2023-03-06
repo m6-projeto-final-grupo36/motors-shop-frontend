@@ -112,12 +112,6 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   };
 
   const {
-    isOpen: isOpenModalUpdateUser,
-    onOpen: onOpenModalUpdateUser,
-    onClose: onCloseModalUpdateUser,
-  } = useDisclosure();
-
-  const {
     isOpen: isOpenModalUpdateAddress,
     onOpen: onOpenModalUpdateAddress,
     onClose: onCloseModalUpdateAddress,
@@ -145,6 +139,12 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     isOpen: isOpenModalErrorRecoverPassword,
     onOpen: onOpenModalErrorRecoverPassword,
     onClose: onCloseModalErrorRecoverPassword,
+  } = useDisclosure();
+
+  const {
+    isOpen: isOpenModalUpdateUser,
+    onOpen: onOpenModalUpdateUser,
+    onClose: onCloseModalUpdateUser,
   } = useDisclosure();
 
   return (

@@ -154,7 +154,7 @@ export const Commentary = ({ announcementId, comments }: ICommentary) => {
             color="var(--color-feedback-alert-1)"
             onClick={() => handleDeleteCommit(selectedCommit.id)}
           >
-            Sim, excluir anúncio
+            Sim, excluir comentário
           </Button>
         </HStack>
       </Modal>
@@ -246,7 +246,7 @@ export const Commentary = ({ announcementId, comments }: ICommentary) => {
           <div className="containerInput">
             <div className="cardHeader">
               {Object.keys(data).length ? (
-                <div className="cardImg5">
+                <div className="cardImg">
                   <p className="cardNameImg">
                     {data.user.name.split(" ")[0][0]}
                     {data.user.name.split(" ")[1] && data.user.name.split(" ")[1][0]}

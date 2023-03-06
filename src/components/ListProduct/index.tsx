@@ -1,3 +1,4 @@
+// import { useEffect, useState } from "react";
 import { IAnnouncement } from "../../Providers/AnnouncementProvider";
 import { ProductCard } from "../ProductCard";
 import { SectionProduct } from "./styles";
@@ -15,6 +16,7 @@ export const ListProduct = ({
   productPage,
   id
 }: IListProduct) => {
+
   return (
     <SectionProduct id={id}>
       <h1>{productType}</h1>

@@ -53,7 +53,7 @@ export const UpdateAddressForm = ({
               label="Estado"
               error={errors.state}
               {...register("state")}
-              defaultValue={user.address.cep}
+              defaultValue={user.address.state}
             />
             <Input
               placeholder="Digitar cidade"
