@@ -240,3 +240,11 @@ Atualizações que não ocasionam alteração no código de produção.
 
     Uma <Div /> não é uma tag semantica, ela é apenas para estilização de algo em especifico,
     não devendo ser utilizada sem a devida necessidade
+
+Feito pela Equipe:
+<ul>
+<li><a href='https://github.com/GuiHirataDev'>Guilherme Hirata</a></li>
+<li> <a href='https://github.com/jorgekimura2001'>Jorge Kimura</a></li>
+<li><a href='https://github.com/maksonss4'>Makson Sillas</a></li>
+<li><a href='https://github.com/richzago97'>Richard Zago</a></li>
+</ul>
