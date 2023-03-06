@@ -9,6 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext, useState } from "react";
 import { IUser, UserContext } from "../../Providers/UserProvider";
 import { api } from "../../services/api";
+import { AnnouncementContext } from "../../Providers/AnnouncementProvider";
 
 export const ModalUpdateUser = () => {
   const [isLoadingButtonUpdateUser, setIsLoadingButtonUpdateUser] =
@@ -20,6 +21,8 @@ export const ModalUpdateUser = () => {
     data: { token, user },
     setData,
   } = useContext(UserContext);
+
+  const { getAllAnnouncements } = useContext(AnnouncementContext);
 
   const {
     formState: { errors: errorsUpdateUser },
@@ -40,10 +43,11 @@ export const ModalUpdateUser = () => {
       .patch<IUser>(`/users/${user.id}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((res) => {
+      .then(async (res) => {
         localStorage.setItem("@MotorsShop:user", JSON.stringify(res.data));
         setData({ token, user: res.data });
         setIsLoadingButtonUpdateUser(false);
+        await getAllAnnouncements();
         onCloseModalUpdateUser();
       })
       .catch((err) => {

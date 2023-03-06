@@ -35,6 +35,7 @@ interface IAnnouncementContext {
   isOpenModalImageVehicle: boolean;
   onOpenModalImageVehicle: () => void;
   onCloseModalImageVehicle: () => void;
+  getAllAnnouncements: () => Promise<void>;
 }
 
 interface IAnnouncementProps {
@@ -123,6 +124,13 @@ export const AnnouncementProvider = ({ children }: IAnnouncementProps) => {
     listAllAnnouncements();
   }, []);
 
+  const getAllAnnouncements = async () => {
+    await api
+      .get("/announcements")
+      .then((res) => setAnnouncements(res.data))
+      .catch((err) => console.log(err));
+  };
+
   const listAnnouncement = async (id: string): Promise<void> => {
     await api
       .get<IAnnouncementRetrieve>(`/announcements/${id}`)
@@ -190,6 +198,7 @@ export const AnnouncementProvider = ({ children }: IAnnouncementProps) => {
         isOpenModalImageVehicle,
         onCloseModalImageVehicle,
         onOpenModalImageVehicle,
+        getAllAnnouncements,
       }}
     >
       {children}
