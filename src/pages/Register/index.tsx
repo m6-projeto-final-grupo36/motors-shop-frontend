@@ -44,8 +44,6 @@ export const Register = () => {
       type_account: account_type,
     };
 
-    console.log(newData);
-
     api
       .post("/users", { ...newData })
       .then(() => {

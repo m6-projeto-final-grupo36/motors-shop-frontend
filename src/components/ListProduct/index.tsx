@@ -6,15 +6,17 @@ interface IListProduct {
   productType: string;
   productList: IAnnouncement[];
   productPage?: string;
+  id: string;
 }
 
 export const ListProduct = ({
   productType,
   productList,
   productPage,
+  id
 }: IListProduct) => {
   return (
-    <SectionProduct>
+    <SectionProduct id={id}>
       <h1>{productType}</h1>
       <ul className="listProduct">
         {productList.length ? (

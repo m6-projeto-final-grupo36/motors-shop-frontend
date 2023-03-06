@@ -69,9 +69,9 @@ export const Header = () => {
         <div className="desktop">
           <div className="navbar">
             <nav>
-              <a href="#">Carros</a>
-              <a href="#">Motos</a>
-              <a href="#">Leilão</a>
+              <a href="#cars">Carros</a>
+              <a href="#motorcycles">Motos</a>
+              <a href="#auction">Leilão</a>
             </nav>
           </div>
           <div className="divider-bar"></div>
@@ -152,34 +152,9 @@ export const Header = () => {
               ref={dropRef}
             >
               <MenuGroup>
-                <MenuItem
-                  fontWeight="600"
-                  pl="16px"
-                  color="var(--color-grey-2)"
-                  mt="32px"
-                  mb="44px"
-                  fontSize="16px"
-                >
-                  Carros
-                </MenuItem>
-                <MenuItem
-                  fontWeight="600"
-                  pl="16px"
-                  color="var(--color-grey-2)"
-                  mb="44px"
-                  fontSize="16px"
-                >
-                  Motos
-                </MenuItem>
-                <MenuItem
-                  fontWeight="600"
-                  pl="16px"
-                  color="var(--color-grey-2)"
-                  mb="32px"
-                  fontSize="16px"
-                >
-                  Leilão
-                </MenuItem>
+                  <a href="#cars" className="mobile-link">Carros</a>
+                  <a href="#motorcycles" className="mobile-link">Motos</a>
+                  <a href="#auction" className="mobile-link">Leilão</a>
               </MenuGroup>
               <MenuDivider
                 border=""

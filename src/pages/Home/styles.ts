@@ -31,48 +31,57 @@ export const ExploreSection = styled.section`
     margin: 0 auto;
   }
 
-  .buttonContainer button {
-    border: 1px solid var(--color-grey-10);
-    border-radius: 5px;
-    margin-bottom: 20px;
-    padding: 15px 0px;
-
-    :hover {
-      background-color: var(--color-grey-10);
-      color: var(--color-brand-2);
+  .buttonContainer a {
+        border: 1px solid var(--color-grey-10);
+        border-radius: 5px;
+        margin-bottom: 20px;
+        padding: 15px 0px;
+        :hover {
+            background-color: var(--color-grey-10);
+            color: var(--color-brand-2);
+        }
     }
-  }
-
-  @media (min-width: 720px) {
-    height: 500px;
-
-    .buttonContainer {
-      width: 100%;
-      flex-direction: row;
-      justify-content: center;
+    @media (min-width: 720px) {
+        height: 500px;
+        .buttonContainer {
+            width: 100%;
+            flex-direction: row;
+            justify-content: center;
+        }
+        .buttonContainer a {
+            padding: 10px 0px;
+            width: 200px;
+            margin-left: 20px;
+        }
     }
-
-    .buttonContainer button {
-      padding: 10px 0px;
-      width: 200px;
-      margin-left: 20px;
-    }
-  }
-`;
+`
 
 export const Container = styled.div`
-  .title-auction {
-    width: 80px;
-    height: 30px;
-    margin: 60px 0px 37px 12px;
-    font-weight: 600;
-    font-size: 24px;
-    color: #000000;
-  }
-
-  @media (min-width: 1024px) {
-    .title-auction {
-      margin-left: 60px;
+    .title-auction{
+        width: 80px;
+        height: 30px;
+        margin: 60px 0px 37px 12px;
+        font-weight: 600;
+        font-size: 24px;
+        color: #000000;
     }
-  }
-`;
+    .list-auctions{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        overflow-x: auto;
+        margin-left: 12px;
+    }
+    .list-auctions::-webkit-scrollbar {
+        height: 6px;
+    }
+    .list-auctions::-webkit-scrollbar-thumb {
+        background-color: var(--color-brand-1);
+        border-radius: 20px;
+    }
+    @media (min-width: 1024px) {
+        .title-auction{
+            margin-left: 60px;
+        }    
+    }
+`

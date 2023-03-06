@@ -11,7 +11,7 @@ export const AuctionLi = styled.li`
   background-color: white;
 
   border-radius: 4px;
-  z-index: 10;
+  z-index: 0;
 
   margin: 0 12px;
   margin-bottom: 50px;
@@ -27,7 +27,6 @@ export const AuctionLi = styled.li`
   .productImg {
     width: 100%;
     height: 100%;
-
     position: absolute;
     z-index: -1;
 

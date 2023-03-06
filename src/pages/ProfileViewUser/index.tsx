@@ -42,36 +42,34 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
     onClose: onCloseModalSuccessDeleteAnnouncement,
   } = useDisclosure();
 
-  const cars = announcements.filter((announcement) => {
-    if (
-      announcement.type_vehicle === "car" &&
-      Object.keys(announcementFound).length
-    ) {
-      return announcement.user.id === announcementFound.user.id;
-    }
-  });
+const cars = announcements.filter(
+    (announcement) => 
+    {
+      if(Object.keys(announcementFound).length){
+        return announcement.type_vehicle === "car" && announcement.user.id === announcementFound.user.id
+      }
+    });
 
-  const motorcycles = announcements.filter((announcement) => {
-    if (
-      announcement.type_vehicle === "motorcycle" &&
-      Object.keys(announcementFound).length
-    ) {
-      return announcement.user.id === announcementFound.user.id;
+  const motorcycles = announcements.filter(
+    (announcement) => 
+    {
+      if(Object.keys(announcementFound).length){
+        return announcement.type_vehicle === "motorcycle" && announcement.user.id === announcementFound.user.id
+      }
     }
-  });
-
-  const carAnnouncements = announcements.filter(
-    (announcement) =>
-      announcement.type_vehicle === "car" &&
-      announcement.user.id === data.user.id
   );
 
-  const motorcyclesAnnouncements = announcements.filter(
-    (announcement) =>
-      announcement.type_vehicle === "motorcycle" &&
-      announcement.user.id === data.user.id
-  );
+  const carAnnouncements = announcements.filter(announcement => {
+    if(Object.keys(data).length){
+      return announcement.type_vehicle === "car" && announcement.user.id === data.user.id
+    }
+  })
 
+  const motorcyclesAnnouncements = announcements.filter(announcement => {
+    if(Object.keys(data).length){
+      return announcement.type_vehicle === "motorcycle" && announcement.user.id ===  data.user.id
+    }
+})
   return (
     <>
       <MainContainer>
@@ -135,30 +133,45 @@ export const ProfileViewUser = ({ page }: IProfileProps) => {
         </ContainerAdvertiser>
         {page && (
           <>
-            <h1>Leilão</h1>
-            <AuctionCard
-              expiryTime={23}
-              productDescription="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
-              productImg="https://www.chevrolet.com.br/content/dam/chevrolet/mercosur/brazil/portuguese/index/cars/cars-subcontent/04-images/novo-onix-branco-summit.png?imwidth=960"
-              productKm={0}
-              productName="Gol"
-              productValue={50000}
-              productYear={2021}
-            />
-          </>
-        )}
-        <ListProduct
-          productPage={page}
-          productType="Carros"
-          productList={page ? carAnnouncements : cars}
-        />
-        <ListProduct
-          productPage={page}
-          productType="Motos"
-          productList={page ? motorcyclesAnnouncements : motorcycles}
-        />
-        <Footer />
-      </MainContainer>
+              <h1 id="auction">Leilão</h1>
+              <ul className="list-auctions">
+                <AuctionCard
+                  username={data.user.name}
+                  expiryTime={23}
+                  productDescription="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+                  productImg="https://www.chevrolet.com.br/content/dam/chevrolet/mercosur/brazil/portuguese/index/cars/cars-subcontent/04-images/novo-onix-branco-summit.png?imwidth=960"
+                  productKm={0}
+                  productName="Gol"
+                  productValue={50000}
+                  productYear={2021}
+                />
+                <AuctionCard
+                  username={data.user.name}
+                  expiryTime={23}
+                  productDescription="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+                  productImg="https://www.chevrolet.com.br/content/dam/chevrolet/mercosur/brazil/portuguese/index/cars/cars-subcontent/04-images/novo-onix-branco-summit.png?imwidth=960"
+                  productKm={0}
+                  productName="Gol"
+                  productValue={50000}
+                  productYear={2021}
+                />
+              </ul>
+            </>
+          )}
+          <ListProduct
+            id="cars"
+            productPage={page}
+            productType="Carros"
+            productList={page ? carAnnouncements : cars}
+          />
+          <ListProduct
+            id="motorcycles"
+            productPage={page}
+            productType="Motos"
+            productList={page ? motorcyclesAnnouncements : motorcycles}
+          />
+          <Footer />
+        </MainContainer>
     </>
   );
 };

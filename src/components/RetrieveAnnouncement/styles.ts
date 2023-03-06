@@ -49,17 +49,35 @@ export const Container = styled.div`
       margin-bottom: 71px;
     }
 
-    .btn-buy {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100px;
-      height: 38px;
-      background-color: var(--color-brand-1);
-      color: var(--color-white-fixed);
-      border: 1.5px solid var(--color-brand-1);
-      border-radius: 4px;
-    }
+    .btn-buy{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 38px;
+            
+            .btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: var(--color-brand-1);
+                color: var(--color-white-fixed);
+                margin-top: 1.3rem;
+                width: 7rem;
+                height: 3rem;
+                border: 1.5px solid #4529e6;
+                border-radius: 4px;
+            }
+            
+            *:disabled{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: var(--color-grey-5);
+                border: 1.5px solid var(--color-grey-5);
+                cursor: not-allowed;
+            }
+        }
 
     .other-infos {
       display: flex;
@@ -71,6 +89,7 @@ export const Container = styled.div`
         font-weight: 500;
         font-size: 16px;
       }
+
 
       .car-info {
         display: flex;
@@ -86,6 +105,7 @@ export const Container = styled.div`
           font-weight: 500;
           font-size: 14px;
           border-radius: 4px;
+
         }
 
         span:first-child {

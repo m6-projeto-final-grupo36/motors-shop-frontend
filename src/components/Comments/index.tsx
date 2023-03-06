@@ -10,6 +10,8 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import { Button, Grid, HStack, useDisclosure } from "@chakra-ui/react";
 import { Modal } from "../Modal";
 import { Input as InputChakra } from "../Form/Input";
+import moment from 'moment'
+import "moment/locale/pt-br";
 
 interface ICommentary {
   comments: IComment[];
@@ -49,16 +51,8 @@ export const Commentary = ({ announcementId, comments }: ICommentary) => {
   } = useForm<ICommentRetrieve>({
     resolver: yupResolver(createCommentSchema),
   });
-
-  const {
-    formState: { errors: errorsUpdate },
-    register: registerUpdate,
-    handleSubmit: handleSubmitUpdate,
-  } = useForm<ICommentUpdate>({
-    resolver: yupResolver(createCommentSchema),
-  });
-
-  const handleComment = async (data: ICommentRetrieve) => {
+  
+    const handleComment = async (data: ICommentRetrieve) => {
     api.defaults.headers.common["Authorization"] = `Bearer ${user}`;
     await api
       .post(`/comments/${announcementId}`, {
@@ -69,6 +63,14 @@ export const Commentary = ({ announcementId, comments }: ICommentary) => {
       )
       .catch((err) => console.log(err));
   };
+
+  const {
+    formState: { errors: errorsUpdate },
+    register: registerUpdate,
+    handleSubmit: handleSubmitUpdate,
+  } = useForm<ICommentUpdate>({
+    resolver: yupResolver(createCommentSchema),
+  });
 
   const {
     isOpen: isOpenModalDeleteCommit,
@@ -190,59 +192,27 @@ export const Commentary = ({ announcementId, comments }: ICommentary) => {
         <div className="comments">
           <h3 className="title">Comentários</h3>
           <>
-            {commentsToRender.length ? (
-              commentsToRender.map((elem) => {
-                let dateToRender = "0";
-
-                let intervalDay = 0;
-
-                let intervalMonth = 0;
-
-                const day = elem.updated_at.split("-")[2];
-
-                const month = elem.updated_at.split("-")[1];
-
-                const dayToday = new Date().getDate();
-
-                const monthToday = new Date().getMonth() + 1;
-
-                intervalDay = dayToday - +day;
-
-                intervalMonth = monthToday - +month;
-
-                if (intervalDay <= 0) {
-                  dateToRender = "0 dias";
-                } else if (intervalDay <= 29) {
-                  if (intervalDay === 1) {
-                    dateToRender = "1 dia";
-                  } else {
-                    dateToRender = `${intervalDay} dias`;
-                  }
-                } else {
-                  if (intervalMonth <= 1) {
-                    dateToRender = "1 mês";
-                  } else if (intervalMonth <= 12) {
-                    dateToRender = `${intervalMonth} meses`;
-                  }
-                }
-
-                return (
-                  <div className="cardCommentary" key={elem.id}>
-                    <div className="cardHeader">
-                      <div className="cardImg">
-                        <p className="cardNameImg">
-                          {elem.user.name.split(" ")[0][0]}
-                          {elem.user.name.split(" ")[1][0]}
-                        </p>
-                      </div>
-                      <div className="cardTitle">{elem.user.name}</div>
-                      <p className="point"></p>
-                      <p className="date">há {dateToRender}</p>
-                    </div>
-                    <div className="cardComments">
-                      <p className="comment">{elem.text}</p>
-                    </div>
-                    {elem.user.id === userLogado.id && (
+            {
+          commentsToRender.length ? commentsToRender.map(elem => {
+            const date = moment(`${elem.updated_at}`, 'YYYY-MM-DD').fromNow()
+          return (<div className="cardCommentary">
+            <div className="cardHeader">
+              <div className="cardImg">
+                <p className="cardNameImg">
+                  {elem.user.name.split(' ')[0][0]}
+                  {elem.user.name.split(" ")[1] && elem.user.name.split(" ")[1][0]}
+                </p>
+              </div>
+              <div className="cardTitle">{elem.user.name}</div>
+              <p className="point"></p>
+              <p className="date">{date}</p>
+            </div>
+            <div className="cardComments">
+              <p className="comment">
+                {elem.text}
+              </p>
+            </div>
+            {elem.user.id === userLogado.id && (
                       <DivButtons>
                         <button
                           type="button"
@@ -264,12 +234,11 @@ export const Commentary = ({ announcementId, comments }: ICommentary) => {
                         </button>
                       </DivButtons>
                     )}
-                  </div>
-                );
-              })
-            ) : (
-              <span>Sem comentários</span>
-            )}
+          </div>)
+            })
+          : 
+          <span>Sem comentários</span>
+        }
           </>
         </div>
 
@@ -280,7 +249,7 @@ export const Commentary = ({ announcementId, comments }: ICommentary) => {
                 <div className="cardImg5">
                   <p className="cardNameImg">
                     {data.user.name.split(" ")[0][0]}
-                    {data.user.name.split(" ")[1][0]}
+                    {data.user.name.split(" ")[1] && data.user.name.split(" ")[1][0]}
                   </p>
                 </div>
               ) : (
@@ -302,6 +271,7 @@ export const Commentary = ({ announcementId, comments }: ICommentary) => {
 
               <p>{errors.text?.message}</p>
 
+
               <div className="divButton">
                 {Object.keys(data).length ? (
                   <button
@@ -317,7 +287,7 @@ export const Commentary = ({ announcementId, comments }: ICommentary) => {
                   </button>
                 )}
               </div>
-            </form>
+            </form>      
 
             <div className="feedbacks">
               <div className="divFeedback">

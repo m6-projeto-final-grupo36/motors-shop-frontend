@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AnnouncementContext } from "../../Providers/AnnouncementProvider";
+import { UserContext } from "../../Providers/UserProvider";
 import { Commentary } from "../Comments";
 import { Footer } from "../Footer";
 import { Header } from "../Header";
@@ -12,6 +13,8 @@ import { Modal } from "../Modal";
 export const RetrieveAnnouncement = () => {
   const { announcementFound } = useContext(AnnouncementContext);
   const [selectedImage, setSelectedImage] = useState("");
+
+  const {data} = useContext(UserContext)
 
   const navigate = useNavigate();
 
@@ -45,7 +48,12 @@ export const RetrieveAnnouncement = () => {
               </span>
             </div>
             <div className="btn-buy">
-              <button>Comprar</button>
+              {
+                 Object.keys(data).length ? 
+                 <a className="btn" href={`https://api.whatsapp.com/send?phone=${announcementFound.user.cell_phone}`}>Comprar</a>
+                 :
+                 <button className="btn" disabled>Comprar</button>
+              }
             </div>
           </div>
           <div className="description-announcement">
@@ -79,8 +87,8 @@ export const RetrieveAnnouncement = () => {
           </div>
           <div className="advertiser-info">
             <div className="initial-caracters">
-              {announcementFound.user.name.split(" ")[0][0]}
-              {announcementFound.user.name.split(" ")[1][0]}
+              {announcementFound.user.name.split(' ')[0][0]}
+              {announcementFound.user.name.split(" ")[1] && announcementFound.user.name.split(" ")[1][0]}
             </div>
             <h3>{announcementFound.user.name}</h3>
             <div className="advertiser-description">
