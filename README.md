@@ -21,14 +21,17 @@ Caso não possua o yarn instalado, utilize o comando abaixo para instalar global
 npm install --global yarn
 ````
 
+## **Antes de rodar a aplicação**
+Rode inicialmente o  comando ````yarn dev```` no repositório de Back-End para que possa utilizar corretamente a aplicação.
+
+Repositório de back-end: [https://github.com/m6-projeto-final-grupo36/motors-shop-backend](https://github.com/m6-projeto-final-grupo36/motors-shop-backend)
+
 ## **Rodando a aplicação**
 Digite o seguinte comando no terminal para rodar a aplicação em sua máquina:
 
 ````
 yarn start
 ````
-
-Obs.: Rode inicialmente o comando ````yarn dev```` no repositório de Back-End para que possa utilizar corretamente a aplicação.
 
 ## Rotas
 
