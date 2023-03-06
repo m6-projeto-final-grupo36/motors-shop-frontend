@@ -62,7 +62,7 @@ Qualquer rota fora dessas redireciona o usuário à página home.
 - axios
 - chakra-ui
 - styled-components
-- framer-motion
+- moment
 - react
 - react-dom
 - react-router-dom
