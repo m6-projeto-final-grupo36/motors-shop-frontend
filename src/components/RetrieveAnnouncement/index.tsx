@@ -14,7 +14,7 @@ export const RetrieveAnnouncement = () => {
   const { announcementFound } = useContext(AnnouncementContext);
   const [selectedImage, setSelectedImage] = useState("");
 
-  const {data} = useContext(UserContext)
+  const { data } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -41,19 +41,25 @@ export const RetrieveAnnouncement = () => {
                 <span>{announcementFound.mileage} KM</span>
               </div>
               <span>
-                {announcementFound.price.toLocaleString("pt-br", {
+                {(announcementFound.price / 100).toLocaleString("pt-br", {
                   style: "currency",
                   currency: "BRL",
                 })}
               </span>
             </div>
             <div className="btn-buy">
-              {
-                 Object.keys(data).length ? 
-                 <a className="btn" href={`https://api.whatsapp.com/send?phone=${announcementFound.user.cell_phone}`}>Comprar</a>
-                 :
-                 <button className="btn" disabled>Comprar</button>
-              }
+              {Object.keys(data).length ? (
+                <a
+                  className="btn"
+                  href={`https://api.whatsapp.com/send?phone=${announcementFound.user.cell_phone}`}
+                >
+                  Comprar
+                </a>
+              ) : (
+                <button className="btn" disabled>
+                  Comprar
+                </button>
+              )}
             </div>
           </div>
           <div className="description-announcement">
@@ -87,8 +93,9 @@ export const RetrieveAnnouncement = () => {
           </div>
           <div className="advertiser-info">
             <div className="initial-caracters">
-              {announcementFound.user.name.split(' ')[0][0]}
-              {announcementFound.user.name.split(" ")[1] && announcementFound.user.name.split(" ")[1][0]}
+              {announcementFound.user.name.split(" ")[0][0]}
+              {announcementFound.user.name.split(" ")[1] &&
+                announcementFound.user.name.split(" ")[1][0]}
             </div>
             <h3>{announcementFound.user.name}</h3>
             <div className="advertiser-description">
