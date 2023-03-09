@@ -10,7 +10,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import { Button, Grid, HStack, useDisclosure } from "@chakra-ui/react";
 import { Modal } from "../Modal";
 import { Input as InputChakra } from "../Form/Input";
-import moment from 'moment'
+import moment from "moment";
 import "moment/locale/pt-br";
 
 interface ICommentary {
@@ -28,20 +28,18 @@ export const Commentary = ({ announcementId, comments }: ICommentary) => {
   const [isLoadingButtonUpdateCommit, setIsLoadingButtonUpdateCommit] =
     useState(false);
 
-  const {
-    data: { token, user: userLogado },
-  } = useContext(UserContext);
-
   useEffect(() => {
     setCommentsToRender(comments);
   }, [comments]);
 
   const { data } = useContext(UserContext);
+  let token = "";
 
-  let user = "";
+  let user: any = "";
 
   if (Object.keys(data).length) {
-    user = data.token;
+    user = data.user;
+    token = data.token;
   }
 
   const {
@@ -51,9 +49,9 @@ export const Commentary = ({ announcementId, comments }: ICommentary) => {
   } = useForm<ICommentRetrieve>({
     resolver: yupResolver(createCommentSchema),
   });
-  
-    const handleComment = async (data: ICommentRetrieve) => {
-    api.defaults.headers.common["Authorization"] = `Bearer ${user}`;
+
+  const handleComment = async (data: ICommentRetrieve) => {
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     await api
       .post(`/comments/${announcementId}`, {
         ...data,
@@ -192,27 +190,30 @@ export const Commentary = ({ announcementId, comments }: ICommentary) => {
         <div className="comments">
           <h3 className="title">Comentários</h3>
           <>
-            {
-          commentsToRender.length ? commentsToRender.map(elem => {
-            const date = moment(`${elem.updated_at}`, 'YYYY-MM-DD').fromNow()
-          return (<div className="cardCommentary">
-            <div className="cardHeader">
-              <div className="cardImg">
-                <p className="cardNameImg">
-                  {elem.user.name.split(' ')[0][0]}
-                  {elem.user.name.split(" ")[1] && elem.user.name.split(" ")[1][0]}
-                </p>
-              </div>
-              <div className="cardTitle">{elem.user.name}</div>
-              <p className="point"></p>
-              <p className="date">{date}</p>
-            </div>
-            <div className="cardComments">
-              <p className="comment">
-                {elem.text}
-              </p>
-            </div>
-            {elem.user.id === userLogado.id && (
+            {commentsToRender.length ? (
+              commentsToRender.map((elem) => {
+                const date = moment(
+                  `${elem.updated_at}`,
+                  "YYYY-MM-DD"
+                ).fromNow();
+                return (
+                  <div className="cardCommentary">
+                    <div className="cardHeader">
+                      <div className="cardImg">
+                        <p className="cardNameImg">
+                          {elem.user.name.split(" ")[0][0]}
+                          {elem.user.name.split(" ")[1] &&
+                            elem.user.name.split(" ")[1][0]}
+                        </p>
+                      </div>
+                      <div className="cardTitle">{elem.user.name}</div>
+                      <p className="point"></p>
+                      <p className="date">{date}</p>
+                    </div>
+                    <div className="cardComments">
+                      <p className="comment">{elem.text}</p>
+                    </div>
+                    {elem.user.id === user.id && (
                       <DivButtons>
                         <button
                           type="button"
@@ -234,11 +235,12 @@ export const Commentary = ({ announcementId, comments }: ICommentary) => {
                         </button>
                       </DivButtons>
                     )}
-          </div>)
-            })
-          : 
-          <span>Sem comentários</span>
-        }
+                  </div>
+                );
+              })
+            ) : (
+              <span>Sem comentários</span>
+            )}
           </>
         </div>
 
@@ -249,7 +251,8 @@ export const Commentary = ({ announcementId, comments }: ICommentary) => {
                 <div className="cardImg">
                   <p className="cardNameImg">
                     {data.user.name.split(" ")[0][0]}
-                    {data.user.name.split(" ")[1] && data.user.name.split(" ")[1][0]}
+                    {data.user.name.split(" ")[1] &&
+                      data.user.name.split(" ")[1][0]}
                   </p>
                 </div>
               ) : (
@@ -271,7 +274,6 @@ export const Commentary = ({ announcementId, comments }: ICommentary) => {
 
               <p>{errors.text?.message}</p>
 
-
               <div className="divButton">
                 {Object.keys(data).length ? (
                   <button
@@ -287,7 +289,7 @@ export const Commentary = ({ announcementId, comments }: ICommentary) => {
                   </button>
                 )}
               </div>
-            </form>      
+            </form>
 
             <div className="feedbacks">
               <div className="divFeedback">
